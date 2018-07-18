@@ -1,0 +1,37 @@
+﻿<md-dialog aria-label="Mango (Fruit)">
+    <form ng-cloak name="tagform">
+        <md-dialog-content>
+            <div style="width: 412px;">
+                <div>
+                    <!-- Modal content-->
+                    <div>
+                        <div class="modal-header custom">
+                            <button type="button" class="close" ng-click="hide()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Tag</h4>
+                        </div>
+                            
+                        <span class="message">{{messsage}}</span>
+                        
+                        <div class="modal-body">
+                            <label class="tagsearch">Specify Tags For Search </label>
+                            <!--<input type="text" class="form-control" name="tagname" id="tagname" ng-model="tagname" required/>-->
+                            <div class="col-lg-12"><tags-input name="tagname" id="tagname" ng-model="tags" on-tag-removing="removeTag($tag)" required></tags-input></div>
+                            <!--<select ng-model="user.account" class="selectpicker select-custom-left" name="account">
+                                <option value="">Select Tag</option>
+                                <option ng-repeat="tag in items" value="{{tag._id}}">{{tag.name}}</option>
+                            </select>
+                            
+                            <md-chips ng-repeat="name in tags">
+                                <md-chip>{{tags.text}}</md-chip>
+                            </md-chips>-->
+                        </div>                        
+                   </div>
+                        <div class="modal-footer custom">
+                            <button type="button" class="btn-edit-change update tagbutton" ng-disabled="tagform.$invalid" ng-click="addHashKey(tags)" data-dismiss="modal">Add</button>
+                            <button type="button" class="btn-edit-change update tagbutton" ng-click="hide()" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

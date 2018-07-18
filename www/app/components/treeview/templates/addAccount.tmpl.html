@@ -1,0 +1,84 @@
+﻿<md-dialog aria-label="Add User" class="add-user" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Create New Portfolio</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-content style="padding-left:15px;padding-right:15px; class=" autocomplete" layout="column">
+
+
+                <md-input-container class="org-title" style="margin-bottom:0px;min-height:0px!important;">
+                    <label></label>
+                    <input style="font-size:14px;padding-bottom:16px;" ng-model="accountName" type="text" ng-change="updateAccountName()" placeholder="Portfolio Name">
+                </md-input-container>
+
+
+            </md-content>
+           
+                <div ng-controller="ContactChipDemoCtrl as ctrl" layout="column" ng-cloak>
+
+                    <md-content  style="padding-bottom:8px;padding-left:15px;padding-right:15px;" class=" autocomplete" layout="column">
+                        <md-chips style="min-height:45px;" flex class="md-contact-chips" readonly="ctrl.ustOwner.length >0" ng-model="ctrl.ustOwner" md-require-match="true" md-autocomplete-snap md-on-add="ctrl.add()" md-on-remove="ctrl.removeUstOwner()" md-max-chips="1">
+                            <md-autocomplete style="font-size: 14px;"  md-menu-class="md-contact-chips-suggestions" md-selected-item="ctrl.selectedUst" md-search-text="ctrl.searchUst"
+                                             md-items="item in ctrl.allContacts | filter: {name: ctrl.searchUst}" md-no-cache="true"
+                                             md-autoselect="true" placeholder="Select UST Owner" ng-if="ctrl.ustOwner.length ==0">
+                                <div class="md-contact-suggestion">
+                                    <!--<img ng-src="{{item.image}}" alt="{{item.name}}" ng-if="item.image" />-->
+                                    <initials-Image name="{{item.name}}"></initials-Image>
+                                    <span class="md-contact-name">{{item.name}}</span>
+                                    <span class="md-contact-email">{{item.email}}</span>
+                                </div>
+                            </md-autocomplete>
+                            <md-chip-template>
+                                <div class="md-contact-avatar">
+                                    <!--<img ng-src="{{$chip.image}}" alt="{{$chip.name}}" ng-if="$chip.image" />-->
+                                    <initials-Image name="{{$chip.name}}"></initials-Image>
+                                </div>
+                                <div class="md-contact-name">
+                                    {{$chip.name}}
+                                </div>
+                            </md-chip-template>
+                        </md-chips>
+
+                        <md-chips style="min-height:45px;" flex class="md-contact-chips" readonly="ctrl.custOwner.length >0" ng-model="ctrl.custOwner" md-require-match="true" md-autocomplete-snap md-on-add="ctrl.add()" md-on-remove="ctrl.removeCustOwner()" md-max-chips="1">
+                            <md-autocomplete style="font-size: 14px;"  md-menu-class="md-contact-chips-suggestions" md-selected-item="ctrl.selectedCust" md-search-text="ctrl.searchCust"
+                                             md-items="item in ctrl.allContacts | filter: {name: ctrl.searchCust}" md-no-cache="true"
+                                             md-autoselect="true" placeholder="Select Customer Owner" ng-if="ctrl.custOwner.length ==0">
+                                <div class="md-contact-suggestion">
+                                    <!--<img ng-src="{{item.image}}" alt="{{item.name}}" ng-if="item.image" />-->
+                                    <initials-Image name="{{item.name}}"></initials-Image>
+                                    <span class="md-contact-name">{{item.name}}</span>
+                                    <span class="md-contact-email">{{item.email}}</span>
+                                </div>
+                            </md-autocomplete>
+                            <md-chip-template>
+
+                                <div class="md-contact-avatar">
+                                    <!--<img ng-src="{{$chip.image}}" alt="{{$chip.name}}" ng-if="$chip.image" />-->
+                                    <initials-Image name="{{$chip.name}}"></initials-Image>
+                                </div>
+                                <div class="md-contact-name">
+                                    {{$chip.name}}
+                                </div>
+                            </md-chip-template>
+                        </md-chips>
+                </div>
+                <span class="error-label">{{AccountCreateError}}</span>
+</md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button ng-click="createAccount()">
+                Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

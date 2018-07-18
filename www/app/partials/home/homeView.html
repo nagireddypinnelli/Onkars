@@ -1,0 +1,352 @@
+
+<header class="home header-height nav-down">
+    <section>
+        <!--<a class="nav-home"><img class="nav-logo" src="img/logo.png" width="30" height="30" data-pin-nopin="true"></a>-->
+        <a class="nav-home"><i class="id3-logo"></i></a>
+        <a class="nav-mob-res-logo-home "><i class="icon ion-android-menu mobileFilterHideIcon" ng-show="loggedInUser!=null" ng-click="hideNavoptions1()"></i></a>
+        <nav class="float-right" ng-show="loggedInUser==null || loggedInUser== undefined">
+             <a href="/#/login">LOGIN&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <!-- <a href="/adfslogiin" ng-show="loggedInUser ==null">LOGIN&nbsp;&nbsp;&nbsp;&nbsp;</a> -->
+        </nav>
+        <nav class="float-right" id="displayHomeNavOption" ng-show="displayHomeNavOption==1">
+            <a href="/#/home" class="active-tab" ng-show="loggedInUser !=null">HOME&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+            <a href="/#/problems" ng-show="loggedInUser !=null">DISCOVERY HUB&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+            <!--<a href="">ABOUT&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+            <a href="">SOLUTIONS&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>-->
+            <a ng-show="loggedInUser !=null" href="https://ust.innovationhub.ust-global.com" target="_blank">INNOVATION HUB&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+            <div class="dropdown mob-drop" ng-show="loggedInUser !=null">
+                <a href="">INNOVATION REPOSITORY&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+                <div class="dropdown-content nav-bar">
+                    <a class="a-nav-margin" target="_blank" href="../Repository/ID3 Dashboard- Q3-Q4 2016 v2.pdf">2016 Q3-Q4 Dashboard</a>
+                    <a class="a-nav-margin" target="_blank" href="https://fab.ust-global.com">Fab Portal</a>
+                </div>
+            </div>
+            <div class="dropdown mob-drop" ng-if="role=='Admin'&&loggedInUser !=null">
+                <a href="">MANAGE&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+                <div class="dropdown-content nav-bar">
+                    <a class="a-nav-margin" href="/#/users/manage" ng-if="role=='Admin'">USER</a>
+                    <a class="a-nav-margin" href="/#/modules" ng-if="role=='Admin'">SETTINGS</a>
+                  
+                </div>
+            </div>
+            <a class="login-user-text"  ng-if="loggedInUser !=null" ng-click="logout()">LOGOUT</a>
+        </nav>
+        <div class="login-error login-error-home">
+            {{loginErrorMessage}}
+        </div>
+    </section>
+</header>
+
+<div class="container-fluid container-content home main">
+    <div class="row">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg home">
+            <span class="span-heading home">ID<sup>3</sup> PLATFORM BRINGS INNOVATIVE SOLUTIONS FOR <br />YOUR CUSTOMER BUSINESS PROBLEMS.<br /> START YOUR JOURNEY WITH ID<sup>3</sup> TODAY&hellip;</span>
+            <a class="w3-btn-floating w3-hover-dark-grey w3-display-left" onclick="plusDivs(-1)">&#10094;</a>
+            <a class="w3-btn-floating w3-hover-dark-grey w3-display-right" onclick="plusDivs(1)">&#10095;</a>
+
+            <div class="mySlides animate-scroll">
+                <h4 class="h4-phase">DISCOVER</h4>
+                <p class="p-home-head">
+                    Sense the symptoms of the business problem during the active customer engagements.<br />
+                    Validate the business problem with customer stakeholders.<br />
+                    Understand customer priority.
+                </p>
+            </div>
+
+            <div class="mySlides animate-scroll">
+                <h4 class="h4-phase">DISTIL</h4>
+                <p class="p-home-head">
+                    Develop & shape the business problem.<br />
+                    Capture the customer pains & gains.<br />
+                    Build the customer segment of the business model canvas.
+                </p>
+            </div>
+            <div class="mySlides animate-scroll">
+                <h4 class="h4-phase">DEFINE</h4>
+                <p class="p-home-head">
+                    Initiate Thinkathon session to bring ideation dialogues.<br />
+                    Define the solution approach & strategy.<br />
+                    Develop the Candidate solution concept.
+                </p>
+            </div>
+            <div class="mySlides animate-scroll">
+                <h4 class="h4-phase">INNOVATE</h4>
+                <p class="p-home-head">
+                    Adopt design thinking tools & techniques.<br />
+                    Build Minimum Viable Concepts (MVCs) - demonstrate the capabilities & possibilities with a clickable prototype.<br />
+                    Develop Value Proposition and share Business Model Canvas with customer stakeholders.
+
+                </p>
+            </div>
+            <div class="mySlides animate-scroll">
+                <h4 class="h4-phase">INSTRUMENT</h4>
+                <p class="p-home-head">
+                    Initiate lean agile product deployment practice.<br />
+                    Build Minimum Viable Product (MVP) - demonstrate the capabilities and possibilities with a working model.<br />
+                    Develop Sales Proposition.
+                </p>
+            </div>
+            <div class="mySlides animate-scroll">
+                <h4 class="h4-phase">INDUSTRIALIZE</h4>
+                <p class="p-home-head">
+                    Baseline the Business Model Canvas.<br />
+                    Activate product deployment team.<br />
+                    Build end-to-end Product.<br />
+                    Initiate commercialization practice.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12 page-heading-bg-solid home">
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content home">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="h2-sub-head">We turn problems into innovative solutions.</h2>
+            <p class="p-home-details">We know from experience how frustrating and challenging it can be when you're trying to keep track of the business problems to identify as potential investments, and which you can leverage at another time. That's why we've designed ID<sup>3</sup> with you in mind, a platform that makes it easy to keep track of your business problems and help you identify the innovative solutions.</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content home">
+    <div class="row">
+        <div class="col-md-12 page-heading-bg-solid home top"></div>
+        <div class="col-md-12 page-heading-bg home mid"></div>
+        <div class="col-md-12 page-heading-bg-solid home home-mob"></div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content mid">
+    <div class="row bg-white">
+        <div class="col-md-12 col-bg-para-detail head">
+            <h2 class="h2-sub-head mid">The innovation to help you succeed</h2>
+            <p class="p-home-details mid">ID<sup>3</sup> framework adopts design thinking tools & techniques like Design Sprint, Hackathon Sprint, Thinkathon etc. to help customers to validate the design & a MVP iteratively within a minimal span of time and resources before commercialization.</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content home">
+    <div class="row">
+        <div class="col-md-12 col-philosophy mobView">
+            <h4 class="h4-philosophy">Our Philosophy</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="float-left col-philosophy-bottom">
+                        <div class="div-philosophy-circle"><i class="id3-binoculars icon-home-phases"></i></div>
+                        <span class="span-home-phase">DISCOVER</span>
+                    </div>
+                    <div class="float-left col-philosophy-bottom">
+                        <div class="div-philosophy-circle"><i class="id3-funnel icon-home-phases"></i></div>
+                        <span class="span-home-phase distill">DISTIL</span>
+                    </div>
+                    <div class="float-left col-philosophy-bottom">
+                        <div class="div-philosophy-circle"><i class="id3-fountain-pen icon-home-phases"></i></div>
+                        <span class="span-home-phase define">DEFINE</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row div-phil-sec-row">
+                <div class="col-md-12">
+                    <div class="float-left col-philosophy-bottom">
+                        <div class="div-philosophy-circle"><i class="id3-light-bulb icon-home-phases"></i></div>
+                        <span class="span-home-phase">INNOVATE</span>
+                    </div>
+                    <div class="float-left col-philosophy-bottom">
+                        <div class="div-philosophy-circle"><i class="id3-settings icon-home-phases"></i></div>
+                        <span class="span-home-phase">INSTRUMENT</span>
+                    </div>
+                    <div class="float-left col-philosophy-bottom">
+                        <div class="div-philosophy-circle"><i class="id3-settings-multi icon-home-phases"></i></div>
+                        <span class="span-home-phase industrialize">INDUSTRIALIZE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-philosophy mobRes">
+            <h4 class="h4-philosophy">Our Philosophy</h4>
+            <div class="row">
+                <div class="col-md-4 col-philosophy-bottom">
+                    <div class="div-philosophy-circle"><i class="id3-binoculars icon-home-phases"></i></div>
+                    <span class="span-home-phase">DISCOVER</span>
+                </div>
+                <div class="col-md-4 col-philosophy-bottom">
+                    <div class="div-philosophy-circle"><i class="id3-funnel icon-home-phases"></i></div>
+                    <span class="span-home-phase distill">DISTIL</span>
+                </div>
+                <div class="col-md-4 col-philosophy-bottom">
+                    <div class="div-philosophy-circle"><i class="id3-fountain-pen icon-home-phases"></i></div>
+                    <span class="span-home-phase define">DEFINE</span>
+                </div>
+            </div>
+            <div class="row div-phil-sec-row">
+                <div class="col-md-4 col-philosophy-bottom">
+                    <div class="div-philosophy-circle"><i class="id3-light-bulb icon-home-phases"></i></div>
+                    <span class="span-home-phase">INNOVATE</span>
+                </div>
+                <div class="col-md-4 col-philosophy-bottom">
+                    <div class="div-philosophy-circle"><i class="id3-settings icon-home-phases"></i></div>
+                    <span class="span-home-phase">INSTRUMENT</span>
+                </div>
+                <div class="col-md-4 col-philosophy-bottom">
+                    <div class="div-philosophy-circle"><i class="id3-settings-multi icon-home-phases"></i></div>
+                    <span class="span-home-phase industrialize">INDUSTRIALIZE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content home">
+    <div class="row">
+        <div class="col-md-12 page-heading-bg-solid home top"></div>
+        <div class="col-md-12 page-heading-bg home mid bottom"></div>
+        <div class="col-md-12 page-heading-bg-solid home home-mob"></div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content mid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="h2-sub-head bottom">The innovation to help you succeed</h2>
+        </div>
+    </div>
+    <div class="row  bg-white mobRes">
+        <div class="col-md-12 col-bg-para-detail bottom">
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="id3-light-bulb icon-home-phases"></i></div>
+                <span class="span-home-phase busines-prob">Business Problems</span>
+            </div>
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="ion-bonfire icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase challenge">Challenge</span>
+            </div>
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="ion-film-marker icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase inno-repo">Innovation Repository</span>
+            </div>
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="ion-clipboard icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase manage">Manage</span>
+            </div>
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="ion-ios-speedometer-outline icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase dashboard">Dashboard</span>
+            </div>
+        </div>
+    </div>
+    <div class="row  bg-white mobView">
+        <div class="col-md-12 col-bg-para-detail bottom">
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="id3-light-bulb icon-home-phases"></i></div>
+                <span class="span-home-phase bottom busines-prob">Business Problems</span>
+            </div>
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="ion-bonfire icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase bottom challenge">Challenge</span>
+            </div>
+        </div>
+    </div>
+    <div class="row  bg-white mobView">
+        <div class="col-md-12 col-bg-para-detail bottom">
+            <div class="float-left div-innovation-margin middle">
+                <div class="div-philosophy-circle"><i class="ion-film-marker icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase bottom inno-repo">Innovation Repository</span>
+            </div>
+        </div>
+    </div>
+    <div class="row  bg-white mobView">
+        <div class="col-md-12 col-bg-para-detail bottom">
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="ion-clipboard icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase bottom manage">Manage</span>
+            </div>
+            <div class="float-left div-innovation-margin">
+                <div class="div-philosophy-circle"><i class="ion-ios-speedometer-outline icon-home-phases icon-cust"></i></div>
+                <span class="span-home-phase bottom dashboard">Dashboard</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content home">
+    <div class="row row-bottom-margin-temp">
+        <div class="col-md-12 page-heading-bg-solid home top temp"></div>
+        <div class="col-md-12 page-heading-bg home mid info">
+            <!--<span class="id3-ID3-logo id3-logo-bottom"></span>-->
+            <img src="../../../assets/img/id3-logo-bg.png" class="id3-logo-bg" />
+            <img src="../../../assets/img/ustlogo.png" class="img-ust" />
+
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+
+<a href="#" class="scrollToTop"><i class="icon ion-ios-arrow-up scroll-up hvr-icon-up"></i></a>
+<!--<ng-include src="'app/partials/users/templates/create.html'"></ng-include>-->
+<script>
+    $(document).ready(function () {
+
+        responsiveSite();
+
+        msieversion();
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+
+        //Click event to scroll to top
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    });
+</script>
+<script>
+    var slideIndex = 1;
+
+    var scrollIndex = 0;
+
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        if (typeof (x[slideIndex - 1]) != 'undefined') {
+            x[slideIndex - 1].style.display = "block";
+        }
+    }
+
+
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        scrollIndex++;
+        if (scrollIndex > x.length) { scrollIndex = 1 }
+        x[scrollIndex - 1].style.display = "block";
+        setTimeout(carousel, 10000); // Change image every 10 seconds
+    }
+</script>

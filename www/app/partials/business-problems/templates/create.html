@@ -1,0 +1,924 @@
+
+
+<div id="myNav" class="overlay" ng-controller="ProblemCreateController">
+    <div class="overlay-content">
+        <div id="wizard">
+            <!--<form id="businessProblemForm1">-->
+            <h2>First Step</h2>
+            <section>
+                <form class="form-inline" name="businessProblemForm" id="businessProblemForm">
+                    <div class="container-fluid container-content create">
+                        <div class="row mobView">
+                            <div class="col-md-12 create-mob">
+                                <a href="javascript:void(0)" class="closebtn" ng-click="saveAndClose()"><i class="icon ion-ios-close-empty"></i></a>
+                                <span class="span-sub-text-create">Share Your Business Problem</span>
+                            </div>
+                        </div>
+                        <div class="row mobRes">
+                            <div class="col-md-12 page-heading-bg create">
+                                <a href="javascript:void(0)" class="closebtn" ng-click="saveAndClose()"><i class="icon ion-ios-close-empty"></i></a>
+                                <div class="create-dp-circle"></div>
+                                <span class="span-sub-text-create">Share Your Business Problem</span>
+                            </div>
+                            <div class="col-md-12 page-heading-bg-solid create">
+                            </div>
+                            <div class="col-md-12 shadow-page-heading-bg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid overlay-container-bg  div-main-container">                        
+                        <div class="row row-padding-top">
+                            <div class="col-md-8">
+                                <div class="row row-padding-top row-title-margin  row-show-remove">
+                                    <div class="col-md-11 create-mob-col-view large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint" rel="tooltip" title="Title for your problem statement"></i>
+                                        <md-input-container class="md-block md-long-text" flex-gt-sm="">
+                                            <label>Title <b class="mandatory">*</b></label>
+                                            <input ng-model="data.title" maxlength="200" name="title" class="custom-placeholder" placeholder="Enter Title for your problem statement">
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div class="row row-show-remove">
+                                    <div class="col-md-11  create-mob-col-view large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint" rel="tooltip" title="What? Articulate the Business Problem"></i>
+                                        <md-input-container class="md-block md-long-text" flex-gt-sm="">
+                                            <label>Problem Statement <b class="mandatory">*</b></label>
+                                            <textarea ng-model="data.problemStatement" name="problemStatement" rows="1" class="custom-placeholder" placeholder="Articulate the Business Problem to Solve"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div class="row row-show-remove">
+                                    <div class="col-md-11  create-mob-col-view large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint" rel="tooltip" title="Why? What is the primary business drive for this business problem? What is the business impact to customer for not solving this solution?"></i>
+                                        <md-input-container class="md-block md-long-text" flex-gt-sm="">
+                                            <label>Business Impact <b class="mandatory">*</b></label>
+                                            <textarea ng-model="data.businessImpact" name="businessImpact" rows="1" class="custom-placeholder" placeholder="Primary business drive for this business problem"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom select">
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block md-right" flex-gt-sm="" id="categorySelectBox">
+                                            <label>Select Category</label>
+                                            <md-select ng-model="data.category" name="category" ng-change="hideErrorMesssage('category')">
+                                                <md-option ng-repeat="category in categories" value="{{category._id}}">
+                                                    {{category.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block md-right" flex-gt-sm="">
+                                            <label>Select Priority</label>
+                                            <md-select ng-model="data.priority">
+                                                <md-option value="High">High</md-option>
+                                                <md-option value="Medium">Medium</md-option>
+                                                <md-option value="Low">Low</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>Owner</label>
+                                            <input ng-model="userDetails.name" readonly>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <md-input-container id="accountSelectBox" class="md-block accountSelectBox" flex-gt-sm="">
+                                            <label>Select Account <b class="mandatory">*</b></label>
+                                            <md-select ng-model="data.account" ng-change="showDomain(data.account)" name="account" data-error=".errorTxt1">                                              
+                                                <md-option ng-repeat="account in accounts" value="{{account._id}}" account>
+                                                    {{account.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom select">
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block md-right" flex-gt-sm="">
+                                            <label>Select Domain <b class="mandatory">*</b></label>
+                                            <!--<input ng-model="domainname" readonly>-->
+                                            <md-select ng-model="data.domain" name="domain">
+                                                <md-option ng-repeat="domain in domains" value="{{domain._id}}">
+                                                    {{domain.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>Select Vertical <b class="mandatory">*</b></label>
+                                            <md-select ng-model="data.vertical" name="vertical">
+                                                <md-option ng-repeat="vertical in verticals" value="{{vertical._id}}">
+                                                    {{vertical.name}}
+                                                </md-option>
+                                            </md-select>
+
+                                            <!--<input ng-model="verticalname" readonly>-->
+
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <!--<div class="row row-padding-bottom select">
+
+                                    
+                                </div>-->
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <span class="span-create-sub-head target">Customer Stakeholder</span>
+                                        <span ng-click="addCustomerstakholder()" class=""><i class="ion-ios-plus-outline font-dark "></i></span>
+                                    </div>
+                                </div>
+                                <div class="row row-show-remove" ng-repeat="row in data.customerStakeholders">
+                                    <div class="col-md-6">                                        
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>Customer Stakeholder <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerStakeholders[$index].name" rows="1" class="input-show-remove custom-placeholder" name="customerStakeholdersName" placeholder="Name in the organization" maxlength="200"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-md-6  right-side large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-add" ng-if="data.customerStakeholders.length == 1" rel="tooltip" title="Who? Who are the customer stakeholders who have validated the problem and will endorse our solution?  What is the direct impact from this solution to each stakeholder? Name & Role in the organization"></i>
+                                        <i class="icon ion-close-circled icon-sm-remove create" ng-if="data.customerStakeholders.length > 1" ng-click="removeCustomerStakholder($index)"></i>
+                                        <!--<input type="text" class="txtcreate-left input-show-remove" placeholder="Role in the organisation" ng-model="data.customerStakeholders[$index].role" name="customerStakeholdersRole" />-->
+                                        <md-input-container class="md-block md-right" flex-gt-sm="">
+                                            <label>Role in the organisation <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerStakeholders[$index].role" rows="1" class="input-show-remove custom-placeholder" name="customerStakeholdersRole" placeholder="Role in the organization" maxlength="200"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <span class="span-create-sub-head target">Targeted Business Units & Geographies</span>
+                                        <span ng-click="addTargetBusinessGeography()" class=""><i class="ion-ios-plus-outline font-dark"></i></span>
+                                    </div>
+                                </div>
+                                <div class="row row-show-remove" ng-repeat="row in data.targetBusinessGeography">
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>Business Unit <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.targetBusinessGeography[$index].businessUnit" rows="1" class="input-show-remove custom-placeholder" name="targetBusinessGeographyBusinessUnit" placeholder="Timeline for a solution"></textarea>
+                                        </md-input-container>
+                                        <!--<input type="text" class="txtcreate-right input-show-remove" placeholder="Business Unit" ng-model="data.targetBusinessGeography[$index].businessUnit" name="targetBusinessGeographyBusinessUnit">-->
+                                    </div>
+                                    <div class="col-md-6  right-side large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-add" ng-if="data.targetBusinessGeography.length == 1" rel="tooltip" title="When/Where? What is our timeline for a solution and are we targeting any specific geographies or customer segments?"></i>
+                                        <i class="icon ion-close-circled icon-sm-remove create" ng-if="data.targetBusinessGeography.length > 1" ng-click="removeTargetBusinessGeography($index)"></i>
+                                        <md-input-container class="md-block md-right" flex-gt-sm="">
+                                            <label>Geography <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.targetBusinessGeography[$index].geography" rows="1" class="input-show-remove custom-placeholder" name="targetBusinessGeographyGeography" placeholder="Specific geographies or customer segments"></textarea>
+                                        </md-input-container>
+                                        <!--<input type="text" class="txtcreate-left input-show-remove" placeholder="Geography" ng-model="data.targetBusinessGeography[$index].geography" name="targetBusinessGeographyGeography">-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="span-create-sub-head align">Opportunity Size</span>
+                                    </div>
+                                </div>
+                                <div class="row row-show-remove">
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block" flex-gt-sm="" id="estimateOfCustomer">
+                                            <label>Estimated customer spend <b class="mandatory">*</b></label>
+                                            <input ng-model="data.estimateOfCustomer" name="estimateOfCustomer" ng-change="CheckeValidNumber('estimateOfCustomer')" id="estimateOfCustomer" class="custom-placeholder">
+                                            <div class="div-error" ng-show="showestimateOfCustomerErrorMsg==1">Please enter a valid number!</div>
+                                        </md-input-container>
+                                        <!--<input type="text" class="txtcreate-right" ng-model="data.estimateOfCustomer" name="estimateOfCustomer" placeholder="Estimated customer spend to solve the business problem">-->
+                                    </div>
+                                    <div class="col-md-6 right-side large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-add" rel="tooltip" title="What is the impact to the business from this and how much is customer willing to pay for a solution?"></i>
+                                        <md-input-container class="md-block md-right" flex-gt-sm="">
+                                            <label>Potential UST Global wallet share <b class="mandatory">*</b></label>
+                                            <input ng-model="data.ustShare" name="ustShare" ng-change="CheckeValidNumber('ustShare')">
+                                            <div class="div-error" ng-show="ustShareErrorMsg==1">Please enter a valid number!</div>
+                                        </md-input-container>
+                                        <!--<input type="text" class="txtcreate-left" ng-model="data.ustShare" name="ustShare" placeholder="Potential UST Global wallet share on the solution">-->
+                                    </div>
+                                </div>
+                                <!--<div class="row">
+                                    <div class="col-md-6">
+                                        <span class="span-create-sub-head align">Other Information</span>
+                                    </div>
+                                </div>-->
+                                <div class="row row-show-remove">
+                                    <div class="col-md-11  create-mob-col-view large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint" rel="tooltip" title="What has customer/UST done in this space already and are we aware of any challenges that they faced in solving this problem? How did we identify this business problem? Additional inputs?"></i>
+                                        <md-input-container class="md-block md-long-text" flex-gt-sm="">
+                                            <label>Other Information</label>
+                                            <textarea ng-model="data.otherInfo" rows="1" class="custom-placeholder" placeholder="Additional inputs"></textarea>
+                                        </md-input-container>
+                                        <!--<textarea class="txtarea-default" ng-model="data.otherInfo" placeholder="List down other informations about the problem"></textarea>-->
+                                    </div>
+                                </div>
+                                <!--<div class="row">
+                                    <div class="col-md-6">
+                                        <span class="span-create-sub-head align">Assumptions</span>
+                                    </div>
+                                </div>-->
+                                <div class="row">
+                                    <div class="col-md-11 create-mob-col-view">
+                                        <md-input-container class="md-block md-long-text" flex-gt-sm="">
+                                            <label>Assumptions</label>
+                                            <textarea ng-model="data.assumptions" rows="3"></textarea>
+                                        </md-input-container>
+                                        <!--<textarea class="txtarea-default" ng-model="data.assumptions" placeholder="List down the Assumptions"></textarea>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-share-right-margin">
+                                <div class="row row-create-right row-sol-date-head">
+                                    <div class="col-md-12 col-sol-date">
+                                        <span class="span-solution-date">Solution Need Date <b class="mandatory">*</b></span>
+                                    </div>
+                                </div>
+                                <div class="row row-create-right row-sol-date">
+                                    <div class="col-md-10 right-side-cal">
+                                        <p class="input-group input-group-width datefield create">
+                                            <input type="text" class="form-control input-no-border-radius col-md-10" ng-click="open3()" placeholder="Select a Date..." uib-datepicker-popup="{{format}}" show-button-bar="false" ng-model="data.solutionNeedDate" is-open="popup3.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" name="solutionNeedDate" min-date="mindate" readonly />
+                                            <span class="input-group-btn span-temp-pos">
+                                                <button type="button" class="btn btn-default btn-calendar create" ng-click="open3()"><i class="icon ion-android-calendar"></i></button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row row-create-right row-sol-date row-padding-middle js">
+                                    <div class="col-md-10 right-side-cal">
+                                        <p class="input-group input-group-width datefield upload">
+                                            <!--<input type="file" ngf-select ng-model="file" name="file" ngf-max-size="20MB" class="span-upload-label">-->
+                                            <!--<input type="file"  ngf-select ng-model="file" name="file" ngf-max-size="20MB" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />-->
+                                            <input type="file" ngf-select ng-model="file" name="file" ng-change="submitFile()" ngf-max-size="20MB" id="file-1" class="inputfile inputfile-1" />
+                                            <label for="file-1"><span id="uploadText">Upload Documents</span></label>
+                                            <span class="input-group-btn span-temp-pos">
+                                                <button type="button" class="btn-upload btn-upload-icon"><i class="icon ion-ios-cloud-upload-outline"></i></button>
+                                            </span>
+                                            <div ng-show="progressVisible">
+                                                <img src="../../../../assets/img/Small_loader.gif" width="30" height="30"/>
+                                            </div>
+                                        </p>
+                                        <div class="row row-show-remove" ng-repeat="attach in data.attachments track by $index">
+                                            <div class="col-md-12 div-attachments create">
+                                                {{attach.attachment}}
+                                                <i ng-click="removeDocument($index)" class="icon ion-close-circled icon-file-remove"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-create-right">
+                                    <div class="col-md-12">
+                                        <span class="span-add-contributors">Add Contributors</span>
+                                    </div>
+                                    <div class="col-md-10 create-contributor" ng-show="showAddcontributorsSelectBox=='1'">
+                                        <!--<select ng-model="data.contributors" class="selectpicker col-md-12" multiple chosen ng-change="changeContributors()">
+                                            <option ng-repeat="user in users" value="{{user._id}}">{{user.name}}</option>
+                                        </select> -->
+                                        <select data-placeholder="Select the Contributor" multiple ng-model="data.contributors" ng-change="changeContributors()" ng-options="user._id as user.name for user in users" chosen class="selectpicker col-md-12"></select>
+                                    </div>
+                                </div>
+                                <div class="row row-create-right row-contributors-padding">
+                                    <div class="col-md-10">
+                                        <div class="float-left" ng-show="showAddcontributorsSelectBox=='0'">
+                                            <div class="div-contributors-add">
+                                                <i class="icon ion-android-add icon-add-contributors" ng-click="addcontributors()"></i>
+                                            </div>
+                                        </div>
+                                        <div class="float-left col-contributors" ng-repeat="contributor in contributorsDetails">
+                                            <div ng-click="removecontributors($index)"><i class="icon ion-close-circled icon-sm-remove contributor"></i></div>
+                                            <div class="div-contributors"></div>
+                                            <label class="label-contributor"> <span ng-repeat="item in contributor.name.split(' ')"> <span ng-if="$index < 1"> {{item}}</span></span><br />  {{item}}</label>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="row row-padding-top">
+
+
+                            <div class="col-md-4">
+
+
+                                <div class="row row-upload create">
+                                    <div class="col-md-12 col-upload-icon-left">
+                                        <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="20MB" class="span-upload-label">
+                                        <span class="icon ion-ios-cloud-upload-outline span-upload-icon" ng-click="submit()"></span>
+                                    </div>
+                                    <div class="row" ng-repeat="attach in data.attachments track by $index">
+                                        <div class="col-md-12 div-attachments">
+                                            {{attach.attachment}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!--<div class="row row-padding-top">
+
+                            <div class="col-md-4 col-action-position">
+                                <div class="row row-action">
+                                    <div class="col-md-8">
+                                        <span class="span-add-contributors">Actions</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 col-actions">
+                                        <div class="row sub-row-action">
+                                            <div class="col-md-2">
+                                                <i class="icon ion-alert"></i>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <span class="span-action">
+                                                    COPY
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row sub-row-action">
+                                            <div class="col-md-2">
+                                                <i class="icon ion-alert"></i>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <span class="span-action">
+                                                    SAVE
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row sub-row-action">
+                                            <div class="col-md-2">
+                                                <i class="icon ion-alert"></i>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <span class="span-action">
+                                                    NOTIFICATIONS
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row sub-row-action">
+                                            <div class="col-md-2">
+                                                <i class="icon ion-alert"></i>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <span class="span-action">
+                                                    SHARE
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row sub-row-action row-action-last">
+                                            <div class="col-md-2">
+                                                <i class="icon ion-alert"></i>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <span class="span-action">
+                                                    CLEAR
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>-->
+                        <!--<div class="row row-padding-top">
+
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-4 col-add-contributors">
+
+                            </div>
+
+                        </div>-->
+                        <!--<div class="row row-padding-top">
+
+                        </div>-->
+                        <!--<div class="row row-padding-top-bottom">
+
+                        </div>
+                        <div class="row row-padding-bottom row-show-remove" ng-repeat="row in data.customerStakeholders">
+
+                        </div>
+
+                        <div class="row">
+
+                        </div>
+                        <div class="row row-padding-bottom row-show-remove" ng-repeat="row in data.targetBusinessGeography">
+
+                        </div>-->
+                        <!--<div class="row row-padding-bottom">
+
+                        </div>-->
+
+                    </div>
+                    <div class="container-fluid overlay-container-bg">
+                        <!--<div class="row row-title-margin">
+                            <div class="col-md-10">
+                                <md-input-container class="md-block md-long-text title" flex-gt-sm="">
+                                    <label>Title</label>
+                                    <input ng-model="data.title" readonly>
+                                </md-input-container>
+                            </div>
+                        </div>-->
+                        <div class="row row-add-pain">
+                            <div class="col-md-5">
+                                <span class="span-add-pain">Add Customer Pains</span>
+                                <span ng-click="addCustomerPains()" class=""><i class="ion-ios-plus-outline font-dark"></i></span>
+                                <!--<span><i class="ion-ios-arrow-down font-dark"></i></span>-->
+                            </div>
+                        </div>
+                        <div class="row row-pain-gain-bg row-show-remove-pg create" ng-repeat="(index,row) in data.customerPains">
+                            <div class="col-md-6">
+                                <div class="row mobView">
+                                    <div class="col-md-12">
+                                        <i class="icon ion-close-circled icon-sm-remove card-close i-pg-cust" ng-if="data.customerPains.length > 1" ng-click="removeCustomerPains($index)"></i>
+                                    </div>
+                                </div>
+                                <!--<div class="row row-padding-top-bottom">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Description</span>
+                                    </div>
+                                </div>-->
+                                <div class="row row-show-remove pg-margin-top">
+                                    <div class="col-md-12 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" rel="tooltip" title="What is the pain contributed by this problem? Pains describe anything that annoys your customers before, during, and after trying to get a job done or simply prevents them from getting a job done. Pains also describe risks, that is, potential bad outcomes, related to getting a job done badly or not"></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Description <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerPains[$index].description" rows="1" name="customerPainDescription" class="custom-placeholder" placeholder="Pain contributed by this problem"></textarea>
+                                        </md-input-container>
+                                        <!--<textarea class="txtarea-default" ng-model="data.customerPains[$index].description" placeholder="List down the Description" name="customerPainDescription"></textarea>-->
+                                    </div>
+                                </div>
+                                <!--<div class="row row-padding-top-bottom">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Quantified Value</span>
+                                    </div>
+                                </div>-->
+                                <div class="row row-show-remove">
+                                    <div class="col-md-12 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" rel="tooltip" title="What is the measurable value of the pain - Value proposition once this pain is addressed? Clearly articulate this data."></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Quantified Value <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerPains[$index].quantifiedValue" rows="1" name="customerPainQuantifiedValue" class="custom-placeholder" placeholder="Measurable value of the pain"></textarea>
+                                        </md-input-container>
+                                        <!--<input type="text" class="txt-quantified-val-create" placeholder="Quantified Value" ng-model="data.customerPains[$index].quantifiedValue" name="customerPainQuantifiedValue">-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-gain-remove mobRes">
+                                    <div class="col-md-12">
+                                        <i class="icon ion-close-circled card-close icon-sm-remove i-pg-cust" ng-if="data.customerPains.length > 1" ng-click="removeCustomerPains($index)"></i>
+                                    </div>
+                                </div>
+                                <!--<div class="row row-padding-top-bottom">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Impacted Task</span>
+                                    </div>
+                                </div>-->
+                                <div class="row row-show-remove pg-margin-top">
+                                    <div class="col-md-12 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" rel="tooltip" title="What is the task impacted for this stakeholder due to this pain?"></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Impacted Task <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerPains[$index].impactedTask" rows="1" name="customerPainImpactedTask" class="custom-placeholder" placeholder="Task impacted for this stakeholder"></textarea>
+                                        </md-input-container>
+                                        <!--<textarea class="txtarea-default" placeholder="List down the Impacted Task" ng-model="data.customerPains[$index].impactedTask" name="customerPainImpactedTask"></textarea>-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Stakeholders</span>
+                                        <span ng-click="addCustomerPainsStackholder($index)" class=""><i class="ion-ios-plus-outline font-dark"></i></span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom row-show-remove" ng-repeat="row in data.customerPains[$index].stackholders">
+                                    <div class="col-md-6 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" ng-if="data.customerPains[$parent.$index].stackholders.length == 1" rel="tooltip" title="Who is the impacted stakeholder due to this pain? Name & Role in the organization"></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Customer Stakeholder <b class="mandatory" ng-if="$parent.$index==0">*</b></label>
+                                            <textarea maxlength="100" ng-model="data.customerPains[$parent.$index].stackholders[$index].name" rows="1" name="customerPainStackholdersName" class="custom-placeholder" placeholder="Name in the organization"></textarea>
+                                        </md-input-container>
+                                        <!--<input type="text" class="input-stake-right" placeholder="Customer Stakeholder" ng-model="data.customerPains[$parent.$index].stackholders[$index].name" name="customerPainStackholdersName" />-->
+                                    </div>
+                                    <div class="col-md-6  right-side-stake">                                        
+                                        <i class="icon ion-close-circled icon-sm-remove pain-gain" ng-if="data.customerPains[$parent.$index].stackholders.length > 1" ng-click="removeCustomerPainsStackholder(index,$index)"></i>
+                                        <!--<input type="text" class="input-stake-left" placeholder="Role in the organisation" ng-model="data.customerPains[$parent.$index].stackholders[$index].role" name="customerPainStackholdersRole" />-->
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Role in the organisation <b class="mandatory" ng-if="$parent.$index==0">*</b></label>
+                                            <textarea maxlength="100" ng-model="data.customerPains[$parent.$index].stackholders[$index].role" rows="1" name="customerPainStackholdersRole" class="custom-placeholder" placeholder="Role in the organization"></textarea>
+                                        </md-input-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid overlay-container-bg">
+                        <!--<div class="row row-title-margin">
+                            <div class="col-md-10">
+                                <md-input-container class="md-block md-long-text title" flex-gt-sm="">
+                                    <label>Title</label>
+                                    <input ng-model="data.title" readonly>
+                                </md-input-container>
+                            </div>
+                        </div>-->
+                        <div class="row row-add-pain">
+                            <div class="col-md-5">
+                                <span class="span-add-pain">Add Customer Gains</span>
+                                <span ng-click="addCustomerGains()" class=""><i class="ion-ios-plus-outline font-dark"></i></span>
+                                <!--<span><i class="ion-ios-arrow-down font-dark"></i></span>-->
+                            </div>
+                        </div>
+                        <div class="row row-pain-gain-bg row-show-remove-pg create" ng-repeat="(index,row) in data.customerGains">
+                            <div class="col-md-6">
+                                <div class="row mobView">
+                                    <div class="col-md-12">
+                                        <i class="icon ion-close-circled icon-sm-remove card-close i-pg-cust" ng-if="data.customerGains.length > 1" ng-click="removeCustomerGains($index)"></i>
+                                    </div>
+                                </div>
+                                <!--<div class="row row-padding-top-bottom">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Description</span>
+                                    </div>
+                                </div>-->
+                                <div class="row row-show-remove pg-margin-top">
+                                    <div class="col-md-12 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" rel="tooltip" title="What is the gain expected while solving this problem? Gains describe the outcomes and benefits your customers want by solving this problem. Some gains are required, expected, or desired by customers, and some would surprise them. Gains include functional utility, social gains, positive emotions, and cost savings"></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Description <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerGains[$index].description" rows="1" name="customerGainsDescription" class="custom-placeholder" placeholder="Gain expected while solving this problem"></textarea>
+                                        </md-input-container>
+                                        <!--<textarea class="txtarea-default" ng-model="data.customerGains[$index].description" placeholder="List down the Description" name="customerGainsDescription"></textarea>-->
+                                    </div>
+                                </div>
+                                <!--<div class="row row-padding-top-bottom">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Quantified Value</span>
+                                    </div>
+                                </div>-->
+                                <div class="row row-show-remove">
+                                    <div class="col-md-12 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" rel="tooltip" title="What is the measurable value of the gain - Value proposition once this gain is addressed? Clearly articulate this data."></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Quantified Value <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerGains[$index].quantifiedValue" rows="1" name="customerGainsQuantifiedValue" class="custom-placeholder" placeholder="Measurable value of the gain"></textarea>
+                                        </md-input-container>
+                                        <!--<input type="text" class="txt-quantified-val-create" ng-model="data.customerGains[$index].quantifiedValue" placeholder="Quantified Value" name="customerGainsQuantifiedValue">-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-gain-remove mobRes">
+                                    <div class="col-md-12">
+                                        <i class="icon ion-close-circled card-close icon-sm-remove i-pg-cust" ng-if="data.customerGains.length > 1" ng-click="removeCustomerGains($index)"></i>
+                                    </div>
+                                </div>
+                                <!--<div class="row row-padding-top-bottom">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Impacted Task</span>
+                                    </div>
+                                </div>-->
+                                <div class="row row-show-remove pg-margin-top">
+                                    <div class="col-md-12 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" rel="tooltip" title="What is the task impacted for this stakeholder due to this gain?"></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Impacted Task <b class="mandatory" ng-if="$index==0">*</b></label>
+                                            <textarea ng-model="data.customerGains[$index].impactedTask" rows="1" name="customerGainsImpactedTask" class="custom-placeholder" placeholder="Task impacted for this stakeholder"></textarea>
+                                        </md-input-container>
+                                        <!--<textarea class="txtarea-default" ng-model="data.customerGains[$index].impactedTask" placeholder="List down the Impacted Task" name="customerGainsImpactedTask"></textarea>-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <span class="span-create-sub-head create">Stakeholders</span>
+                                        <span ng-click="addCustomerGainsStackholder($index)" class=""><i class="ion-ios-plus-outline font-dark"></i></span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom row-show-remove" ng-repeat="row in data.customerGains[$index].stackholders">
+                                    <div class="col-md-6 large-tooltip">
+                                        <i class="icon ion-help-circled icon-sm-remove hint-pg" rel="tooltip" ng-if="data.customerGains[$parent.$index].stackholders.length == 1" title="Who is the beneficiary stakeholder of this gain? Name & Role in the organization"></i>
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Customer Stakeholder <b class="mandatory" ng-if="$parent.$index==0">*</b></label>
+                                            <textarea maxlength="100" ng-model="data.customerGains[$parent.$index].stackholders[$index].name" rows="1" name="customerGainsstackholdersName" class="custom-placeholder" placeholder="Name in the organization"></textarea>
+                                        </md-input-container>
+                                        <!--<input type="text" class="input-stake-right" placeholder="Customer Stakeholder" ng-model="data.customerGains[$parent.$index].stackholders[$index].name" name="customerGainsstackholdersName" />-->
+                                    </div>
+                                    <div class="col-md-6 right-side-stake ">                                        
+                                        <i class="icon ion-close-circled icon-sm-remove pain-gain" ng-if="data.customerGains[$parent.$index].stackholders.length > 1" ng-click="removeCustomerGainsStackholder(index,$index)"></i>
+                                        <!--<input type="text" class="input-stake-left" placeholder="Role in the organisation" ng-model="data.customerGains[$parent.$index].stackholders[$index].role" name="customerGainsstackholdersRole" />-->
+                                        <md-input-container class="md-block md-wizard" flex-gt-sm="">
+                                            <label>Role in the organisation <b class="mandatory" ng-if="$parent.$index==0">*</b></label>
+                                            <textarea maxlength="100" ng-model="data.customerGains[$parent.$index].stackholders[$index].role" rows="1" name="customerGainsstackholdersRole" class="custom-placeholder" placeholder="Role in the organization"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid container-create-bottom">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!--<div class="float-left col-update margin div-btn-mob">
+                                    <button class="btn-edit-change btn-mob" ng-click="saveProblem()">Save</button>
+                                </div>
+
+                                <div class="float-left col-update margin div-btn-mob bottom">
+                                    <button id="createProblem" class="btn-edit-change update btn-mob" ng-click="createProblem()">Share</button>
+                                </div>-->
+
+
+                                <a class="btn-edit-change col-update margin col-sm-2 saveBtn div-btn-mob" ng-click="saveProblem()">Save</a>
+                                <button class="btn-edit-change update col-update margin div-btn-mob bottom" id="createProblem" ng-click="createProblem()">Share</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <!--<h2>Second Step</h2>-->
+            <!--<section>
+                <form class="form-inline" name="businessProblemForm3" id="businessProblemForm2">
+                    <div class="container-fluid container-content create">
+                        <div class="row">
+                            <div class="col-md-12 page-heading-bg create">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="icon ion-ios-close-empty"></i></a>
+                                <div class="create-dp-circle"></div>
+                                <span class="span-sub-text-create">Share Your Business Problem</span>
+                            </div>
+                            <div class="col-md-12 page-heading-bg-solid create">
+                            </div>
+                            <div class="col-md-12 shadow-page-heading-bg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid overlay-container">
+                        <div class="row overlay-row-head">
+                            <div class="col-md-12">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="icon ion-ios-close-empty"></i></a>
+                                <div class="create-dp-circle"></div>
+                                <span class="span-text-create">CREATE</span>
+                                <span class="span-sub-text-create">Create a New Business Problem</span>
+                            </div>
+                        </div>
+                        <div class="row row-create-details">
+                            <div class="col-md-12 col-create-details">
+                                <span class="input-create-details">{{data.title}}</span>
+                                <input class="input-create-details" placeholder="Title" ng-model="data.title" />
+                                <span class="span-create-details">Anthem Mobile App Customization</span><br />
+                                <span class="span-create-details">Provider HIPPA</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </section>-->
+            <!--<h2>Third Step</h2>-->
+            <!--<section>
+                <form class="form-inline" name="businessProblemForm2" id="businessProblemForm3">
+                    <div class="container-fluid container-content create">
+                        <div class="row">
+                            <div class="col-md-12 page-heading-bg create">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="icon ion-ios-close-empty"></i></a>
+                                <div class="create-dp-circle"></div>
+                                <span class="span-sub-text-create">Share Your Business Problem</span>
+                            </div>
+                            <div class="col-md-12 page-heading-bg-solid create">
+                            </div>
+                            <div class="col-md-12 shadow-page-heading-bg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid overlay-container">
+                        <div class="row overlay-row-head">
+                            <div class="col-md-12">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="icon ion-ios-close-empty"></i></a>
+                                <div class="create-dp-circle"></div>
+                                <span class="span-text-create">CREATE</span>
+                                <span class="span-sub-text-create">Create a New Business Problem</span>
+                            </div>
+                        </div>
+                        <div class="row row-create-details">
+                            <div class="col-md-12 col-create-details">
+                                <span class="input-create-details">{{data.title}}</span>
+                                <input class="input-create-details" placeholder="Title" ng-model="data.title" />
+                                <span class="span-create-details">Anthem Mobile App Customization</span><br />
+                                <span class="span-create-details">Provider HIPPA</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </section>-->
+
+        </div>
+    </div>
+
+
+    <!--</form>-->
+</div>
+<div class="modal fade" id="modalCreateSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Shared</h4>
+            </div>
+            <div class="modal-body">
+                <p>Business problem shared successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#modalCreateSuccess').modal('hide');">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSaveSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Saved</h4>
+            </div>
+            <div class="modal-body">
+                <p>Business problem successfully saved in drafts!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#modalSaveSuccess').modal('hide');">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        responsiveSite();
+
+        $("#createProblem").click(function () {
+            if ($("#businessProblemForm").valid()) {
+                var scope = angular.element('div[ng-controller="ProblemCreateController"]').scope();
+                scope.createProblem();
+            }
+        });
+    });
+
+    $(function () {
+
+        jQuery.validator.addMethod(
+    "money",
+    function (value, element) {
+        var isValidMoney = /^\$?(([1-9](\d*|\d{0,2}(,\d{3})*))|0)(\.\d{1,2})?$/.test(value);
+        return this.optional(element) || isValidMoney;
+    },
+    ""
+);
+        $("#wizard").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            onStepChanging: function (event, currentIndex, newIndex) {
+                //alert(1);
+                //alert(currentIndex);
+                //if(scope.showErrorAlert) return false;
+                // alert(currentIndex)
+
+                if (currentIndex == 0) {
+                    if ($("#businessProblemForm1").valid()) {
+                        var scope = angular.element('div[ng-controller="ProblemCreateController"]').scope();
+                        scope.createProblem();
+                        return true;
+                    }
+                    else {
+                        if (newIndex < currentIndex) {
+
+                            return true
+                        }
+                        else {
+
+                            return false;
+                        }
+                    }
+                    return false;
+                }
+
+                else if (currentIndex == 1) {
+                    if ($("#businessProblemForm2").valid()) {
+                        var scope = angular.element('div[ng-controller="ProblemCreateController"]').scope();
+                        scope.updateProblem();
+                        return true;
+                    }
+                    else {
+                        if (newIndex < currentIndex) {
+                            return true
+                        }
+                        else {
+
+                            return false;
+                        }
+                    }
+                }
+                else if (currentIndex == 2) {
+                    return true;
+                }
+                return false;
+            },
+
+            onFinished: function (event, currentIndex) {
+                if ($("#businessProblemForm3").valid()) {
+                    var scope = angular.element('div[ng-controller="ProblemCreateController"]').scope();
+                    scope.updateFinalFormProblem();
+                    closeNav();
+                }
+            }
+        });
+
+        $("#businessProblemForm").validate({
+            rules: {
+                title: {
+                    required: true,
+                },
+                problemStatement: {
+                    required: true,
+                },
+                businessImpact: {
+                    required: true
+                },
+                ".account": {
+                    required: true
+                },
+                ".domain" :{
+                    required: true
+                },
+                ".vertical": {
+                    required: true
+                },
+                //".category": {
+                //    required: true
+                //},
+                customerStakeholdersName: {
+                    required: true
+                },
+                customerStakeholdersRole: {
+                    required: true
+                },
+                targetBusinessGeographyBusinessUnit: {
+                    required: true
+                },
+                targetBusinessGeographyGeography: {
+                    required: true
+                },
+                estimateOfCustomer: {
+                    required: true,
+                    money: true,
+                },
+                ustShare: {
+                    required: true,
+                    money: true,
+                },
+                solutionNeedDate: {
+                    required: true
+                },
+                customerGainsDescription: {
+                    required: true,
+                },
+                customerGainsImpactedTask: {
+                    required: true,
+                },
+                customerGainsQuantifiedValue: {
+                    required: true,
+                },
+                customerGainsstackholdersName: {
+                    required: true,
+                },
+                customerGainsstackholdersRole: {
+                    required: true
+                },
+                customerPainDescription: {
+                    required: true,
+                },
+                customerPainImpactedTask: {
+                    required: true,
+                },
+                customerPainQuantifiedValue: {
+                    required: true,
+                },
+                customerPainStackholdersName: {
+                    required: true,
+                },
+                customerPainStackholdersRole: {
+                    required: true
+                }
+            }
+        });
+    });
+
+
+</script>
+<script src="/assets/js/custom-file-input.js"></script>
+

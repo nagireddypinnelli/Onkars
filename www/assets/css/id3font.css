@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'id3font';
+  src:  url('fonts/id3font.eot?iav9st');
+  src:  url('fonts/id3font.eot?iav9st#iefix') format('embedded-opentype'),
+    url('fonts/id3font.ttf?iav9st') format('truetype'),
+    url('fonts/id3font.woff?iav9st') format('woff'),
+    url('fonts/id3font.svg?iav9st#id3font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="id3-"], [class*=" id3-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'id3font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.id3-banking:before {
+  content: "\e900";
+}
+.id3-car:before {
+  content: "\e901";
+}
+.id3-emerging:before {
+  content: "\e902";
+}
+.id3-healthcare:before {
+  content: "\e903";
+}
+.id3-media:before {
+  content: "\e904";
+}
+.id3-retail:before {
+  content: "\e905";
+}
+.id3-telecom:before {
+  content: "\e906";
+}
+.id3-add:before {
+  content: "\e907";
+}
+.id3-binoculars:before {
+  content: "\e908";
+}
+.id3-clipboard:before {
+  content: "\e909";
+}
+.id3-cloud-computing:before {
+  content: "\e90a";
+}
+.id3-contact:before {
+  content: "\e90b";
+}
+.id3-customer-problem:before {
+  content: "\e90c";
+}
+.id3-diskette:before {
+  content: "\e90d";
+}
+.id3-eraser:before {
+  content: "\e90e";
+}
+.id3-flip:before {
+  content: "\e90f";
+}
+.id3-fountain-pen:before {
+  content: "\e910";
+}
+.id3-funnel:before {
+  content: "\e911";
+}
+.id3-ID3-logo:before {
+  content: "\e912";
+}
+.id3-light-bulb:before {
+  content: "\e913";
+}
+.id3-like:before {
+  content: "\e914";
+}
+.id3-list-button:before {
+  content: "\e915";
+}
+.id3-logoemblembg:before {
+  content: "\e916";
+}
+.id3-notification-bell:before {
+  content: "\e917";
+}
+.id3-outdoor-rock:before {
+  content: "\e918";
+}
+.id3-settings:before {
+  content: "\e919";
+}
+.id3-settings-multi:before {
+  content: "\e91a";
+}
+.id3-timeline:before {
+  content: "\e91b";
+}

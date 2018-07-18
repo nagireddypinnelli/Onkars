@@ -1,0 +1,132 @@
+﻿@charset "UTF-8";
+
+/**
+ * Edge Treeview Styling
+ */
+ div.treeview {
+     margin:10px 0;
+     display: inline-flex;
+     padding: 0 0px 20px 0px;
+     box-sizing: border-box;
+     width:100%;
+
+ }
+
+ div.treeview ul{
+     list-style-type: none;
+     padding-left:25px;
+     color: rgba(5,5,5,1);
+     width:100%;
+ }
+
+ div.treeview ul li{
+     font-weight:400;
+     font-size: 14px;
+ }
+
+ ul li span.item{
+     padding:3px 0 3px 5px;
+     display: block;
+     cursor: pointer;
+     transition: background-color 60ms ease-in-out, color 50ms ease-in-out ;
+     -webkit-user-select: none;
+     -webkit-user-modify: read-only;
+ }
+
+ ul li span.item:hover,ul li span.item:active{
+     background-color:rgba(0,0,0,0.45);
+
+ }
+
+ div.treeview ul li i{
+     padding-right:5px;
+     font-size: 16px;
+ }
+
+ div.treeview ul li i.indicator-expanded{
+     position: absolute;
+     margin-left: -18px;
+     margin-top: -2px;
+     font-size: 20px;
+     color: rgba(5,5,5,1);
+ }
+
+ div.treeview ul li.collapsed > ul{
+     display:none;
+ }
+
+ div.treeview ul li.collapsed > span > i.indicator-expanded:before{
+     content:"\f363";
+ }
+
+ /* Add dialog styles */
+
+ .chipsdemoContactChips md-content.autocomplete {
+  min-height: 250px; }
+  .chipsdemoContactChips md-content.autocomplete input {
+    min-width: 400px; }
+
+.chipsdemoContactChips .md-item-text.compact {
+  padding-top: 8px;
+  padding-bottom: 8px; }
+
+.chipsdemoContactChips .contact-item {
+  box-sizing: border-box; }
+  .chipsdemoContactChips .contact-item.selected {
+    opacity: 0.5; }
+    .chipsdemoContactChips .contact-item.selected h3 {
+      opacity: 0.5; }
+  .chipsdemoContactChips .contact-item .md-list-item-text {
+    padding: 14px 0;
+    max-width: 190px; }
+    .chipsdemoContactChips .contact-item .md-list-item-text h3 {
+      margin: 0 !important;
+      padding: 0;
+      line-height: 1.2em !important; }
+    .chipsdemoContactChips .contact-item .md-list-item-text h3, .chipsdemoContactChips .contact-item .md-list-item-text p {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden; }
+  @media (min-width: 960px) {
+    .chipsdemoContactChips .contact-item {
+      float: left;
+      width: 33%; } }
+
+.chipsdemoContactChips md-contact-chips {
+  margin-bottom: 10px; }
+
+.chipsdemoContactChips .md-chips {
+  padding: 5px 0 8px; }
+
+.chipsdemoContactChips .fixedRows {
+  height: 250px;
+  overflow: hidden; }
+
+/* Custom */
+md-dialog.add-user{
+  max-width: 440px;
+  min-width: 440px;
+}
+/*md-dialog.add-user md-content{
+  padding-top: 60px;
+  padding-bottom: 60px;
+}*/
+.md-contact-suggestion img {
+  vertical-align: top;
+}
+
+md-chips md-chips-wrap.md-chips.md-removable{
+  height: 50px;
+  overflow: hidden;
+}
+
+.md-chips md-chip{
+  min-width: 100%;
+  height: 35px;
+  line-height: 32px;
+}
+
+/*
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+*/

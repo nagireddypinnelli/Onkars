@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="id3" >
+<head>
+    <title>ID3</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="assets/css/angularmaterial.min.css" rel="stylesheet" />
+    <link href="assets/css/id3font.css" rel="stylesheet" />
+    <link href="assets/css/id3-domain.css" rel="stylesheet" />
+	<link href="/assets/css/fonts.css" rel="stylesheet" />
+    
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/assets/css/ionicons.css" rel="stylesheet" />
+    <link href="/assets/css/icon-font.min.css" rel="stylesheet" />
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/jquery.steps.css" rel="stylesheet" />
+    
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/assets/css/ng-tags-input.min.css" />
+	
+    <!--<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/megrim" type="text/css" />-->   
+
+	<script src="/assets/js/jquery.min.js"></script>
+    <script src="angular/angular.js"></script>
+	<script src="/assets/js/chosen.jquery.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <!--<script src="jquery/dist/jquery.js"></script>-->
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="assets/js/jquery.formatCurrency.js"></script>
+    
+
+    <script src="angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="angular-animate/angular-animate.js"></script>
+    <script src="angular-aria/angular-aria.js"></script>
+    <script src="angular-messages/angular-messages.js"></script>
+    <script src="angular-material/angular-material.js"></script>
+    <script src="assets/js/moment.js"></script>
+    <script src="assets/js/angular-moment.js"></script>
+	
+    <script src="assets/js/modernizr-2.6.2.min.js"></script>
+    <script src="assets/js/jquery.cookie-1.3.1.js"></script>
+    <script src="assets/js/jquery.steps.js"></script>
+
+	<script type="text/javascript" src="assets/js/ng-file-upload.min.js"></script>
+	<script type="text/javascript" src="assets/js/ng-file-upload-shim.min.js"></script>   
+
+    <script src="assets/js/chosen.js"></script>
+    <link href="assets/css/chosen.css" rel="stylesheet" />
+	
+	<script type="text/javascript" src="assets/js/ng-infinite-scroll.js"></script>
+
+
+
+    <script src="assets/js/loadingoverlay.min.js"></script>
+    <script src="assets/js/loadingoverlay_progress.min.js"></script>
+</head>
+<body>	
+    <div ui-view="main" class="main"></div>
+    <script src="/assets/js/angular.treeview.js"></script>
+    <script src="/assets/js/d3.min.js"></script>
+    <script src="/assets/js/dirPagination.js"></script>
+    <script src="/assets/js/liquidFillGauge.js"></script>
+    <script src="/assets/js/ng-table.js"></script>
+    <script src="/assets/js/radialProgress.js"></script>
+    <script src="/app/app.module.js"></script>
+    <script src="/app/components/navbar/navbar.module.js"></script>
+    <script src="/app/components/right-click/contextmenu.module.js"></script>
+    <script src="/app/components/treeview/tree.module.js"></script>
+	
+	<!-- start problems -->
+	<script src="/app/partials/business-problems/problem.module.js"></script>
+	<script src="/app/partials/business-problems/controllers/problemController.js"></script>
+    <script src="app/partials/business-problems/controllers/angularSlidable.js"></script>
+    <script src="/app/partials/business-problems/controllers/createController.js"></script>
+    <script src="/app/partials/business-problems/controllers/editController.js"></script>
+    <script src="app/partials/business-problems/controllers/myBusinessProblemController.js"></script>
+    <script src="/app/partials/business-problems/controllers/problemDetailsController.js"></script>
+	<script src="/app/partials/business-problems/services/problemService.js"></script>
+    <script src="app/partials/business-problems/controllers/problemDraft.js"></script>
+	<!-- end problems -->
+
+    <script src="/app/partials/home/home.module.js"></script>
+    <script src="/app/partials/insight/insight.module.js"></script>
+    <script src="/app/partials/login/login.module.js"></script>
+   
+    <!--start users-->
+    <script src="/app/partials/users/users.module.js"></script>
+	<script src="/app/partials/users/controllers/usersController.js"></script>
+	<script src="/app/partials/users/services/usersService.js"></script>
+	<script src="/app/partials/users/controllers/createController.js"></script>
+    <script src="app/partials/users/controllers/editController.js"></script>
+	<!--end users-->
+
+	<!-- start accounts -->
+	<script src="/app/partials/accounts/account.module.js"></script>
+	<script src="/app/partials/accounts/controllers/accountController.js"></script>
+    <script src="/app/partials/accounts/controllers/createController.js"></script>
+    <script src="/app/partials/accounts/controllers/editController.js"></script>
+	<script src="/app/partials/accounts/services/accountService.js"></script>
+	<!-- end accounts -->
+   
+    <!--start domains-->
+    <script src="app/partials/domain/domain.module.js"></script>
+    <script src="app/partials/domain/controllers/createController.js"></script>
+    <script src="app/partials/domain/controllers/detailsController.js"></script>
+    
+    <script src="app/partials/domain/controllers/listController.js"></script>
+    <script src="app/partials/domain/services/domainService.js"></script>
+    <!--end domains-->
+
+    <!--start status-->
+    <script src="app/partials/status/status.module.js"></script>
+    <script src="app/partials/status/controllers/createController.js"></script>
+    <script src="app/partials/status/controllers/detailsController.js"></script>
+    <script src="app/partials/status/controllers/editController.js"></script>
+    <script src="app/partials/status/controllers/listController.js"></script>
+    <script src="app/partials/status/services/statusService.js"></script>
+    <!--end status-->
+
+    <!--start vertical-->
+    <script src="app/partials/vertical/vertical.module.js"></script>
+    <script src="app/partials/vertical/controllers/createController.js"></script>
+    <script src="app/partials/vertical/controllers/detailsController.js"></script>
+    <script src="app/partials/vertical/controllers/editController.js"></script>
+    <script src="app/partials/vertical/controllers/listController.js"></script>
+    <script src="app/partials/vertical/services/verticalService.js"></script>
+    <!--end vertical-->
+
+    <!--start phase-->
+    <script src="app/partials/phase/phase.module.js"></script>
+    <script src="app/partials/phase/controllers/createController.js"></script>
+    <script src="app/partials/phase/controllers/detailsController.js"></script>
+    <script src="app/partials/phase/controllers/editController.js"></script>
+    <script src="app/partials/phase/controllers/listController.js"></script>
+    <script src="app/partials/phase/services/phaseService.js"></script>
+    <!--end phase-->
+
+    <!--Start Modules-->
+    <script src="app/partials/Modules/modules.module.js"></script>
+    <script src="app/partials/Modules/controllers/modulesController.js"></script>
+    <script src="app/partials/Modules/services/modulesService.js"></script>
+    <!--end Modules-->
+
+    <!--Start Repository--> 
+    <script src="app/partials/repository/repository.module.js"></script>
+    <script src="app/partials/repository/controller/createController.js"></script>
+    <script src="app/partials/repository/controller/repositoryController.js"></script>
+    <script src="app/partials/repository/services/repositoryService.js"></script>
+    <script src="/assets/js/ng-tags-input.min.js"></script>
+
+    <!--End Repository-->
+
+
+    <!--Start profile-->
+        <script src="app/partials/profile/controllers/profileController.js"></script>
+        <script src="app/partials/profile/services/profileServices.js"></script>
+    <!--End profile-->
+
+
+    <!--start category-->
+    <!--<script src="app/partials/category/category.module.js"></script>
+    <script src="app/partials/category/controllers/createController.js"></script>
+    <script src="app/partials/category/controllers/detailsController.js"></script>
+    <script src="app/partials/category/controllers/editController.js"></script>
+    <script src="app/partials/category/controllers/listController.js"></script>
+    <script src="app/partials/category/services/categoryService.js"></script>-->
+    <!--end category-->
+
+    <script src="/app/components/treeview/demo.js"></script>
+    <script src="/app/partials/home/homeController.js"></script>
+    <script src="/app/partials/insight/insightController.js"></script>
+    <script src="/app/partials/login/loginController.js"></script>
+    <script src="app/partials/spinner/spinner.module.js"></script>
+    <script src="app/partials/spinner/spinnerService.js"></script>    
+    <script src="/app/app.routes.js"></script>
+    <!-- endinject -->
+    <script src="app/partials/users/controllers/manage.js"></script>
+    <script src="app/partials/users/services/usersService.js"></script>
+
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/script.js"></script>
+
+
+    
+</body>
+
+
+</html>
+<script>
+   
+
+    // Hide it after 3 seconds
+    //setTimeout(function () {
+    //    $.LoadingOverlay("hide");
+    //}, 3000);
+</script>

@@ -1,0 +1,139 @@
+<!-- Add New Selector View -->
+<md-tabs  class="list-det-scrol" style="padding-top:0px">
+    <md-tab  label="Chart List" class="executive-details-tab">
+        <md-content style="overflow:hidden;">
+            <table ng-show="executiveUpdates.length>=1" ng-table="tableParams" class="table xe-updates-table">
+                <thead>
+                    <tr>
+                        <th ng-click="orderByField='name'; reverseSort = !reverseSort"> Title </th>
+                        <th ng-click="orderByField='email'; reverseSort = !reverseSort"> Chart </th>
+                        <th ng-click="orderByField='organizationRole'; reverseSort = !reverseSort">
+                            Options <span ng-show="orderByField == 'organizationRole'" ng-click="orderByField='isPublished'; reverseSort = !reverseSort"><span ng-show="!reverseSort">&Delta;</span><span ng-show="reverseSort">&nabla;</span></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="(fIndex,update) in executiveUpdates" current-page="currentPage">
+                    <td style="vertical-align:top;padding-top: 28px;"><span ng-controller="ExecutiveViewController" ng-click="showAdvanced($event,update._id)" class="xe-link">{{update.title}}</span></td>
+                    <td>
+                        <div ng-if="update.chartType === 'line'"style="margin-left:75px;"id="line-chart{{$index}}"></div>
+                        <div ng-if="update.chartType === 'area'">
+                            <span style="position: relative;top: -139px; text-align: center;color:rgb(148,148,148);">{{update.yaxis}}</span>
+                            <div  id="area-chart{{$index}}"></div>
+                            <span style="position: relative; left:240px;color:rgb(148,148,148);">{{update.xaxis}}</span>
+                        </div>                       
+                        <div ng-if="update.chartType === 'bar'" id="bar-chart{{$index}}"></div>
+                        <div ng-if="update.chartType === 'donut' || update.chartType === 'pie'" style="margin-left:75px;"id="pie-chart{{$index}}"></div>
+                        <span ng-if="update.chartType === 'liquid'" style="position:relative" ng-repeat="data in update.chartData">
+                            <svg id="fillgauge{{fIndex}}{{$index}}" style="margin:2px 12px 20px 12px" width="20%" height="90"></svg>
+                            <span style="position:absolute;left:0;bottom:15px;text-align:center;width:100%;color:rgb(148,148,148);">{{data.key}}</span>
+                        </span>
+                    </td>
+
+                    <td style="vertical-align:middle;">
+
+                        <a href="#/executives/edit/{{update.chartType}}/{{update.level}}/{{update._id}}">
+                            <md-button md-ink-ripple="#333" class="publish-btn">
+                                <md-tooltip>
+                                    Edit
+                                </md-tooltip>
+                                <i class="ion-edit" style="color:#7d7d7d"></i>
+                            </md-button>
+                        </a>
+                        <div ng-if="update.isPublished === true">
+                            <md-button md-ink-ripple="#333"  class="publish-btn withdraw-bg-img" ng-click="changePublish(update._id,'0')">
+                                <md-tooltip>
+                                    Withdraw
+                                </md-tooltip>
+                               <!-- <i class="ion-ios-download-outline"></i>-->
+                            </md-button>
+
+                        </div>
+                        <div ng-if="update.isPublished === false">
+                            <md-button md-ink-ripple="#333" class="publish-btn publish-bg-img" ng-click="changePublish(update._id,'1')">
+                                <md-tooltip>
+                                    Publish
+                                </md-tooltip>
+                                <div class=""></div>
+                                <!--<i class="ion-ios-upload-outline"></i>-->
+                            </md-button>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show="executiveUpdates.length==0">
+                    <td> </td>
+                    <td>
+                        <span class="alert text-center" style="color:#31708F">No data found !!!</span>
+                    </td>
+                    <td> </td>
+                </tr>
+            </table>
+
+            <div ng-show="executiveUpdates.length==0" style="width:100%" class="alert text-center">
+                <span style="color:#31708F">No data found !!!</span>
+            </div>
+            </md-content>
+            <!-- /.End -->
+
+</md-tab>
+    <md-tab label="Approval" class="executive-details-tab">
+         <!--Add New Selector View -->
+        <md-content class="md-padding">
+            <table ng-show="executiveUpdates>=1" ng-table="tableParams" class="table xe-updates-table" ng-controller="ExecutiveApproveController">
+                <thead>
+                    <tr>
+                        <th ng-click="orderByField='name'; reverseSort = !reverseSort"> Title </th>
+                        <th ng-click="orderByField='email'; reverseSort = !reverseSort"> Chart </th>
+                        <th ng-click="orderByField='organizationRole'; reverseSort = !reverseSort">
+                            Status <span ng-show="orderByField == 'organizationRole'"><span ng-show="!reverseSort">&Delta;</span><span ng-show="reverseSort">&nabla;</span></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="(fIndex,update) in executiveUpdates" current-page="currentPage">
+                    <td style="vertical-align:top;padding-top: 28px;"><span ng-controller="ExecutiveViewController" ng-click="showAdvanced($event,update._id)" class="xe-link">{{update.title}}</span></td>
+                    <!-- <td style="vertical-align:top;padding-top: 28px;"><span ng-controller="ExecutiveViewController"  class="xe-link">{{update.title}}</span></td>-->
+ 
+                    <td>
+                        <div ng-if="update.chartType === 'line'" style="margin-left:75px;" id="line-chartApproval{{$index}}"></div>
+                        <div ng-if="update.chartType === 'area'">
+                            <span style="position: relative;top: -139px; text-align: center;color:rgb(148,148,148);">{{update.yaxis}}</span>
+                            <div id="area-chartApproval{{$index}}"></div>
+                            <span style="position: relative; left:-175px;">{{update.xaxis}}</span>
+                        </div>   
+
+                        <div ng-if="update.chartType === 'bar'" id="bar-chartApproval{{$index}}"></div>
+
+                        <div ng-if="update.chartType === 'donut' || update.chartType === 'pie'" style="margin-left:75px;"id="pie-chartApproval{{$index}}"></div>
+                        <span ng-if="update.chartType === 'liquid'" style="position:relative" ng-repeat="data in update.chartData">
+                            <svg id="fillgauge{{fIndex}}{{$index}}" style="margin:2px 12px 20px 12px" width="20%" height="90"></svg>
+                            <span style="position:absolute;left:0;bottom:15px;text-align:center;width:100%">{{data.key}}</span>
+                        </span>
+                    </td>
+
+                    <td style="vertical-align:top;padding-top: 28px;">
+
+
+                        <md-button md-ink-ripple="#333"  class="publish-btn" ng-click="approveChart(update._id)">
+                            <md-tooltip>
+                                Approve
+                            </md-tooltip>
+                            <i style="font-size:32px;" class="ion-ios-checkmark"></i>
+                            <!--<i class="ion-ios-download-outline"></i>-->
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-show="executiveUpdates.length==0">
+                    <td> </td>
+                    <td>
+                        <span class="alert text-center" style="color:#31708F">No data found !!!</span>
+                    </td>
+                    <td> </td>
+                </tr>
+            </table>
+            <div ng-show="executiveUpdates.length==0" style="width:100%" class="alert text-center">
+                <span style="color:#31708F">No data found !!!</span>
+            </div>
+            </md-content>
+            <!-- /.End -->
+</md-tab>
+</md-tabs>

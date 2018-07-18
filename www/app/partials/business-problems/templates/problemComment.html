@@ -1,0 +1,56 @@
+﻿<script src="../../../../assets/Scripts/bootstrap.js"></script>
+<link href="../../../../assets/Content/bootstrap.css" rel="stylesheet" />
+<div id="style-scroll" style="height: 86vh;
+    overflow: auto;">
+    <div id="style-scroll" style="height: 86vh;
+    overflow: auto;">
+        <md-content layout-padding class="xe-transparent font-dark">
+            <h2 class="margin-0">{{data.title}}</h2>
+        </md-content>
+        <div layout-padding flex layout="row" class="xe-transparent">
+            <form class="form-inline">
+                <div class="col-sm-12" style="border-color:black; border-style:solid;">
+                    <div class="form-group col-lg-6">
+                        <md-input-container ng-repeat="row in data.contributors track by $index">
+                            <label class="size-16">Contributors {{$index+1}}</label>
+                            <input class="input-field" style="margin-bottom:5px;" type="text" ng-model="data.contributors[$index]">
+                        </md-input-container>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label>Tagged in</label>
+                        <label></label>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-6">Like this solution</label>
+                        <md-button md-ink-ripple="#333" class="publish-btn" ng-click="addlike()">
+                            <md-tooltip>
+                                Like
+                            </md-tooltip>
+                            <i class="glyphicon-apple" style="color:#7d7d7d"></i>
+                        </md-button>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-6">Member</label>
+                      </div>
+
+                    <div class="form-group col-lg-12">
+                        <label class="col-lg-4">Description</label>
+                        <label class="col-lg-8">:{{data.problemStatement}}</label>
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label class="col-sm-4">Add Comment</label>
+                        <textarea class="col-sm-8" ng-model="comment">
+                        </textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <md-content style="float:right;right: 16px;">
+            <md-input-container>
+                <button type="button" md-ink-ripple="#333" class="border xe-right" ng-click="addComment()">Send</button>
+            </md-input-container>
+        </md-content>
+    </div>
+</div>

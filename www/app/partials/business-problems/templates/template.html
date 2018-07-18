@@ -1,0 +1,38 @@
+<md-dialog aria-label={{data.title}} style="width:60%;border-radius: 0px;text-align:left" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools" style="margin:0 auto">
+                <div style="width:100%;padding-left:10px">
+                    <h2 style="width:95%;text-align:left;text-transform:capitalize;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;float:left;font:bold">{{data.title}}</h2>
+                    <button class="close-icon" ng-click="close()"></button>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content" style="width:60%;float:left">
+                <h4 class="line"><b class="b-500"> Description:</b> {{data.description}}</h4>
+                <h4 class="line"><b class="b-500"> Created By:</b> {{data.createdByName}}</h4>
+                <h4 class="line"><b class="b-500">Highlight Title:</b> {{data.highlightTitle}}</h4>
+                <h4 class="line"><b class="b-500">Highlight Description:</b></h4><h4 class="line" ng-repeat="detail in data.highlightDetail">{{$index+1}} - {{detail}}{{$last ? '' : ' '}}</h4>
+                
+            </div>
+            <div ng-if="data.chartType !== 'blank'" style="width:40%;float:right;background-color:azure" class=" padding-10 xe-content" md-whiteframe="1">
+                <h3 style="text-align:center">{{data.level}} Data</h3>
+
+                <div class="pie-chart"></div>
+                <div ng-if="data.chartType === 'line'" id="line-chart"></div>
+                <div ng-if="data.chartType === 'bar'" id="bar-chart"></div>
+                <div ng-if="data.chartType === 'area'" id="area-chart"></div>
+
+                <div ng-if="data.chartType === 'liquid'" ng-repeat="chart in data.chartData">
+                    <span>{{chart.key}}</span>
+                    <svg id="fillgauge{{$index}}" style="margin: 7px 6px 7px 50px;" width="20%" height="90"></svg>
+                </div>
+                <h6 style="text-align:center;margin-top:0px"> Created On: {{data.createdDateTime | date:'MM/dd/yyyy'}}</h6>
+            </div>
+        </md-dialog-content>
+
+        <!--<md-dialog-actions style="padding:0;background-color:#dddee2" layout="row"></md-dialog-actions>-->
+    </form>
+</md-dialog>

@@ -1,0 +1,47 @@
+<div class="treeview" ng-controller="TreeviewCtrl">
+    <ul> 
+        <li ng-repeat="a in tree">
+            <span node-Expand></span>
+            <span node id="{{a.id}}" context-Menu="{{'menuOptions'+a[contextmenuclick]}}"  class="uppercase item">
+                <i class="lnr lnr-earth"></i> {{a[display]}}
+            </span>
+            <ul>
+                <li ng-repeat="b in a[child]">
+                    <span node-Expand ng-hide="{{b[contextmenuclick] == 'user' || b[contextmenuclick] == 'ustOwner' || b[contextmenuclick] == 'customerOwner' }}"></span>
+                    <span node id="{{b.id}}" parent-Id="{{a.id}}" parent-Type="organization" context-Menu="{{'menuOptions'+b[contextmenuclick]}}" class=" item">
+						<i ng-show="{{b[contextmenuclick] == 'user'}}" class="icon ion-ios-person-outline"></i>
+                        <i ng-show="{{b[contextmenuclick] == 'ustOwner' }}" class="icon ion-ios-person"></i>
+                        <i ng-show="{{b[contextmenuclick] == 'customerOwner' }}" style="color:gold" class="icon ion-ios-person" ></i>
+                        <i ng-show="{{b[contextmenuclick] == 'account'}}" class="icon ion-ios-briefcase-outline"></i> {{b[display]}}
+                    </span>
+                    <ul>
+                        <li ng-repeat="c in b[child]">
+                            <span node-Expand ng-hide="{{c[contextmenuclick] == 'user' || c[contextmenuclick] == 'ustOwner' || c[contextmenuclick] == 'customerOwner' }}"></span>
+                            <span node id="{{c.id}}" parent-Id="{{b.id}}" parent-Type="account" context-Menu="{{'menuOptions'+c[contextmenuclick]}}" class=" item" >
+                                <i ng-show="{{c[contextmenuclick] == 'user'}}" class="icon ion-ios-person-outline"></i>
+                                <i ng-show="{{c[contextmenuclick] == 'ustOwner' }}" class="icon ion-ios-person" ></i>
+                                <i ng-show="{{c[contextmenuclick] == 'customerOwner' }}" style="color:gold" class="icon ion-ios-person" ></i>
+                                <i ng-show="{{c[contextmenuclick] == 'project'}}" class="lnr lnr-layers "></i> {{c[display]}}
+                            </span>
+                            <ul>
+                                <li ng-repeat="d in c[child]">
+                                    <span id="{{d.id}}" parent-Id="{{c.id}}" parent-Type="project" context-Menu="{{'menuOptions'+d[contextmenuclick]}}" class="item"> 
+                                        <i ng-show="{{d[contextmenuclick] == 'user'}}" class="icon ion-ios-person-outline"></i>
+                                        <i ng-show="{{d[contextmenuclick] == 'ustOwner' }}" class="icon ion-ios-person" ></i>
+                                        <i ng-show="{{d[contextmenuclick] == 'customerOwner' }}" style="color:gold" class="icon ion-ios-person" ></i> {{d[display]}}
+                                    </span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div ng-controller="TreeviewCtrl">
+    <p ng-if="isAdmin" ng-click="addOrganization('organization');">
+Add Engagement
+        </p>
+</div>

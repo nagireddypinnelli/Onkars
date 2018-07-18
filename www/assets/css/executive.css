@@ -1,0 +1,193 @@
+/*
+ * Executive updates styles
+ * =========================
+ */
+ 
+ a.exec-options,.exec-options:hover{
+     color: #000 !important;
+ }
+ 
+ .exec-options-search{
+     margin-bottom: 5px;
+     padding:0px;
+ }
+ 
+ .exec-options{
+     transition: all 100ms ease-in-out;
+ }
+ .exec-options:hover,.exec-options:active,.exec-options:focus{
+     background-color: rgba(180, 180, 180,0.6);
+     cursor: pointer;
+ }
+ .tabactive{
+      background-color: rgba(180, 180, 180,0.6);
+     cursor: pointer;
+ }
+ .tabinactive{
+   display:none;
+     cursor: not-allowed !important;
+ }
+ .exec-options > h4{
+     margin-bottom: 5px;
+     margin-top: 5px;
+ }
+ 
+ .preview-pane{
+     min-width: 170px;
+     max-width:170px;
+     text-align:center;
+     padding-top:0;
+     padding-bottom: 20px;
+ }
+ .preview-pane > label{
+     padding:5px;
+     font-weight: 400;
+     color: rgba(10,10,10,0.65);
+ }
+ .preview{
+     min-height:180px;
+     transition: all 200ms ease-in-out;
+     background-color: rgba(255,255,255,0.6);
+     box-shadow: 0px 1px 2px 0px rgba(200,200,200,0.8);
+     cursor: pointer;
+ }
+ .preview:hover{
+     box-shadow: 0px 2px 3px 0px rgba(200,200,200,1);
+ }
+ 
+ .md-button{
+     text-transform: none;
+     font-weight: 500;
+ }
+.top-6 {
+    position:relative;
+    top:6px;
+}
+ 
+ /*
+  * Create Page styles
+  * =========================
+  */
+ .form > .form-elem{
+     margin-bottom:10px;
+ }
+ 
+ .form > md-input-container textarea.md-input{
+     height:58px;
+ }
+ 
+ .form > .form-elem{
+     margin-bottom:10px;
+ }
+ 
+ .form > .form-elem.add-button{
+     transition: all 200ms ease-in-out;
+     cursor: pointer
+ }
+ 
+ .form > .form-elem.add-button:hover{
+     box-shadow: 0px 1px 2px 0px rgba(200,200,200,1);
+ }
+ 
+ .form > .form-elem.add-button:active{
+     box-shadow: inset 0px 0px 2px 0px rgba(200,200,200,1);
+ }
+ 
+ table.chart-data{
+     margin-top: 10px;
+     margin-bottom: 20px;
+ }
+ 
+ table.chart-data thead tr th,table.chart-data tbody tr td{
+     border: 1px solid rgba(0,0,0,0.15);
+     padding: 10px;
+     font-weight: 400;
+     font-size: 14px;
+     
+ }
+ table.chart-data tfoot tr td{
+     padding:10px;
+     color: green;
+     text-align: right;
+ }
+ 
+ table.chart-data tfoot tr td span:hover{
+     text-decoration: underline;
+     cursor: pointer;
+ }
+ 
+ table.chart-data tr td input{
+     background-color: transparent;
+     border: 0px;
+ }
+ 
+ table.chart-data tr td input[type="number"]{
+     width: 60px;
+     color: rgba(0,0,0,0.7) !important;
+ }
+ table.chart-data tr input[type="text"]{
+     width:100%;
+     color: rgba(0,0,0,0.7) !important;
+ }
+ 
+ /* 
+  * Chart View styles
+  * =======================
+  */ 
+  
+ table.xe-updates-table{ 
+ }
+ 
+ table.xe-updates-table > thead > tr > th{
+     line-height: 25px;
+     border-bottom: 1px solid #afafaf;     
+ }
+ 
+ table.xe-updates-table tbody tr > td{
+     border-bottom: 0px solid #afafaf; 
+     min-width:90px;   
+     vertical-align: middle; 
+ }
+ 
+ table.xe-updates-table tbody tr > td div{
+     display: -webkit-inline-box; 
+ }
+ 
+ table.xe-updates-table > thead > tr > th:first-child{
+     max-width:200px;  
+ }
+ 
+ table.xe-updates-table button.publish-btn{
+     min-height: 24px;
+     line-height: 28px;
+     font-weight: 400;
+     min-width: auto;
+     margin: 0;
+     transition: transform 200ms ease-in-out;
+     width:30px;
+ }
+ 
+ table.xe-updates-table button.publish-btn i{
+     font-size: 24px;
+ } 
+ table.xe-updates-table button.publish-btn i.ion-edit{
+     font-size: 18px;
+ } 
+ 
+ table.xe-updates-table button.publish-btn:hover{
+     background-color: transparent;
+     transform: scale(1.2,1.2)
+ }
+ .publish-bg-img
+{
+    background: url("../img/publish-ic.png");
+    background-repeat: no-repeat;
+    background-size: inherit;
+}
+.withdraw-bg-img
+{
+    background: url("../img/withdraw-ic.png");
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position:center;
+}

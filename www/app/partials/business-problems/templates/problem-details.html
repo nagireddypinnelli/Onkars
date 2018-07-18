@@ -1,0 +1,870 @@
+﻿<ng-include src="'app/partials/main/templates/topmenu.html'"></ng-include>
+<div class="container-fluid container-content main" ng-mouseover="toggleChange()">
+    <div class="row mobRes">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg">
+            <!--<span class="span-heading">Business Problems</span>-->
+            <ul class="business-sub-nav">
+                <li class="active"> BUSINESS PROBLEMS </li>
+                <!--<li> MANAGE </li>
+                <li> SETTINGS </li>-->
+            </ul>
+        </div>
+        <div class="col-md-12 page-heading-bg-solid">
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+        <div class="col-md-12 page-overlay-row">
+
+                </div>
+    </div>-->
+<div class="container-fluid container-content container-fixed" ng-mouseover="toggleChange()">
+    <div class="row white-bg menu-fixed mobView nav-static">
+        <div class="col-md-12 mobileFilterHideIcon">
+            <div class="float-left align-left fix-width-menu">
+                <i class="ion-android-people filter-menu-mob fixed-menu-left" ng-click="showhidefilteroptions()"></i>
+            </div>
+            <div class="float-left align-center fix-width-menu">
+                <i class="ion-android-clipboard filter-menu-mob active" ng-click="showTimeline();"></i>
+            </div>
+            <div class="float-left align-right fix-width-menu">
+                <i class="ion-card filter-menu-mob fixed-menu-right" ng-click="showhiderecent();"></i> <!--ion-ios-bookmarks-outline-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mobRes">
+            <!--<span class="span-text-wall">WALL</span><br />-->
+            <span class="span-text-intro mobRes">Share your business problem,</span><br />
+            <span class="span-text-intro-part">we will find an innovative solution!</span>
+        </div>
+        <div class="col-md-6">
+            <div class="row txt-row-margin-create mobRes">
+                <div class="col-md-6">
+                    <span class="span-create-head">Share Your Business Problem</span>
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-12">
+                    <input type="text" class="input-create-prob" ng-model="createTilte" placeholder="What would you like to share with us today?" />
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-1 mobRes">
+                    <div class="div-disp-pic"></div>
+                </div>
+                <div class="col-md-3 float-right">
+                    <button class="btn-create-prob" onclick="openNav()">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid container-content container-border-left">
+    <form class="form-inline">
+        <div class="row">
+            <div class="col-md-3 col-left col-left-cust-width col-sel-left filter-mob-res animate-left-hide" ng-show="displayFilteroption==1">
+                <div class="row text-align-center row-margin-dp">
+                    <div class="col-md-12">
+                        <span class="div-owner-dp"></span>
+                    </div>
+                </div>
+                <div class="row text-align-center">
+                    <div class="col-md-12 col-owner-name">
+                        <span>{{problemdata.createdBy.name}}</span>
+                    </div>
+                </div>
+                <div class="row text-align-center  row-padding-bottom">
+                    <div class="col-md-12">
+                        <span class="span-owner-id">{{problemdata.createdBy.email}}</span>
+                    </div>
+                </div>
+                <div class="row row-filter-margin">
+                    <div class="col-md-12 filter-head">
+                        {{problemdata.createdBy.name}}'s ID<sup>3</sup>
+                    </div>
+                </div>
+                <div class="row unSelectedDiv row-card-bottom-border row-padding-bottom edit" id="businessProblem">
+                    <div class="col-md-12">
+                        <div class="row row-card details">
+                            <div class="float-left left-filter-icon">
+                                <i class="icon id3-customer-problem icon-filter"></i>
+                            </div>
+                            <div class="float-left filter-text">
+                                <input type="checkbox" id="getmyProblem" ng-model="myId3" ng-true-value="1" ng-false-value="0" ng-change="getProblem()" style="display:none;" />
+                                <label for="getmyProblem">
+                                    <span>
+                                        <a class="a-link-color" href="/#/problem/MyProblem/{{problemdata.createdBy._id}}" ng-click="showScroll()">Business Problem</a>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-padding-top">
+                    <div class="col-md-12">
+                        <div class="row row-create-left row-sol-date-head edit">
+                            <div class="col-md-12 col-sol-date">
+                                <span class="span-add-contributors">Solution Need Date</span>
+                            </div>
+                        </div>
+                        <div class="row row-create-left row-sol-date">
+                            <div class="col-md-11">
+                                <label class="col-md-12 lbl-details left-col">{{problemdata.solutionNeedDate  | date:'dd MMMM yyyy'}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row row-create-left row-sol-date-head edit" ng-if="problemdata.solutionPlannedClosureDate !=null ">
+                            <div class="col-md-12 col-sol-date">
+                                <span class="span-add-contributors">Solution Closure Date</span>
+                            </div>
+                        </div>
+                        <div class="row row-create-left row-sol-date">
+                            <div class="col-md-11">
+                                <label class="col-md-12 lbl-details left-col">{{problemdata.solutionPlannedClosureDate  | date:'dd MMMM yyyy'}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-create-left row-sol-date attachment-top" ng-if="problemdata.attachments.length>0">
+                    <div class="col-md-12 col-sol-date">
+                        <span class="span-add-contributors">Attachment</span>
+                    </div>
+                </div>
+                <div class="row row-create-left row-sol-date attachment-items" ng-repeat="attach in problemdata.attachments track by $index">
+                    <div class="col-md-11">
+                        <label class="col-md-12 lbl-details left-col"> <a class="div-attachments view" target="_blank" href="../uploads/{{attach.orginalFilename}}">{{attach.attachment}}</a> </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-middle-cust-width col-sel-middle" ng-show="displaytimeline==1">
+                <div class="row  col-middle">
+                    <div class="row row-timeline-padding details">
+                        <div class="float-left div-phase-margin">
+                            <div class="timeline-icon details"><i class="{{problemdata.phase.logo}} i-timeline-icon-cust"></i></div>
+                        </div>
+                        <div class="float-left div-post-number">
+                            <span class="span-post-number detail">#{{problemdata.problemId}}</span>
+                        </div>
+                        <div class="float-left div-phase-margin title">
+                            <span class="span-post-name detail">{{problemdata.title}}</span>
+                        </div>
+                        <div class="col-md-1 display-none">
+                            <i class="icon icon ion-ios-close-empty i-icon-more"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-timeline problemList">
+                    <div class="col-md-12 col-timeline-bg">                        
+                        <div class="row row-timeline-padding-status">
+                            <div class="col-md-12 col-filter-pos">
+                                <div class="col-status-padding float-left">
+                                    <div class="div-timeline-status text-overflow head-label {{problemdata.status.class}} view">{{problemdata.status.name}}</div>
+                                </div>
+                            </div>
+                            <!--<span ng-repeat="label in problemdata.labels">
+                                <div class="col-md-3 col-status-padding">
+                                    <button class="div-timeline-status div-mobility">{{label}}</button>
+                                </div>
+                            </span>-->
+                        </div>
+                        <!--<div class="row row-padding-top-bottom">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Title</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label class="col-md-12 full-width-edit"> {{problemdata.title}}</label>
+                            </div>
+                        </div>-->
+                        <div class="row row-padding-bottom">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Problem Statement</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label class="col-md-12 lbl-details">{{problemdata.problemStatement}}</label>
+                            </div>
+                        </div>
+                        <div class="row row-padding-top-bottom">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Business Impact</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label class="col-md-12 lbl-details">{{problemdata.businessImpact}}</label>
+                            </div>
+                        </div>
+                        <!--<div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <input type="text" class="txtcreate-right" ng-model="problemdata.createdBy" placeholder="Owner" readonly />
+                            </div>
+                            <div class="col-md-6 col-select-padding">
+                                <select multiple ng-model="problemdata.category" ng-options="category._id as category.name for category in categories" chosen style="width:77%" class="custom-chosen-select"></select>
+                            </div>
+                        </div>
+                        <div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <select ng-model="problemdata.vertical" class="selectpicker select-custom-left">
+                                    <option value="">Select Vertival</option>
+                                    <option ng-repeat="vertical in verticals" value="{{vertical._id}}">{{vertical.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select ng-model="problemdata.priority" class="selectpicker select-custom-right">
+                                    <option value="">Select Priority</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+
+                                </select>
+                            </div>
+                        </div>-->
+
+
+                        <div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Account</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.account.name}}</label>
+                                    </div>
+                                </div> 
+                                    </div>
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head  details">Domain</span>
+                                    </div>
+                                </div>  
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.domain.name}}</label>
+                                    </div>
+                                </div>                              
+                            </div>
+                        </div>
+                        <div class="row row-padding-top">
+                        
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Vertical</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details">{{problemdata.vertical[0].name}}</label>
+                                    </div>
+                                </div> 
+                                    </div>
+
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Solution approach</span>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.approach.name}}</label>
+                                    </div>
+                                </div>                               
+                            </div>
+                          
+                        </div>                        
+
+                        <div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Status</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.status.name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Innovation Champion </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.innovationChampion.name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Category</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.category[0].name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Priority </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.priority}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+
+
+                        <div class="row row-padding-top-bottom">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Customer Stakeholder</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details child">Name</span>
+                                    </div>
+                                </div> 
+                                <div class="row row-padding-bottom" ng-repeat="row in problemdata.customerStakeholders">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details">{{problemdata.customerStakeholders[$index].name}}</label>
+                                    </div>
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details child">Role</span>
+                                    </div>
+                                </div>  
+                                <div class="row row-padding-bottom" ng-repeat="row in problemdata.customerStakeholders">                                    
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details"> {{problemdata.customerStakeholders[$index].role}}</label>
+                                    </div>
+                                </div>                              
+                            </div>
+                                    </div>
+                        
+
+                        <div class="row row-padding-top-bottom">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Target Business & Geography</span>
+                                </div>                                
+                            </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details child">Business Unit</span>
+                                    </div>
+                                </div> 
+                                <div class="row row-padding-bottom" ng-repeat="row in problemdata.targetBusinessGeography">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details">{{problemdata.targetBusinessGeography[$index].businessUnit}}</label>
+                                    </div>
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details child">Geography</span>
+                                    </div>
+                                </div> 
+                                <div class="row row-padding-bottom" ng-repeat="row in problemdata.targetBusinessGeography">                                   
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details">{{problemdata.targetBusinessGeography[$index].geography}}</label>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>                        
+
+                                       
+                      
+
+                        <div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <div class="row  row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head details">Estimated customer spend </span>
+                                    </div>
+                                </div>  
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details">{{problemdata.estimateOfCustomer}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row  row-padding-bottom-sm">
+                                    <div class="col-md-12">
+                                        <span class="span-create-sub-head  details">Potential UST Global wallet share</span>
+                                    </div>
+                                </div>  
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12 lbl-details">{{problemdata.ustShare}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                   
+                        <div class="row row-padding-top-bottom">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Other Information </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label class="col-md-12 lbl-details">{{problemdata.otherInfo}}</label>
+                            </div>
+                        </div>
+                        <div class="row row-padding-top-bottom">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Assumptions </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label class="col-md-12 lbl-details">{{problemdata.assumptions}}</label>
+                            </div>
+                        </div>
+                        <div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Customer Pains</span>
+                            </div>
+                        </div>
+                        <div class="row row-pain-gain-bg edit" ng-repeat="(index,row) in problemdata.customerPains" ng-init="parentIndex=$index">
+                            <div class="col-md-6">
+                                <div class="row row-padding-top-bottom">
+                                    <div class="col-md-6">
+                                        <span class="span-create-sub-head sub-details">Description </span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-11">
+                                        <label class="col-md-12 lbl-details">{{problemdata.customerPains[$index].description}}</label>
+                                    </div>
+                                </div>
+
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-8">
+                                        <span class="span-create-sub-head quantified">Quantified Value </span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-11">
+                                        <label class="col-md-12 lbl-details">{{problemdata.customerPains[$index].quantifiedValue}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-padding-top-bottom">
+                                    <div class="col-md-7">
+                                        <span class="span-create-sub-head sub-details-left">Impacted Task </span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-11">
+                                        <label class="col-md-12 lbl-details">{{problemdata.customerPains[$index].impactedTask}}</label>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-6">
+                                        <span class="span-create-sub-head sub-details-left">Stakeholder </span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span class="span-create-sub-head name child">Name </span>
+                                            </div>
+                                        </div>
+                                        <div class="row row-padding-bottom row-show-remove" ng-repeat="rowY in problemdata.customerPains[$index].stackholders">
+                                            <div class="col-md-12">
+                                                <label class="col-md-12 lbl-details">{{problemdata.customerPains[$parent.$index].stackholders[$index].name}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span class="span-create-sub-head sub-details role child">Role </span>
+                                            </div>
+                                        </div>
+                                        <div class="row row-padding-bottom row-show-remove" ng-repeat="rowY in problemdata.customerPains[$index].stackholders">                                            
+                                            <div class="col-md-12">
+                                                <label class="col-md-12 lbl-details">{{problemdata.customerPains[$parent.$index].stackholders[$index].role}} </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row row-padding-top">
+                            <div class="col-md-6">
+                                <span class="span-create-sub-head details">Customer Gains</span>
+                            </div>
+                        </div>
+                        <div class="row row-pain-gain-bg edit" ng-repeat="(index,row) in problemdata.customerGains" ng-init="parentIndex=$index">
+                            <div class="col-md-6">
+                                <div class="row row-padding-top-bottom">
+                                    <div class="col-md-6">
+                                        <span class="span-create-sub-head sub-details">Description </span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-11">
+                                        <label class="col-md-12 lbl-details">{{problemdata.customerGains[$index].description}}</label>
+                                    </div>
+                                </div>
+
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-8">
+                                        <span class="span-create-sub-head quantified">Quantified Value </span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-11">
+                                        <label class="col-md-12 lbl-details">{{problemdata.customerGains[$index].quantifiedValue}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-padding-top-bottom">
+                                    <div class="col-md-7">
+                                        <span class="span-create-sub-head sub-details-left">Impacted Task </span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-11">
+                                        <label class="col-md-12 lbl-details">{{problemdata.customerGains[$index].impactedTask}}</label>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-6">
+                                        <span class="span-create-sub-head sub-details-left">Stakeholder</span>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-bottom">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span class="span-create-sub-head name child">Name </span>
+                                            </div>
+                                        </div>
+                                        <div class="row row-padding-bottom row-show-remove" ng-repeat="rowY in problemdata.customerGains[$index].stackholders">
+                                            <div class="col-md-12">
+                                                <label class="col-md-12 lbl-details">{{problemdata.customerGains[$parent.$index].stackholders[$index].name}} </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span class="span-create-sub-head role  child">Role </span>
+                                            </div>
+                                        </div>
+                                        <div class="row row-padding-bottom row-show-remove" ng-repeat="rowY in problemdata.customerGains[$index].stackholders">                                            
+                                            <div class="col-md-12">
+                                                <label class="col-md-12 lbl-details">{{problemdata.customerGains[$parent.$index].stackholders[$index].role}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row mobRes">
+                            <div class="col-md-12">
+                                <div class="float-left div-icon-margin left">
+                                    <span ng-if="problemdata.userlikes.indexOf(loggedInUserID) == -1">
+                                        <i ng-click="addlike(problemdata,problemdata._id,$index)" class="icon ion-thumbsup tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problemdata.likes.length}}&nbsp;LIKES</span>
+                                    </span>
+                                    <span ng-if="problemdata.userlikes.indexOf(loggedInUserID) != -1">
+                                        <i ng-click="unlike(problemdata,problemdata._id,$index)" class="icon ion-thumbsup tl-inner-icon color-orange"></i><span class="span-inner-text color-orange">&nbsp;{{problemdata.likes.length}}&nbsp;LIKES</span>
+                                    </span>
+                                </div>
+                                <div class="float-left div-icon-margin" slide-toggle="#row_{{$index}}" id="row{{$index}}">
+                                    <i class="icon ion-chatbubbles tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problemdata.comments.length}}&nbsp;COMMENTS</span>
+                                </div>
+                                <div class="float-left">
+                                    <i class="icon ion-ios-eye-outline tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problemdata.views.length}}&nbsp;VIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mobView">
+                            <div class="col-md-12">
+                                <div class="float-left div-icon-margin left">
+                                    <span ng-if="problemdata.userlikes.indexOf(loggedInUserID) == -1">
+                                        <i ng-click="addlike(problemdata,problemdata._id,$index)" class="icon ion-thumbsup tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problemdata.likes.length}}</span>
+                                    </span>
+                                    <span ng-if="problemdata.userlikes.indexOf(loggedInUserID) != -1">
+                                        <i ng-click="unlike(problemdata,problemdata._id,$index)" class="icon ion-thumbsup tl-inner-icon color-orange"></i><span class="span-inner-text color-orange">&nbsp;{{problemdata.likes.length}}</span>
+                                    </span>
+                                </div>
+                                <div class="float-left div-icon-margin" slide-toggle="#row_{{$index}}" id="row{{$index}}">
+                                    <i class="icon ion-chatbubbles tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problemdata.comments.length}}</span>
+                                </div>
+                                <div class="float-left">
+                                    <i class="icon ion-ios-eye-outline tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problemdata.views.length}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="h4-comments">Comments</h4>
+                            <div ng-repeat="comment in problemdata.comments">
+                                <div class="row row-timeline-padding-comment">
+                                    <div class="col-md-12">
+                                        <div class="float-left  div-icon-margin">
+                                            <div class="circle-link"></div>
+                                        </div>
+                                        <div class="float-left col-comment-name-date mobRes">
+                                            <span class="span-responder">{{comment.commentedBy.name}}</span><span class="response-date-time">/ {{comment.commnetedDate | date:'dd MMMM yyyy HH:mm'}}  <!--/ reply --></span>
+                                        </div>
+                                        <div class="float-left col-comment-name-date mobView">
+                                            <span class="span-responder">{{comment.commentedBy.name}}</span><span class="response-date-time">/ {{comment.commnetedDate | date:'dd MMM yyyy'}}  <!--/ reply --></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-timeline-padding-comment">
+                                    <div class="col-md-12">
+                                        <div class="float-left  div-icon-margin">
+                                            <div class="circle-space">&nbsp;</div>
+                                        </div>
+                                        <div class="float-left">
+                                            <p class="right-card-para">
+                                                {{comment.comment}}
+                                            </p>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row div-share">
+                                <div class="col-md-1">
+                                    <div class="circle-link"></div>
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea placeholder="Would you like to share your thoughts?" type="text" class="input-share txtarea-comment" ng-model="comment" aria-invalid="false" style=""></textarea>
+                                    <button class="comment-post ng-hide" type="button" ng-show="comment.length > 0" ng-click="addComment()" aria-hidden="true" style=""><i class="icon ion-android-send"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-update back-edit div-btn-mob bottom">
+                            <a ng-click="back()"> <button class="btn-edit-change"> Back</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-right-cust-width col-sel-right" ng-show="displayRecent==1">
+                <!--<div class="col-md-12 col-status-padding">
+            <div class="div-timeline-status">{{problemdata.phase.name}}</div>
+        </div>-->
+                <div class="row row-right-card-update details row-padding-bottom action">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 col-update-phase">
+                                <span class="span-update-phases">Phase</span>
+                            </div>
+                        </div>
+                        <div class="row row-card-bottom-border custom" ng-repeat="phase in phases" id="phase{{phase._id}}" ng-class="{SelectedDiv: phase._id === problemdata.phase._id ,unSelectedDiv :phase._id != problemdata.phase._id}">
+                            <div class="row row-card-update custom">
+                                <label for={{phase._id}} class="col-md-12">
+                                    <span class="float-left left-filter-icon">
+                                        <i class="icon  {{phase.logo}} icon-filter"></i>
+                                    </span>
+                                    <span class="float-left filter-text">
+                                        {{phase.name}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-right-card-update row-padding-bottom action">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 col-update-phase">
+                                <span class="span-update-phases">Labels</span>
+                            </div>
+                        </div>
+                        <div class="row  row-card-bottom-border  row-phase-margin custom" ng-repeat="label in labels" id="label{{label._id}}">
+                            <div class="row row-card-update custom">
+                                <label for={{label._id}} class="col-md-12">
+                                    <span class="float-left left-filter-icon multi">
+                                        <!--<i class="icon ion-ios-checkmark icon-filter"></i>-->
+                                        <i ng-if="problemdata.labels.indexOf(label._id) > -1" class="icon icon-filter ion-checkmark-circled" style="color:#f79f17"></i>
+                                        <i ng-if="problemdata.labels.indexOf(label._id) == -1 ||problemdata.labels==undefined||problemdata.labels==null" class="icon icon-filter ion-ios-paper-outline"></i>
+                                    </span>
+                                    <span class="float-left filter-text">
+                                        {{label.name}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-right-card-update" ng-if="problemdata.contributors.length >0">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 col-update-phase">
+                                <span class="span-update-phases">Contributors</span>
+                            </div>
+                        </div>
+
+                        <div class="row row-contributors-padding details">
+                            <div class="col-md-12">
+                                <div class="float-left col-contributors edit" ng-repeat="contributors in problemdata.contributors">
+                                    <div class="div-contributors"></div>
+                                    <label class="label-contributor"> <span ng-repeat="item in contributors.split(' ')"> <span ng-if="$index < 1"> {{item}}</span></span><br />  {{item}}</label>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-right-card-update" ng-if="problemdata.solutionContributors.length > 0">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 col-update-phase">
+                                <span class="span-update-phases">Solution Contributors</span>
+                            </div>
+                        </div>
+                        <div class="row row-contributors-padding details">
+                            <div class="col-md-12">
+                                <div class="float-left col-contributors edit" ng-repeat="contributors in problemdata.solutionContributors">
+                                    <div class="div-contributors"></div>
+                                    <label class="label-contributor"> <span ng-repeat="item in contributors.split(' ')"> <span ng-if="$index < 1"> {{item}}</span></span><br />  {{item}}</label>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<a class="scrollToTop"><i class="icon ion-ios-arrow-up scroll-up hvr-icon-up"></i></a>
+<ng-include src="'app/partials/business-problems/templates/create.html'"></ng-include>
+
+<script>
+    $(document).ready(function () {
+    $('body').tooltip({
+        selector: '[rel="tooltip"]'
+    });
+
+        $(".input-create-prob").keyup(function () {
+            openNav();
+        });
+
+        $(".filter-menu-mob").click(function () {
+
+    $(".filter-menu-mob.active").removeClass('active');
+
+    $(this).addClass('active');
+    });
+
+    responsiveSite();
+
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            if ($("#myNav").height() == 0 &&
+                $(".fixed-menu-left").hasClass("active") == false) {
+        didScroll = true;
+        }
+    });
+
+        setInterval(function () {
+        if (didScroll) {
+            hasScrolled();
+            didScroll = false;
+        }
+    }, 1);
+
+    function hasScrolled() {
+        var st = $(this).scrollTop();
+
+        // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+            return;
+
+        // If they scrolled down and are past the navbar, add class .nav-up.
+        // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+            // Scroll Down
+                if ($(".searchbox-icon").hasClass("search") && $(".searchbox-icon").hasClass("show-header") == false) {
+                $('header, .nav-mob-res-logo ').removeClass('nav-down').addClass('nav-up');
+
+                $('.menu-fixed').removeClass('nav-static').addClass('nav-relative');
+            }
+
+            $('.searchbox-icon').removeClass('show-header');
+        } else {
+            // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    if ($(".searchbox-icon").hasClass("search")) {
+                    $('header, .nav-mob-res-logo ').removeClass('nav-up').addClass('nav-down');
+
+                    $('.menu-fixed').removeClass('nav-relative').addClass('nav-static');
+                }
+            }
+        }
+
+        lastScrollTop = st;
+    }
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+});
+
+        //Click event to scroll to top
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    });
+</script>

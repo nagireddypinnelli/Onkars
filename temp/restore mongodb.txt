@@ -1,0 +1,20 @@
+
+create dump folder in follwoing path.
+
+	C:\Program Files\MongoDB\Server\3.4\bin\dump>
+and execute follwoing step
+2. mongodbrestore dump\ID3Db
+
+p/w
+
+ 
+
+ 
+
+id3 Project
+
+    uName : u10649
+
+    pwd : password  .
+
+ 

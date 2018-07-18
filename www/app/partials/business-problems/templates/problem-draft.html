@@ -1,0 +1,316 @@
+﻿<ng-include src="'app/partials/main/templates/topmenu.html'"></ng-include>
+
+<div class="container-fluid container-content main" ng-mouseover="toggleChange()">
+    <div class="row mobRes">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg">
+            <!--<span class="span-heading">Business Problems</span>-->
+            <ul class="business-sub-nav">
+                <li class="active"> BUSINESS PROBLEMS </li>
+                <!--<li> MANAGE </li>
+                <li> SETTINGS </li>-->
+            </ul>
+        </div>
+        <div class="col-md-12 page-heading-bg-solid">
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+        <div class="col-md-12 page-overlay-row">
+
+                </div>
+    </div>-->
+<div class="container-fluid container-content container-fixed" ng-mouseover="toggleChange()">
+    <div class="row white-bg menu-fixed mobView nav-static">
+        <div class="col-md-12 mobileFilterHideIcon">
+            <div class="float-left align-left fix-width-menu">
+                <i class="ion-ios-list-outline filter-menu-mob fixed-menu-left" ng-click="showhidefilteroptions()"></i>
+            </div>
+            <div class="float-left align-center fix-width-menu">
+                <i class="ion-earth filter-menu-mob active" ng-click="showTimeline();"></i>
+            </div>
+            <div class="float-left align-right fix-width-menu">
+                <i class="ion-ios-clock-outline filter-menu-mob fixed-menu-right" ng-click="showhiderecent();"></i> <!--ion-ios-bookmarks-outline-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mobRes">
+            <!--<span class="span-text-wall">WALL</span><br />-->
+            <span class="span-text-intro mobRes">Share your business problem,</span><br />
+            <span class="span-text-intro-part">we will find an innovative solution!</span>
+        </div>
+        <div class="col-md-6">
+            <div class="row txt-row-margin-create mobRes">
+                <div class="col-md-6">
+                    <span class="span-create-head">Share Your Business Problem</span>
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-12">
+                    <input type="text" class="input-create-prob" ng-model="createTilte" placeholder="What would you like to share with us today?" />
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-1 mobRes">
+                    <div class="div-disp-pic"></div>
+                </div>
+                <div class="col-md-3 float-right">
+                    <button class="btn-create-prob" onclick="openNav()">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-content container-border-left">
+    <div class="row">
+        <div class="col-md-3 col-left col-left-cust-width col-sel-left filter-mob-res animate-left-hide" ng-show="displayFilteroption==1">
+            <div class="row text-align-center row-margin-dp">
+                <div class="col-md-12">
+                    <span class="div-owner-dp"></span>
+                </div>
+            </div>
+            <div class="row text-align-center">
+                <div class="col-md-12 col-owner-name">
+                    <span>{{userDetils.name}}</span>
+                </div>
+            </div>
+            <div class="row text-align-center  row-padding-bottom">
+                <div class="col-md-12">
+                    <span class="span-owner-id">{{userDetils.email}}</span>
+                </div>
+            </div>
+
+            <div class="row row-filter-margin">
+                <div class="col-md-10 filter-head">
+                    {{userDetils.name}}'s ID<sup>3</sup>
+                </div>
+            </div>
+            <div class="row unSelectedDiv row-card-bottom-border" id="businessProblem">
+                <div class="row row-card ">
+                    <div class="float-left left-filter-icon">
+                        <i class="icon id3-customer-problem icon-filter"></i>
+                    </div>
+                    <div class="float-left filter-text">
+                        <a href="/#/problem/MyProblem/{{loggedInUserID}}" class="filter-text" ng-click="showScroll()">Business Problems</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-middle-cust-width col-sel-middle" ng-show="displaytimeline==1">
+            <div class="filterOption">
+                <div class="row  col-middle">
+                    <div class="row row-timeline-padding details">
+                        <div class="float-left div-phase-margin">
+                            <div class="timeline-icon details"><i class="id3-timeline i-timeline-icon-drafts"></i></div>
+                        </div>
+                        <div class="float-left div-post-number draft">
+                            <span class="span-post-number detail">My Drafts</span>
+                        </div>
+                        <div class="float-left">
+
+                        </div>
+                        <div class="col-md-1 display-none">
+                            <i class="icon icon ion-ios-close-empty i-icon-more"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-timeline problemList">
+                <div class="col-md-12 col-timeline-bg" ng-repeat="(fIndex,problem) in problems">
+                    <div class="row row-timeline-padding">
+                        <div class="squaredThree float-left chk-timeline-filter display-none">
+                            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
+                            <label for="squaredThree"></label>
+                        </div>
+                        <!--<div class="checkbox float-left chk-timeline-filter">
+                            <label><input type="checkbox" value="">&nbsp;</label>
+                        </div>-->
+                        <div class="float-left div-phase-margin">
+                            <div class="timeline-icon phase"><i class="{{problem.phase.logo}} i-timeline-icon"></i></div>
+                        </div>
+                        <div class="float-left div-post-number">
+                            <span class="span-post-number">#{{fIndex+1}}</span>
+                        </div>
+                        <div class="float-left div-phase-margin title">
+                            <span class="span-post-name text-overflow">{{problem.title}}</span>
+                        </div>
+                        <div class="dropdown float-right share-icon" ng-if="problem.createdBy._id === loggedInUser || roleSession === 'Innovation champion' ||roleSession ==='Idea champion' ||roleSession==='Admin'">
+                            <i class="icon ion-android-more-vertical i-icon-more"></i>
+                            <div class="dropdown-content prob-list">
+                                <!--<a href="/#/problem/update/{{problem._id}}">Edit</a>-->
+                                <a ng-click="updateDraftProblem(problem._id)">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-timeline-padding-status">
+                        <div class="col-md-12 col-filter-pos">
+                            <div class="col-status-padding float-left">
+                                <div class="div-timeline-status text-overflow">Draft</div>
+                            </div>
+                            <div class="col-status-padding float-left " ng-if="problem.category[0] !=null">
+                                <div class="div-timeline-status text-overflow head-label category">{{problem.category[0].name}}</div>
+                            </div>
+                            <div class="col-status-padding float-left" ng-repeat="label in problem.labels">
+                                <div class="div-timeline-status text-overflow">{{label.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-timeline-padding-status">
+                        <div class="col-md-12">
+                            <p class="right-card-para timeline-para-bottom">
+                                {{problem.problemStatement}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-timeline problemList draft" ng-show="problems.length==0">
+                    <div class="col-md-12 col-timeline-bg">
+                        <div class="row">
+                            <img class="img-no-data" src="../../../../assets/img/nodata.png" />
+                            <label class="lbl-no-data">No Data Found</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3 col-right-cust-width col-sel-right" ng-mouseover="toggleChange()" ng-show="displayRecent==1">
+            <span class="span-recent">Most Recent</span>
+            <div class="row row-right-card" ng-repeat="(fIndex,recentProblem) in recentProblems | limitTo:3">
+                <div class="col-md-12">
+                    <div class="float-left right-dp-padding">
+                        <div class="right-card-dp"><i class="{{recentProblem.domain.logo}} i-domain-icon"></i></div>
+                    </div>
+                    <div class="float-left recent-inner-width">
+                        <span class="right-card-profile text-overflow">{{recentProblem.title}}</span><br />
+                        <div class="row">
+                            <div class="float-left col-right-padding" ng-repeat="categoryName in recentProblem.category">
+                                <button class="right-card-btn text-overflow">{{categoryName.name}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 right-para-padding">
+                    <p class="right-card-para para-height">
+                        {{recentProblem.problemStatement}}
+                    </p>
+                </div>
+                <div class="col-md-12 align-center col-view-more">
+                    <button class="btn-read-more"> <a href="/#/problem/details/{{recentProblem._id}}" class="no-text-decoration">View Problem</a></button>
+                </div>
+                <div class="col-md-12">
+                    <div class="row row-right-card-bottom">
+                        <div class="col-md-12">
+                            <div class="float-left right-like-margin">
+                                <span class="right-card-count">{{recentProblem.likes.length}}</span>
+                                <span class="right-card-comments">LIKES</span>
+                            </div>
+                            <div class="float-left">
+                                <span class="right-card-count">&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i>&nbsp;&nbsp;{{recentProblem.comments.length}}</span>
+                                <span class="right-card-comments">COMMENTS</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="scrollToTop"><i class="icon ion-ios-arrow-up scroll-up hvr-icon-up"></i></a>
+
+<ng-include src="'app/partials/business-problems/templates/create.html'"></ng-include>
+<script>
+    $(document).ready(function () {
+        $('body').tooltip({
+            selector: '[rel="tooltip"]'
+        });
+
+        $(".input-create-prob").keyup(function () {
+            openNav();
+        });
+
+        $(".filter-menu-mob").click(function () {
+
+            $(".filter-menu-mob.active").removeClass('active');
+
+            $(this).addClass('active');
+        });
+
+        responsiveSite();
+
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            if ($("#myNav").height() == 0 &&
+                $(".fixed-menu-left").hasClass("active") == false) {
+                didScroll = true;
+            }
+        });
+
+        setInterval(function () {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 1);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+                if ($(".searchbox-icon").hasClass("search") && $(".searchbox-icon").hasClass("show-header") == false) {
+                    $('header, .nav-mob-res-logo ').removeClass('nav-down').addClass('nav-up');
+
+                    $('.menu-fixed').removeClass('nav-static').addClass('nav-relative');
+                }
+
+                $('.searchbox-icon').removeClass('show-header');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    if ($(".searchbox-icon").hasClass("search")) {
+                        $('header, .nav-mob-res-logo ').removeClass('nav-up').addClass('nav-down');
+
+                        $('.menu-fixed').removeClass('nav-relative').addClass('nav-static');
+                    }
+                }
+            }
+
+            lastScrollTop = st;
+        }
+
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+
+        //Click event to scroll to top
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    });
+</script>

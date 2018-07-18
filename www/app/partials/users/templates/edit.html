@@ -1,0 +1,85 @@
+﻿<script src="../../../../assets/Scripts/bootstrap.js"></script>
+<link href="../../../../assets/Content/bootstrap.css" rel="stylesheet" />
+<script src="../../../../assets/Scripts/bootstrap.js"></script>
+<link href="../../../../assets/Content/bootstrap.css" rel="stylesheet" />
+<div id="style-scroll" style="height: 86vh;
+    overflow: auto;">
+    <div id="style-scroll" style="height: 86vh;overflow: auto;">
+        <md-content layout-padding class="xe-transparent font-dark">
+            <h2 class="margin-0">Update User Details</h2>
+        </md-content>
+
+        <div layout-padding flex layout="row" class="xe-transparent">
+            <form class="form-inline">
+                <div class="col-sm-12" style="border:1px solid #CCCCCC;margin:10px 0 20px 10px;padding:40px 0 50px 0px;">
+                    <div class="form-group col-lg-6">
+                        <label>Name</label>
+                        <br>
+                        <input type="text" class="form-control" id="name" ng-model="user.name">
+                        <br>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label>Username</label>
+                        <br>
+                        <input type="text" class="form-control" id="username" ng-model="user.username" />
+                        <br>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label>Email</label>
+                        <br>
+                        <input type="text" class="form-control" id="email" ng-model="user.email" />
+                        <br>
+                    </div>
+
+                    <!--<div class="form-group col-lg-6">
+                        <label>Password</label>
+                        <br>
+                        <input type="password" class="form-control" id="password" ng-model="user.password" />
+                        <br>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label>Confirm Password</label>
+                        <br>
+                        <input type="password" class="form-control" id="password" ng-model="user.confirmPassword" />
+                        <br>
+                    </div>-->
+
+                    <div class="form-group col-lg-6">
+                        <label>Contact Info</label>
+                        <br>
+                        <input type="text" class="form-control" id="password" ng-model="user.contactInfo" />
+                        <br>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <br>
+                        <label class="col-lg-6">Account</label>
+                       
+						<select ng-model="user.account" class="selectpicker select-custom-left" name="account">
+							<option value="">Select Account</option>
+							<option ng-repeat="account in accounts" value="{{account._id}}">{{account.name}}</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <br>
+                        <label class="col-lg-6">Role</label>
+                        <select ng-model="user.role">
+                            <option value="">--Select--</option>
+                            <option ng-repeat="role in roles" value="{{role._id}}">{{role.name}}</option>
+                        </select>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <md-content style="float:right;right: 16px;">
+            <md-input-container>
+                <button type="button" md-ink-ripple="#333" class="border xe-right" ng-click="updateUserDetails()">Save</button>
+            </md-input-container>
+        </md-content>
+    </div>
+</div>

@@ -1,0 +1,807 @@
+
+<script>
+    $.LoadingOverlay("show");
+</script>
+<ng-include src="'app/partials/main/templates/topmenu.html'"></ng-include>
+
+<div class="container-fluid container-content main" ng-mouseover="toggleChange()">
+    <div class="row mobRes">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg">
+            <!--<span class="span-heading">Business Problems</span>-->
+            <ul class="business-sub-nav">
+                <li class="active"> BUSINESS PROBLEMS </li>
+                <!--<li> MANAGE </li>
+                <li> SETTINGS </li>-->
+            </ul>
+        </div>
+        <div class="col-md-12 page-heading-bg-solid">
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+        <div class="col-md-12 page-overlay-row">
+
+                </div>
+    </div>-->
+<div class="container-fluid container-content container-fixed" ng-mouseover="toggleChange()">
+    <div class="row white-bg list-menu menu-fixed mobView nav-static">
+        <div class="col-md-12 mobileFilterHideIcon">
+            <div class="float-left align-left fix-width-menu">
+                <i class="ion-ios-list-outline filter-menu-mob fixed-menu-left" ng-click="showhidefilteroptions()"></i>
+            </div>
+            <div class="float-left align-center fix-width-menu">
+                <i class="ion-earth filter-menu-mob active" ng-click="showTimeline();"></i>
+            </div>
+            <div class="float-left align-right fix-width-menu">
+                <i class="ion-ios-clock-outline filter-menu-mob fixed-menu-right" ng-click="showhiderecent();"></i> <!--ion-ios-bookmarks-outline-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mobRes">
+            <!--<span class="span-text-wall">WALL</span><br />-->
+            <span class="span-text-intro mobRes">Share your business problem,</span><br />
+            <span class="span-text-intro-part">we will find an innovative solution!</span>
+        </div>
+        <div class="col-md-6">
+            <div class="row txt-row-margin-create mobRes">
+                <div class="col-md-6">
+                    <span class="span-create-head">Share Your Business Problem</span>
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-12">
+                    <input type="text" class="input-create-prob" ng-model="createTilte" placeholder="What would you like to share with us today?" maxlength="200" />
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-1 mobRes">
+                    <div class="div-disp-pic"></div>
+                </div>
+                <div class="col-md-3 float-right">
+                    <button class="btn-create-prob" onclick="openNav()">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-content container-border-left">
+    <div class="row">
+        <div class="col-md-3 col-left col-left-cust-width filterDiv col-sel-left filter-mob-res animate-left-hide" ng-mouseover="toggleChange()" ng-show="displayFilteroption==1">
+            <div class="dropdown sort " ng-show="showSortOption==1">
+                <span class="span-sort-filter"><i class="id3-list-button"></i>Filter by</span>
+                <i class="icon ion-ios-arrow-down arrow-down right float-right"></i>
+                <div class="dropdown-content sort">
+                    <a ng-click="filterByDate('Last24Hr')">Last 24 Hours </a>
+                    <a ng-click="filterByDate('Last7Days')">Last 7 Days </a>    
+                    <a ng-click="filterByDate('Last30Days')">Last 30 Days </a>
+                    <a ng-click="filterByDate('Last3Months')">Last 3 Months</a>
+                    <a ng-click="filterByDate('YeartoDate')">Year to Date </a>
+                    <a ng-click="getBusinessProblem()">All</a>
+                </div>
+            </div>
+            <h4> Refine your search </h4>
+            <div id="divPhase" class="row div-Phase phase-icon cursor-pointer" onclick="slideDownPhase($(this));">
+                <div class="float-left filter-head">
+                    Phases
+                </div>
+                <i class="icon ion-ios-arrow-down arrow-slide float-right right span-click-icon" ></i>                
+            </div>
+            <div id="rowGridPhase" class="slide-menu">
+                <div class=" row unSelectedDiv  row-card-bottom-border" ng-repeat="phase in phases" id="phase{{phase._id}}">
+                    <div class="row row-card">
+                        <input type="checkbox" id="{{phase._id}}" ng-model="phasefilter[$index]" ng-true-value="{{phase}}" ng-false-value="{{}}"
+                               ng-change="phasefilterchange()" style="display:none;" class="phasefilter-input" />
+                        <label for={{phase._id}} class="full-width-label">
+                            <span class="float-left left-filter-icon">
+                                <i class="{{phase.logo}} icon-filter"></i>
+                            </span>
+                            <span class="float-left filter-text">
+                                {{phase.name}}
+                            </span>
+                            <span class="col-span-count span-count">
+                                {{phase.problemCount}}
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Dummy item-->
+            <div id="divStatus" class="row row-filter-margin cursor-pointer" onclick="slideDownStatus($(this));">
+                <div class="float-left filter-head">
+                    Status
+                </div>
+                <i class="icon ion-ios-arrow-down arrow-slide float-right right span-click-icon"></i>  
+            </div>
+            <div id="rowGridStatus" class="slide-menu">
+                <div class="row unSelectedDiv row-card-bottom-border" ng-repeat="state in states" id="status{{state._id}}">
+                    <div class="row row-card">
+                        <input type="checkbox" id="{{state._id}}" ng-model="statusfilter[$index]" ng-true-value="{{state}}" ng-false-value="{{}}"
+                               ng-change="statusfilterchange()" style="display:none;" />
+                        <label for="{{state._id}}" class="full-width-label">
+                            <span class="float-left left-filter-icon status">
+                                <i class="filter-color {{state.class}}"></i>
+                            </span>
+                            <span class="float-left filter-text">
+                                {{state.name}}
+                            </span>
+                            <span class="col-span-count span-count">
+                                {{state.problemCount}}
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="dropdown sort display-none">
+                <span class="span-sort-filter"><i class="id3-list-button"></i>Sort by</span>
+                <i class="icon ion-ios-arrow-down arrow-down right float-right"></i>
+                <div class="dropdown-content">
+                    <a ng-click="sortproblem('problemId')">ID <span class="sortorder" ng-show="sortBy === 'problemId'" ng-class="{reverse: reverse}"></span> </a>
+                    <a ng-click="sortproblem('createdDateTime')">Date <span class="sortorder" ng-show="sortBy === 'createdDateTime'" ng-class="{reverse: reverse}"></span> </a>
+                    <a ng-click="sortproblem('account.name')">Account <span class="sortorder" ng-show="sortBy === 'account.name'" ng-class="{reverse: reverse}"></span>  </a>
+                    <a ng-click="sortproblem('domain.name')">Domain <span class="sortorder" ng-show="sortBy === 'domain.name'" ng-class="{reverse: reverse}"></span>   </a>
+                    <a ng-click="sortproblem('phase.name')">Phase <span class="sortorder" ng-show="sortBy === 'phase.name'" ng-class="{reverse: reverse}"></span></a>
+                </div>
+            </div>-->
+            <div id="dividp" class="row row-filter-margin cursor-pointer" onclick="slideDownId3($(this));">
+                <div class="float-left filter-head">
+                    My ID<sup>3</sup>
+                </div>
+                <i class="icon ion-ios-arrow-down arrow-slide float-right right span-click-icon"></i>
+            </div>
+            <div id="rowGridId3" class="slide-menu">
+                <div class="row unSelectedDiv row-card-bottom-border" id="businessProblem">
+                    <div class="row row-card ">
+                        <div class="float-left left-filter-icon">
+
+                            <i class="icon id3-customer-problem icon-filter"></i>
+                        </div>
+                        <div class="float-left filter-text">
+                            <a href="/#/problem/MyProblem/{{loggedInUserID}}" class="filter-text" ng-click="showScroll()">Business Problems</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row unSelectedDiv " id="drafts">
+                    <div class="row row-card ">
+                        <div class="float-left left-filter-icon status">
+                            <i class="icon id3-timeline icon-filter pad-l-4"></i>
+                        </div>
+                        <div class="float-left filter-text">
+                            <a href="/#/draftProblem/{{loggedInUserID}}" class="filter-text" ng-click="showScroll()">Drafts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-middle-cust-width col-auto-scroll col-sel-middle" ng-show="displaytimeline==1">
+            <div class="filterOption mobRes">
+                <div class="row  col-middle">
+                    <div class="col-md-1 col-computing">
+                        <i class="icon id3-cloud-computing"></i>
+                    </div>
+                    <div class="col-md-11">
+                        <span class="span-keyword-search">Keyword Search</span><br />
+                        <input type="text" class="input-search" placeholder="Search for Problem Statement, Number, Category" ng-model="searchKeyword" ng-click="toggle()" />
+                    </div>
+                    <!--<div class="col-md-2 col-sort">
+                        <div class="dropdown">
+                            <span class="span-sort-filter">Sort</span>
+                            <i class="icon ion-ios-arrow-down arrow-down"></i>
+                            <div class="dropdown-content">
+                                </div>
+                        </div>
+                    </div>-->
+                    <!--<div class="col-md-2 col-filter">
+                        <div class="dropdown">
+                            <span class="span-sort-filter">Filter</span>
+                            <i class="icon ion-ios-arrow-down arrow-down"></i>
+                            <div class="dropdown-content">
+                                <a ng-click="filterProblem('domain')">Domain</a>
+                                <a ng-click="filterProblem('account')">Account</a>
+                                <a ng-click="filterProblem('vertical')">Vertical</a>
+                                <a ng-click="filterProblem('date')">Date</a>
+                                <a ng-click="filterProblem('creator')">Creator</a>
+                            </div>
+                        </div>
+                    </div>-->
+                    <!--<div>
+                        <div class="col-md-12" ng-show="filterType=='date'">
+                            <div class="row row-calendar-padding">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control cal-bg input-border" placeholder="Select a Date..." uib-datepicker-popup="{{format}}"
+                                               show-button-bar="false" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions"
+                                               ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-calendar cal-bg" ng-click="open1()"><i class="icon ion-android-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control cal-bg input-border" placeholder="Select a Date..." uib-datepicker-popup="{{format}}"
+                                               show-button-bar="false" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions"
+                                               ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-calendar cal-bg" ng-click="open2()"><i class="icon ion-android-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 cust-chosen" ng-show="filterType=='domain'">
+                            <div class="row  row-calendar-padding">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-7">
+                                    <select data-placeholder="Select Domain" chosen ng-model="filterByDomain" ng-show="filterType=='domain'" multiple class="col-md-11"
+                                            ng-options="domain.name as domain.name for domain in domains"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 cust-chosen" ng-show="filterType=='account'">
+                            <div class="row  row-calendar-padding">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-7">
+                                    <select data-placeholder="Select Accounts" multiple ng-model="filterByaccount" ng-show="filterType=='account'" ng-options="account.name as account.name for account in accounts"
+                                            chosen class="col-md-11"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 cust-chosen" ng-show="filterType=='vertical'">
+                            <div class="row  row-calendar-padding">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-7">
+                                    <select data-placeholder="Select Verticals" chosen ng-model="filterByVertical" ng-show="filterType=='vertical'" multiple
+                                            class="col-md-11" ng-options="vertical.name as vertical.name for vertical in verticals">
+                                        <option ng-repeat="vertical in verticals" value="{{vertical.name}}">{{vertical.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 cust-chosen" ng-show="filterType=='creator'">
+                            <div class="row  row-calendar-padding">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-7">
+                                    <select data-placeholder="Select Originator" chosen ng-model="filterByCreate" ng-show="filterType=='creator'" multiple class="col-md-11"
+                                            ng-options="users.name as users.name for users in activeUsers">
+                                        <option ng-repeat="users in activeUsers" value="{{users.name}}">{{users.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            <div class="row row-filter" toggle>
+                <!--<div class="divider first"></div>
+                <div class="divider last"></div>-->
+                <div class="col-md-8">
+                    <div class="row row-filter-bottom">
+                        <div class="col-md-6 cust-chosen col-filter-pos">
+                            <select data-placeholder="Select Accounts" multiple ng-model="filterByaccount" ng-options="account.name as account.name for account in accounts" chosen class="col-md-11"></select>
+                        </div>
+
+                        <div class="col-md-6 cust-chosen">
+                            <select data-placeholder="Select Verticals" chosen ng-model="filterByVertical" multiple class="col-md-11" ng-options="vertical.name as vertical.name for vertical in verticals">
+                                <option ng-repeat="vertical in verticals" value="{{vertical.name}}">{{vertical.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row row-filter-bottom">
+                        <div class="col-md-6 cust-chosen col-filter-pos">
+                            <select data-placeholder="Select Domains" chosen ng-model="filterByDomain" multiple class="col-md-11" ng-options="domain.name as domain.name for domain in domains"></select>
+                        </div>
+                        <div class="col-md-6 cust-chosen">
+                            <select data-placeholder="Select Originator" chosen ng-model="filterByCreate" multiple
+                                    class="col-md-11" ng-options="users.name as users.name for  users in activeUsers">
+                                <!--<option ng-repeat="users in activeUsers" value="{{users.name}}">{{users.name}}</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row row-filter-bottom">
+                        <div class="col-md-6 cust-chosen col-filter-pos">
+                            <select data-placeholder="Select Labels" chosen ng-model="filterByLabels" multiple class="col-md-11" ng-options="label.name as label.name for label in labels"></select>
+                        </div>
+                        <div class="col-md-6 cust-chosen">
+                            <select data-placeholder="Select Innovation Champions" chosen ng-model="filterByInnovationChampion" multiple
+                                    class="col-md-11" ng-options="users.name as users.name for  users in activeUsers">
+                                <!--<option ng-repeat="users in activeUsers" value="{{users.name}}">{{users.name}}</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6  col-filter-cal">
+                            <p class="input-group p-width-from">
+                                <input type="text" class="form-control cal-bg input-border" placeholder="From Date" uib-datepicker-popup="{{format}}" show-button-bar="false" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" max-date="fromdateMax" min-date="fromDateMinDate" readonly />
+                                <span class="input-group-btn span-cal-list">
+                                    <button type="button" class="cal-bg icon-size" ng-click="open1()"><i class="icon ion-android-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-md-6 col-filter-cal-right">
+                            <p class="input-group p-width">
+                                <input type="text" class="form-control cal-bg input-border" placeholder="To Date" uib-datepicker-popup="{{format}}" show-button-bar="false" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" max-date="maxdate" min-date="fromDate" readonly ng-change="changefromMaxDate()" />
+                                <span class="input-group-btn span-cal-list">
+                                    <button type="button" class="cal-bg icon-size-right" ng-click="open2()"><i class="icon ion-android-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn-reset" ng-click="resetFilter()">Reset</button>
+                </div>
+            </div>
+            <div class="row div-row-filter">
+                <div class="col-md-12">
+                    <div class="dropdown float-left drop-filter-align">
+                        <div class="squaredThree chk-filter">
+                            <input type="checkbox" value="None" id="checkAll" name="check" ng-change="displayActions()" ng-model="problemCheckbox" />
+                            <label for="checkAll"></label>
+                        </div>
+                    </div>
+                    <div class="float-left drop-left move">
+                        <label class="lbl-all">All</label>
+                    </div>
+                    <div class="float-left drop-left move" ng-hide="displayactions==1">
+                        <div class="checkbox chk-filter">
+                            <a class="anchor-export" href="/api/excel/problems">Export All</a>
+                        </div>
+                    </div>
+                    <div class="float-left drop-left " ng-show="displayactions==1">
+                        <div class="checkbox chk-filter">
+                            <label class="lbl-export" ng-click="exportExcel()">Export Selected</label>
+                        </div>
+                    </div>
+                    <!--<div class="dropdown float-right drop-right">
+                        <div class="checkbox chk-filter">
+                            <label class="lbl-export">Export Excel</label>
+                            <i class="icon ion-arrow-down-b arrow-down-thick float-right"></i>
+                        </div>
+                        <div class="dropdown-content right-filter">
+                            <a href="api/excel/problems">All</a>
+                            <a href="" ng-click="exportExcel()">Selected</a>
+
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="row div-row-filter mobView">
+            <div class="col-md-12">
+                <div class="dropdown float-left drop-filter-align">
+                    <div class="squaredThree chk-filter">
+                        <input type="checkbox" value="None" id="checkAll" name="check" ng-change="displayActions()" ng-model="problemCheckbox" />
+                        <label for="checkAll"></label>
+                    </div>
+                </div>
+                <div class="float-left drop-left move">
+                    <label class="lbl-all">All</label>
+                </div>
+                <div class="float-left drop-left move" ng-hide="displayactions==1">
+                    <div class="checkbox chk-filter">
+                        <a class="anchor-export" href="/api/excel/problems">Export All</a>
+                    </div>
+                </div>
+                <div class="float-left drop-left " ng-show="displayactions==1">
+                    <div class="checkbox chk-filter">
+                        <label class="lbl-export" ng-click="exportExcel()">Export Selected</label>
+                    </div>
+                </div>
+                <!--<div class="dropdown float-right drop-right">
+                    <div class="checkbox chk-filter">
+                        <label class="lbl-export">Export Excel</label>
+                        <i class="icon ion-arrow-down-b arrow-down-thick float-right"></i>
+                    </div>
+                    <div class="dropdown-content right-filter">
+                        <a href="api/excel/problems">All</a>
+                        <a href="" ng-click="exportExcel()">Selected</a>
+
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div class="row row-timeline problemList" infinite-scroll="loadMore()" infinite-scroll-distance="1" ng-mouseover="toggleChange()">
+            <div class="col-md-12 col-timeline-bg" ng-repeat="(fIndex,problem) in filteredProblems =(problems | phaseFilter:tags | statusFilter:statuesFilter |filter:problemKeywordFilter(searchKeyword)| orderBy :sortBy:reverse |accountFilter :filterByaccount | datefilter : fromDate : toDate | accountFilter :filterByaccount | domainFilter : filterByDomain |verticalFilter:filterByVertical |innovationChampionfilter:filterByInnovationChampion |creatorfilter : filterByCreate |labelfilter :filterByLabels |limitTo:numberToDisplay)">
+                <div class="row row-timeline-padding">
+                    <div class="squaredThree float-left chk-timeline-filter">
+                        <input type="checkbox" name="check" class="problemCheck" id="{{problem._id}}" value="{{problem._id}}" ng-change="displayActions()" ng-model="problemCheckbox" />
+                        <label for="{{problem._id}}"></label>
+                    </div>
+                    <div class="float-left div-phase-margin">
+                        <div class="timeline-icon phase"><i class="{{problem.phase.logo}} i-timeline-icon"></i></div>
+                    </div>
+                    <div class="float-left div-post-number">
+                        <span class="span-post-number">#{{problem.problemId}}</span>
+                    </div>
+                    <div class="float-left div-phase-margin title">
+                        <span class="span-post-name text-overflow">{{problem.title}}</span>
+                    </div>
+                    <div class="dropdown float-right share-icon" ng-if="problem.createdBy._id === loggedInUser || roleSession === 'Innovation champion' ||roleSession ==='Idea champion' ||roleSession==='Admin' ||problem.innovationChampion===loggedInUser">
+                        <i class="icon ion-android-more-vertical i-icon-more"></i>
+                        <div class="dropdown-content prob-list">
+                            <a href="/#/problem/update/{{problem._id}}">Edit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-timeline-padding-tags">
+                    <div class="col-md-12 col-filter-pos">
+                        <div class="col-status-padding float-left">
+                            <div rel="tooltip" title="Status" class="div-timeline-status text-overflow head-label {{problem.status.class}}">{{problem.status.name}}</div>
+                        </div>
+                        <div class="col-status-padding float-left " ng-if="problem.category.length >= 1">
+                            <div rel="tooltip" title="Category" class="div-timeline-status text-overflow head-label category">{{problem.category[0].name}}</div>
+                        </div>
+                        <div class="col-status-padding float-left" ng-repeat="label in problem.labels">
+                            <div rel="tooltip" title="Label" class="div-timeline-status text-overflow">{{label.name}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-timeline-padding-para">
+                    <div class="col-md-12">
+                        <p class="right-card-para timeline-para-bottom main">
+                            {{problem.problemStatement}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row row-timeline-padding-row mobRes">
+                    <div class="col-md-12">
+                        <div class="float-left div-icon-margin">
+                            <span ng-if="problem.userlikes.indexOf(loggedInUserID) == -1">
+                                <i ng-click="addlike(problem,problem._id,$index)" class="icon ion-thumbsup tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problem.likes.length}}&nbsp;LIKES</span>
+                            </span>
+                            <span ng-if="problem.userlikes.indexOf(loggedInUserID) != -1">
+                                <i ng-click="unlike(problem,problem._id,$index)" class="icon ion-thumbsup tl-inner-icon color-orange"></i><span class="span-inner-text color-orange">&nbsp;{{problem.likes.length}}&nbsp;LIKES</span>
+                            </span>
+                        </div>
+                        <div class="float-left div-icon-margin" slide-toggle="#row_{{$index}}" id="row{{$index}}">
+                            <i class="icon ion-chatbubbles tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problem.comments.length}}&nbsp;COMMENTS</span>
+                        </div>
+                        <div class="float-left div-icon-margin">
+                            <i class="icon ion-ios-eye-outline tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problem.views.length}}&nbsp;VIEWS</span>
+                        </div>
+                        <div class="float-left div-icon-margin read-more-bottom">
+                            <a class="btn-read-more read no-text-decoration" href="/#/problem/details/{{problem._id}}">Read More</a>
+                        </div>
+                        <div class="col-md-1 div-icon-margin"></div>
+                        <div class="float-left col-inner-dp div-icon-margin">
+                            <div class="inner-dp"></div>
+                        </div>
+                        <div class="col-prof-name float-left">
+                            <span class="span-prof-firstname" ng-repeat="item in problem.createdBy.name.split(' ')"> <span ng-if="$index <2"> {{item}}</span></span><br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-timeline-padding-row mobView">
+                    <div class="col-md-12">
+                        <div class="float-left div-icon-margin">
+                            <span ng-if="problem.userlikes.indexOf(loggedInUserID) == -1">
+                                <i ng-click="addlike(problem,problem._id,$index)" class="icon ion-thumbsup tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problem.likes.length}}</span>
+                            </span>
+                            <span ng-if="problem.userlikes.indexOf(loggedInUserID) != -1">
+                                <i ng-click="unlike(problem,problem._id,$index)" class="icon ion-thumbsup tl-inner-icon color-orange"></i><span class="span-inner-text color-orange">&nbsp;{{problem.likes.length}}</span>
+                            </span>
+                        </div>
+                        <div class="float-left div-icon-margin" slide-toggle="#row_{{$index}}" id="row{{$index}}">
+                            <i class="icon ion-chatbubbles tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problem.comments.length}}&nbsp;</span>
+                        </div>
+                        <div class="float-left div-icon-margin">
+                            <i class="icon ion-ios-eye-outline tl-inner-icon"></i><span class="span-inner-text">&nbsp;{{problem.views.length}}&nbsp;</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row row-timeline-padding-row mobView">
+                    <div class="col-md-12">
+                        <div class="float-left">
+                            <span class="span-prof-firstname">{{problem.createdBy.name}}</span><br />
+                        </div>
+                        <div class="float-right ">
+                            <a class="no-text-decoration read-more-mob" href="/#/problem/details/{{problem._id}}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div id="row_{{$index}}" class="slideable">
+                    <div ng-repeat="comment in problem.comments">
+                        <div class="row row-timeline-padding-comment">
+                            <div class="col-md-1">
+                                <div class="circle-link"></div>
+                            </div>
+                            <div class="col-md-8 col-comment-name-date">
+                                <span class="span-responder">{{comment.commentedBy.name}}</span><span class="response-date-time">/ {{comment.commnetedDate | date:'dd MMMM yyyy HH:mm'}}  </span>
+                            </div>
+                        </div>
+                        <div class="row row-connect-line">
+                            <div class="col-md-12">
+                                <p class="right-card-para para-position">
+                                    {{comment.comment}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <!--<div class="row div-long-border"></div>
+                <div class="row div-share">
+                    <div class="col-md-1">
+                        <div class="circle-link"></div>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="input-share" ng-model="comment[$index]" ng-keypress="addComment(comment[$index],problem._id,$event,$index)"
+                        />
+                    </div>
+                    <div class="col-md-1">
+                        <i class="icon ion-android-attach big-attach"></i>
+                    </div>
+                    <div class="col-md-1" ng-if="problem.userlikes.indexOf(loggedInUserID) == -1">
+                        <i ng-click="addlike(problem,problem._id,$index)" class="icon ion-thumbsup big-like"></i>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+
+    <div class="row row-timeline problemList">
+        <div ng-hide="filteredProblems.length" class="col-md-12 col-timeline-bg">
+            <div class="row">
+                <img class="img-no-data" src="../../../../assets/img/nodata.png" />
+                <label class="lbl-no-data">No Data Found</label>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="row" ng-show="problems.length>0">
+            <div ng-hide="filteredProblems.length" class="col-md-12 alert text-center">
+                <label class="col-md-11 span-no-data-warning"></label>
+            </div>
+        </div>-->
+    <!--<p ng-hide="filteredProblems.length">Nothing here!</p>-->
+
+</div>
+<div class="col-md-3 col-right-cust-width col-sel-right" ng-mouseover="toggleChange()" ng-show="displayRecent==1">
+    <span class="span-recent">Most Recent</span>
+    <div class="row row-right-card" ng-repeat="(fIndex,recentProblem) in recentProblems | limitTo:3">
+        <div class="col-md-12 no-padding">
+            <div class="float-left right-dp-padding">
+                <div class="right-card-dp"><i class="{{recentProblem.domain.logo}} i-domain-icon"></i></div>
+            </div>
+            <div class="float-left recent-inner-width">
+                <span class="right-card-profile text-overflow">{{recentProblem.title}}</span><br />
+                <div class="row">
+                    <div class="float-left col-right-padding recent-inner-width" ng-repeat="categoryName in recentProblem.category">
+                        <div class="right-card-btn background text-overflow">{{categoryName.name}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 right-para-padding">
+            <p class="right-card-para para-height">
+                {{recentProblem.problemStatement}}
+            </p>
+        </div>
+        <div class="col-md-12 align-center col-view-more">
+            <a href="/#/problem/details/{{recentProblem._id}}" class="no-text-decoration"> <button class="btn-read-more"> View Problem</button></a>
+        </div>
+        <div class="col-md-12">
+            <div class="row row-right-card-bottom">
+                <div class="col-md-12">
+                    <div class="float-left right-like-margin">
+                        <span class="right-card-count">{{recentProblem.likes.length}}</span>
+                        <span class="right-card-comments">LIKES</span>
+                    </div>
+                    <div class="float-left">
+                        <span class="right-card-count">&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i>&nbsp;&nbsp;{{recentProblem.comments.length}}</span>
+                        <span class="right-card-comments">COMMENTS</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+<a class="scrollToTop"><i class="icon ion-ios-arrow-up scroll-up hvr-icon-up"></i></a>
+
+<ng-include src="'app/partials/business-problems/templates/create.html'"></ng-include>
+
+<script>
+    $(document).ready(function () {        
+
+        resetChevronIcon();
+
+        setTimeout(function(){$('.phase-icon').trigger('click'); }, 100);
+
+        $(".input-create-prob").keyup(function () {
+            openNav();
+        });
+
+        $('body').tooltip({
+            selector: '[rel="tooltip"]'
+        });
+
+        $(".filter-menu-mob").click(function () {
+
+            $(".filter-menu-mob.active").removeClass('active');
+
+            $(this).addClass('active');
+        });
+
+        responsiveSite();
+
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            if ($("#myNav").height() == 0 &&
+                $("#myUserNav").height() == 0 &&
+                $(".fixed-menu-left").hasClass("active") == false) {
+                didScroll = true;
+            }
+        });
+
+        setInterval(function () {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 1);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+                if ($(".searchbox-icon").hasClass("search") && $(".searchbox-icon").hasClass("show-header") == false) {
+                    $('header, .nav-mob-res-logo ').removeClass('nav-down').addClass('nav-up');
+
+                    $('.menu-fixed').removeClass('nav-static').addClass('nav-relative');
+                }
+
+                $('.searchbox-icon').removeClass('show-header');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    if ($(".searchbox-icon").hasClass("search")) {
+                        $('header, .nav-mob-res-logo ').removeClass('nav-up').addClass('nav-down');
+
+                        $('.menu-fixed').removeClass('nav-relative').addClass('nav-static');
+                    }
+                }
+            }
+
+            lastScrollTop = st;
+        }
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+
+        //Click event to scroll to top
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    });
+</script>
+<script>
+    var fixmeTop = ($('.filterDiv').offset().top) - 52;
+    $(window).scroll(function () {
+
+        if ($(window).height() > 700 &&
+            $(window).width() > 991) {
+            var currentScroll = $(window).scrollTop();
+
+            var filterOptionWidth = $(".filterOption").width();
+            if (currentScroll >= fixmeTop) {
+                //var filterDivheight = $(".filterDiv").height();
+                //var windowheight = $(window).height();
+                //var top = 0;
+                //if (filterDivheight > windowheight)
+                //{
+                //    top = filterDivheight - windowheight;
+                //}
+
+                if (screen.width > 1280) {
+                    $('.filterDiv').css({
+                        'width': '16%'
+                    });
+                }
+
+                $('.filterDiv').css({
+                    'position': 'fixed',
+                    'top': '85px'
+                });
+
+                $('.filterOption').css({
+                    'position': 'fixed',
+                    'top': '85px',
+                    'width': filterOptionWidth + 'px',
+                    'z-index': '5'
+                });
+
+                $('.problemList').css({
+                    'position': 'relative'
+                });
+
+                $('.problemList').css({
+                    'position': 'relative'
+                });
+
+                $('.col-auto-scroll').css({
+                    'margin-left': '20.3%'
+                });
+
+                $('.divider.last').css({
+                    'left': '33.3%'
+                });
+
+                $('.divider.last').css({
+                    'left': '33.3%'
+                });
+
+                $('.divider.first').css({
+                    'left': '66.3%'
+                });
+
+            } else {
+                $('.filterDiv').css({
+                    'position': 'static',
+                    'width': '19%'
+                });
+
+                $('.filterOption').css({
+                    'position': 'static',
+                    'width': '100%'
+                });
+
+                $('.problemList').css({
+                    'position': 'static',
+                    'left': '0px',
+                });
+                $('.col-auto-scroll').css({
+                    'margin-left': '0%'
+                });
+
+                $('.divider.last').css({
+                    'left': '34.3%'
+                });
+
+                $('.divider.first').css({
+                    'left': '67.3%'
+                });
+            }
+        }
+    });
+
+
+    $('#checkAll').click(function () {
+        // $('.userCheck').prop('checked', this.checked);
+        $('input:checkbox').not(this).prop('checked', this.checked);
+        //$(".userCheck").trigger("click");
+    });
+</script>

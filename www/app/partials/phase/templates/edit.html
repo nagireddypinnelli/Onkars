@@ -1,0 +1,30 @@
+﻿<script src="../../../../assets/Scripts/bootstrap.js"></script>
+<link href="../../../../assets/Content/bootstrap.css" rel="stylesheet" />
+<script src="../../../../assets/Scripts/bootstrap.js"></script>
+<link href="../../../../assets/Content/bootstrap.css" rel="stylesheet" />
+<div id="style-scroll" style="height: 86vh;
+    overflow: auto;">
+    <div id="style-scroll" style="height: 86vh;
+    overflow: auto;">
+        <md-content layout-padding class="xe-transparent font-dark">
+            <h2 class="margin-0">Edit Phase</h2>
+        </md-content>
+
+        <div layout-padding flex layout="row" class="xe-transparent">
+            <form class="form-inline">
+                <div class="col-sm-12" style="border-color:black; border-style:solid;margin:10px 0 20px 10px;padding:0px 0 10px 0px;">
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-6">Name</label>
+                        <input type="text" class="form-control" id="title" ng-model="phase.name">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <md-content style="float:right;right: 16px;">
+            <md-input-container>
+                <button type="button" md-ink-ripple="#333" class="border xe-right" ng-click="editPhase()">Save Changes</button>
+            </md-input-container>
+        </md-content>
+    </div>
+</div>

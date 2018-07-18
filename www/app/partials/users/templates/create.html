@@ -1,0 +1,219 @@
+<div>
+    <div id="myUserNav" class="overlay">
+        <div class="overlay-content">
+            <div id="wizard">
+                <!--<form id="businessProblemForm1">-->
+                <h2>First Step</h2>
+                <section>
+                    <form class="form-inline" name="createUserForm" id="createUserForm">
+                        <div class="container-fluid container-content create-user">
+                            <div class="row mobView">
+                                <div class="col-md-12 create-mob">
+                                    <a href="javascript:void(0)" class="closebtn" ng-click="CloseNav()"><i class="icon ion-ios-close-empty hvr-icon-spin"></i></a>
+                                    <span class="span-sub-text-create" ng-if="user._id ==''">Create User</span>
+                                    <span class="span-sub-text-create" ng-if="user._id !=''">Edit User</span>
+                                </div>
+                            </div>
+                            <div class="row mobRes">
+                                <div class="col-md-12 page-heading-bg create-user">
+                                    <a href="javascript:void(0)" class="closebtn" ng-click="CloseNav();"><i class="icon ion-ios-close-empty hvr-icon-spin"></i></a>
+                                    <div class="create-dp-circle"></div>
+                                    <span class="span-sub-text-create" ng-if="user._id ==''">Create User</span>
+                                    <span class="span-sub-text-create" ng-if="user._id !=''">Edit User</span>
+
+                                </div>
+                                <div class="col-md-12 page-heading-bg-solid create-user">
+                                </div>
+                                <div class="col-md-12 shadow-page-heading-bg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid overlay-container-bg  div-main-container">
+                            <div class="row row-padding-top row-title-margin">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block" flex-gt-sm="">
+                                                <label>Name</label>
+                                                <input ng-model="user.name" name="name" maxlength="200">
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block" flex-gt-sm="">
+                                                <label>Username (UID)</label>
+                                                <input ng-model="user.username" name="username" maxlength="100">
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block user-email" flex-gt-sm="">
+                                                <label>Email</label>
+                                                <input ng-model="user.email" name="email" maxlength="100"  ng-text-change="emailValidation">
+                                            </md-input-container>
+                                            <label class="error">{{emailValidationError}}</label>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block" flex-gt-sm="">
+                                                <label>Contact Number</label>
+                                                <input ng-model="user.contactInfo" name="contactInfo" maxlength="100">
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <!--<div class="row">
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block" flex-gt-sm="">
+                                                <label>Password</label>
+                                                <input ng-model="user.password">
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block" flex-gt-sm="">
+                                                <label>Confirm Password</label>
+                                                <input ng-model="user.confirmPassword">
+                                            </md-input-container>
+                                        </div>
+                                    </div>-->
+                                    <div class="row user-row-bottom">
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block md-right" flex-gt-sm="" id="accountSelectBox">
+                                                <label>Account</label>
+                                                <md-select ng-model="user.account" name="account" ng-change="hideErrorMesssage('account')">
+                                                    <md-option ng-repeat="account in accounts" value="{{account._id}}">
+                                                        {{account.name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <md-input-container class="md-block md-right" flex-gt-sm="" id="roleSelectBox">
+                                                <label>Role</label>
+                                                <md-select ng-model="user.role" name="role" ng-change="hideErrorMesssage('role')" id="userRole">
+                                                    <md-option ng-repeat="role in roles | orderBy:'name'" value="{{role._id}}">
+                                                        {{role.name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <label class="role_error" ng-show="role_error">This field is required!</label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label class="createUserError" ng-repeat="error in errorMessage">
+                                    * {{error.msg}}
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="container-fluid container-create-bottom newuser">
+                            <div class="row">
+                                <div class="col-md-12 div-btn-mob">
+                                    <a class="btn-edit-change btn-sumbit-create col-sm-2 saveBtn btn-mob" id="createUser" ng-show="user._id==''" ng-click="createUser()">Save</a>
+                                    <a class="btn-edit-change btn-sumbit-create col-sm-2 saveBtn btn-mob" id="updateUser" ng-show="user._id!=''" ng-click="updateUserDetails()">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+        <!--</form>-->
+    </div>
+
+
+
+    <div class="modal fade" id="usercreateconfirm" role="dialog" >
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-header custom">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Created</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully created user</p>
+                </div>
+                <div class="modal-footer custom">
+                    <button type="button" class="btn-edit-change margin" data-dismiss="modal" onclick="$('#usercreateconfirm').modal('hide');" ng-click="redirectHomepage()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="userupdateconfirm" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-header custom">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Updated</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully updated user</p>
+                </div>
+                <div class="modal-footer custom">
+                    <button type="button" class="btn-edit-change margin" data-dismiss="modal" onclick="$('#userupdateconfirm').modal('hide');" ng-click="redirectHomepage()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#wizard").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            onStepChanging: function (event, currentIndex, newIndex) {
+                //alert(1);
+                //alert(currentIndex);
+                //if(scope.showErrorAlert) return false;
+                // alert(currentIndex)
+
+                return false;
+            },
+        });
+
+    $("#createUserForm").validate({
+        rules: {
+            name: {
+                required: true
+            },
+            username: {
+                required: true
+            },
+            email: {
+                required: true,
+                email:true
+            },
+            ".role": {
+                required:true
+            },
+        }
+    });
+
+    $(document).ready(function () {
+
+        responsiveSite();
+
+        //$("#createUser").click(function () {          
+        //    if ($("#createUserForm").valid()) {
+        //        var scope = angular.element('div[ng-controller="ManageController"]').scope();
+        //        scope.createUser();
+        //    }
+        //});
+
+        //$("#updateUser").click(function () {
+        //    if ($("#createUserForm").valid()) {
+        //        var scope = angular.element('div[ng-controller="ManageController"]').scope();
+        //        scope.updateUserDetails();
+        //    }
+        //});
+    });
+</script>
+

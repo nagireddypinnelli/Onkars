@@ -1,0 +1,231 @@
+﻿<ng-include src="'app/partials/main/templates/topmenu.html'"></ng-include>
+
+<md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+<div class="container-fluid container-content main">
+    <div class="row mobRes">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg">
+            <!--<span class="span-heading">Manage</span>-->
+            <ul class="business-sub-nav">
+                <!--<li class="active"> BUSINESS PROBLEMS </li>-->
+                <li class="active">MANAGE REPOSITORY </li>
+                <!--<li> SETTINGS </li>-->
+            </ul>
+        </div>
+        <div class="col-md-12 page-heading-bg-solid">
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+        <div>
+            <md-progress-linear mode="indeterminate"  ng-show="progressVisible"></md-progress-linear>
+        </div>
+    
+</div>
+<div class="container-fluid container-content container-fixed">
+    <form name="repoForm">
+        <div class="row white-bg list-menu menu-fixed mobView nav-static">
+            <div class="col-md-12 mobileFilterHideIcon">
+                <div class="float-left align-left fix-width-menu">
+                    <i class="ion-ios-list-outline filter-menu-mob fixed-menu-left" ng-click="showhidefilteroptions()"></i>
+                </div>
+                <div class="float-left align-center fix-width-menu">
+                    <i class="ion-earth filter-menu-mob active" ng-click="showTimeline();"></i>
+                </div>
+                <div class="float-left align-right fix-width-menu">
+                    <i class="ion-ios-clock-outline filter-menu-mob fixed-menu-right" ng-click="showhiderecent();">
+                    </i> <!--ion-ios-bookmarks-outline-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-md-7 mobRes">
+                <span class="span-text-repo mobRes">Innovation Repository {{repository.folderName}}</span><br />
+
+                <div class="row col-middle-search">
+                    <div class="col-md-1 col-computing">
+                        <i class="icon id3-cloud-computing"></i>
+                    </div>
+                    <div class="col-md-6">
+                            <input type="text" class="input-search" ng-model="searchKeyword" placeholder="Keyword Search" ng-click="toggle()" />
+                    </div>
+                </div>
+               
+            </div>
+           
+            <div>
+                <a ng-click="sendmail()">Add Tag</a>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <div class="row txt-row-margin-create mobRes">
+                    <div class="col-md-8">
+                        <span class="span-create-head">Create Repository</span>
+                    </div>
+                  
+                <div class="row input-row-margin-create">
+                     <div class="col-md-8">
+                        <input type="text" class="input-create-prob" name="folderName" ng-model="folderName" placeholder="Enter the new repository name" required/>
+                             <button class="btn-create-prob" style="position:absolute;left:30em;margin-top: 43px;" ng-disabled="!folderName" ng-click="create()">Create</button>
+                     </div>
+                </div>
+                <div class="row input-row-margin-create">
+                  
+                </div>
+                <div class="row row-create-right row-sol-date row-padding-middle js">
+                    <div class="col-md-9 right-side-cal">
+                        <p class="input-group input-group-width datefield upload movedown">
+                            <!--<input type="file" ngf-select ng-model="file" name="file" ngf-max-size="20MB" class="span-upload-label">-->
+                            <!--<input type="file"  ngf-select ng-model="file" name="file" ngf-max-size="20MB" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />-->
+                            <input type="file" ngf-select ng-model="file" name="file" ng-change="submitFile()" ngf-max-size="30MB" id="file-1" class="inputfile inputfile-1"   ngf-model-invalid="errorFile" required/>
+                            <label for="file-1"><span id="uploadText">Upload Documents</span></label>
+                            <i class="errormsg" ng-show="repoForm.file.$error.maxSize">
+                                File too large Max Size is 30MB
+                            </i>
+                            <span class="input-group-btn span-temp-pos">
+                                <button type="button" class="btn-upload btn-upload-icon"  ><i class="icon ion-ios-cloud-upload-outline"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </div>
+    </form>
+</div>  
+<div class="container-fluid container-content container-border-left" > 
+    <div class="row">                                           
+        <div class="col-sm-2 upload-docs upload-cart" ng-repeat="item in repository.innerFiles | filter:searchKeyword">
+            <div class="dropdown float-right share-icon">
+                <i class="icon ion-android-more-vertical i-icon-more-repo"></i>
+                <div class="dropdown-content prob-list">
+                    <a ng-click="openTag(item._id)">Add Tag</a>
+                </div>
+            </div>
+                <a href='/uploads/{{item.filename}}'>
+                        <img src="../../../../assets/img/file.png" class="img-small" ng-if="item.isFolder==false" />
+                        <div class="col-md-12">
+                            <label class="repolabel"> {{item.filename}}</label>
+                        </div>
+                </a>
+        </div>
+    </div>
+
+    
+
+    <div class="row">
+            <div class="col-sm-2 upload-cart" ng-repeat="item in repository.innerFolder">
+                <a href="/#/repository/innerFolder/{{item._id}}">
+                    <img src="../../../../assets/img/folder.png" class="img-small centered"/></a>
+                <div class="col-md-12">
+                    <label class="repolabel">{{item.foldername}}</label>
+                </div>
+            </div>
+            <div class="col-sm-2 upload-cart" ng-repeat="item in folderDetails">
+                <a href="/#/repository/innerFolder/{{item._id}}">
+                    <img src="../../../../assets/img/folder.png" class="img-small centered" />
+                </a>
+                <div class="col-md-12">
+                    <label class="repolabel">{{item}}</label>
+                </div>
+            </div>
+   </div>
+ 
+ </div>
+
+<script>
+    $(document).ready(function () {
+        $('body').tooltip({
+            selector: '[rel="tooltip"]'
+        });
+
+        $("#Upload").validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                username: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                ".role": {
+                    required: true
+                },
+            }
+        });
+
+
+        $(".filter-menu-mob").click(function () {
+
+            $(".filter-menu-mob.active").removeClass('active');
+
+            $(this).addClass('active');
+        });
+
+        responsiveSite();
+
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            if ($("#myNav").height() == 0 &&
+                $("#myUserNav").height() == 0 &&
+                $(".fixed-menu-left").hasClass("active") == false) {
+                didScroll = true;
+            }
+        });
+
+        setInterval(function () {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 1);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+                if ($(".searchbox-icon").hasClass("search") && $(".searchbox-icon").hasClass("show-header") == false) {
+                    $('header, .nav-mob-res-logo ').removeClass('nav-down').addClass('nav-up');
+
+                    $('.menu-fixed').removeClass('nav-static').addClass('nav-relative');
+                }
+
+                $('.searchbox-icon').removeClass('show-header');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    if ($(".searchbox-icon").hasClass("search")) {
+                        $('header, .nav-mob-res-logo ').removeClass('nav-up').addClass('nav-down');
+
+                        $('.menu-fixed').removeClass('nav-relative').addClass('nav-static');
+                    }
+                }
+            }
+
+            lastScrollTop = st;
+        }
+    });
+</script>
+
+

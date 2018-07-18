@@ -1,0 +1,49 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-edge-theme" style="height:44px !important">
+        <h4 class="title" style="font-weight:400; color:#fff;">Create New</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeForm()"><i class="ion-android-close"></i></button>
+        </div>
+    </ion-header-bar>
+    <ion-content style="background:#3f3f3f url('assets/img/side-menu-bg.png'); background-size: cover;" >
+        <form ng-submit="doForm()">
+            <div class="list list-form" >
+                <label class="item item-input item-floating-label"> 
+                    <span class="input-label">Title</span>
+                    <input type="text" placeholder="Title">
+                </label>
+                <label class="item item-input item-floating-label"> 
+                    <span class="input-label">Stakeholders</span>
+                    <input type="text" placeholder="Stakeholders">
+                </label>
+                <label class="item item-input item-floating-label"> 
+                    <span class="input-label">Description</span>
+                    <textarea type="text" placeholder="Description" style="padding-top: 9px; height:130px;"></textarea>
+                </label>
+                <br />
+                <div class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                    </label>
+                    Critical 
+                </div>
+                
+                <br />
+                <label class="item item-radio">
+                    <input type="radio" name="group">
+                    <div class="item-content"> Radio 1 </div>
+                    <i class="radio-icon ion-checkmark" style="visibility:visible"></i>
+                </label>
+                
+                
+                <div class="item range range-positive"> 
+                    <i class="icon ion-ios-sunny-outline"></i>
+                    <input type="range" name="volume" min="0" max="100" value="33">
+                    <i class="icon ion-ios-sunny"></i> 
+                </div>
+               
+                <button class="button button-block xe-btn-dark ink" data-ink-color="#9DEAFF" data-ink-opacity="1"> Submit </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

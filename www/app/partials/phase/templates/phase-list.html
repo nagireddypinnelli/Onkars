@@ -1,0 +1,47 @@
+﻿<!-- Add New Selector View -->
+<md-tabs class="list-det-scrol" style="padding-top:0px">
+    <md-tab label="Accounts" class="executive-details-tab">
+
+        <md-content style="overflow:hidden;">
+            <table ng-show="phase.length>=1" ng-table="tableParams" class="table xe-updates-table" ng-controller="ProblemController">
+                <tr style="width:100%;">
+                    <td style="width:70%;">
+                        <a ui-sref="app.phase/create">
+                            Create +
+                        </a>
+                    </td>
+                    <td style="width:30%;"></td>
+                    <td style="width:30%;"></td>
+                </tr>
+
+                <tr ng-repeat="(fIndex,phase) in phases" current-page="currentPage">
+                    <td colspan="3" style="vertical-align:top;padding-top: 28px;" style="width:100%;">
+                        Name : {{phase.name}}
+                        <br>
+
+                        <a href="/#/phase/update/{{phase._id}}">
+                            <md-button md-ink-ripple="#333" class="publish-btn">
+                                <md-tooltip>
+                                    Edit
+                                </md-tooltip>
+                                <i class="ion-edit" style="color:#7d7d7d"></i>
+                            </md-button>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr ng-show="phases.length==0">
+                    <td> </td>
+                    <td>
+                        <span class="alert text-center" style="color:#31708F">No data found !!!</span>
+                    </td>
+                    <td> </td>
+                </tr>
+            </table>
+
+            <div ng-show="status.length==0" style="width:100%" class="alert text-center">
+                <span style="color:#31708F">No data found !!!</span>
+            </div>
+        </md-content>
+    </md-tab>
+</md-tabs>

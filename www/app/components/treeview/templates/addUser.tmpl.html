@@ -1,0 +1,48 @@
+<md-dialog aria-label="Add User" class="add-user" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add New User</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon  aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div ng-controller="ContactChipDemoCtrl as ctrl" layout="column" ng-cloak>
+      <md-content class="md-padding autocomplete" layout="column">
+     <md-chips style="min-height:45px;" flex class="md-contact-chips" readonly="ctrl.contacts.length >0" ng-model="ctrl.contacts" md-require-match="true" md-autocomplete-snap md-on-add="ctrl.add()" md-on-remove="ctrl.remove()" md-max-chips="1" >
+        <md-autocomplete style="font-size: 14px;"  md-menu-class="md-contact-chips-suggestions" md-selected-item="ctrl.selectedItem" md-search-text="ctrl.searchText"
+                            md-items="item in ctrl.allContacts | filter: {name: ctrl.searchText}" md-no-cache="true"
+                            md-autoselect="true" placeholder="Select Team Member" ng-if="ctrl.contacts.length ==0">
+                                <div class="md-contact-suggestion">
+                                    <!--<img ng-src="{{item.image}}" alt="{{item.name}}" ng-if="item.image" />-->
+                                    <initials-Image name="{{item.name}}"></initials-Image>
+                                    <span class="md-contact-name">{{item.name}}</span>
+                                    <span class="md-contact-email">{{item.email}}</span>
+                                </div>
+         </md-autocomplete>
+         <md-chip-template>
+           <div class="md-contact-avatar" ng-if="ctrl.contacts.length>0">
+               <initials-Image name="{{$chip.name}}"></initials-Image>
+             <!--<img ng-src="{{$chip.image}}" alt="{{$chip.name}}" ng-if="$chip.image" />-->
+           </div>
+           <div class="md-contact-name">
+             {{$chip.name}}
+           </div>
+         </md-chip-template>
+       </md-chips>
+    </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()">
+       Cancel
+      </md-button>
+      <md-button ng-click="save()">
+       Save
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

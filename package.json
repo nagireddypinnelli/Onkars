@@ -1,0 +1,46 @@
+{
+  "name": "id3",
+  "version": "0.0.1",
+  "description": "ID3 Web App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js"
+  },
+  "author": "@ust-global",
+  "license": "ISC",
+  "project_page": "http://10.10.114.239:5000",
+  "source": "https://tfs.ust-global.com:8080/tfs/",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "1.10.0",
+    "exceljs": "^0.9.1",
+    "express": "4.13.4",
+    "express-validator": "2.20.3",
+    "jwt-simple": "^0.5.0",
+    "mongoose": "^4.4.13",
+    "multer": "^1.2.0",
+    "node-schedule": "^1.1.1",
+    "nodemailer": "^4.6.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "promises": "^0.2.5",
+    "request": "^2.72.0",
+    "sequence": "^3.0.0",
+    "underscore": "^1.8.3",
+    "underscore-node": "^0.1.2"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-inject": "1.5.0",
+    "gulp-jscs": "3.0.2",
+    "gulp-jshint": "2.0.0",
+    "gulp-nodemon": "2.0.6",
+    "jshint": "2.9.1",
+    "jshint-stylish": "2.1.0",
+    "wiredep": "3.0.0"
+  },
+  "engines": {
+    "node": "6.9.4"
+  }
+}

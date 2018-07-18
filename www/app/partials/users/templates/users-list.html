@@ -1,0 +1,72 @@
+<!-- Add New Selector View -->
+<md-tabs  class="list-det-scrol" style="padding-top:0px">
+    <md-tab  label="Users List" class="executive-details-tab">
+
+        
+        <md-content style="overflow:hidden;">
+            <table ng-show="users.length>=1" ng-table="tableParams" class="table xe-updates-table" ng-controller="UserController">
+                <tr style="width:100%;">
+				<td style="width:70%;">
+				<a ui-sref="app.user/create">
+					Create + 
+				</a>
+				</td>
+				<td style="width:30%;">
+				<md-input-container class="user-place-holder">
+					<label for="employedBy" class="size-16"> Filter</label>
+					<md-select style="margin-bottom:5px;" ng-model="filterType">
+						<md-option value="">Select</md-option>
+						<md-option value="account">Account</md-option>
+						<md-option value="domain">Domain</md-option>
+						<md-option value="phase">Phase</md-option>
+						<md-option value="state">State</md-option>
+						
+					</md-select>
+				</md-input-container>
+				<md-input-container class="user-place-holder" style="margin: 8px 0;">
+                        <label class="size-16">Filter Value</label>
+                        <input style="margin-bottom:-19px;" type="text" id="name" ng-model="filterValue" maxlength="50">
+                </md-input-container>
+				</td>
+				<td style="width:30%;">
+				<md-input-container>					
+					<md-button md-ink-ripple="#333" type="button" class="border " ng-click="filterProblem(filterType,filterValue)" id="save" value="Save">filter</md-button>
+				</md-input-container>
+				</td>
+				</tr>
+                <tr ng-repeat="(fIndex,user) in users" current-page="currentPage">
+                    <td colspan="3" style="vertical-align:top;padding-top: 28px;" style="width:100%;">
+					Name : {{user.name}}
+					<br>
+					<span style="width:70%">Email : {{user.email}}</span>
+					<br>
+					<span style="width:70%">Role : {{user.role}}</span>
+					<br>
+                        <a href="/#/users/update/{{user._id}}">
+                            <md-button md-ink-ripple="#333" class="publish-btn">
+                                <md-tooltip>
+                                    Edit
+                                </md-tooltip>
+                                <i class="ion-edit" style="color:#7d7d7d"></i>
+                            </md-button>
+                        </a>
+                        <br />
+                    
+                    </td>
+                    
+                </tr>
+                <tr ng-show="users.length==0">
+                    <td> </td>
+                    <td>
+                        <span class="alert text-center" style="color:#31708F">No data found !!!</span>
+                    </td>
+                    <td> </td>
+                </tr>
+            </table>
+
+            <div ng-show="users.length==0" style="width:100%" class="alert text-center">
+                <span style="color:#31708F">No data found !!!</span>
+            </div>
+            </md-content>
+	</md-tab>
+</md-tabs>

@@ -1,0 +1,100 @@
+<header class="header-height nav-down">
+    <section ng-controller="LoginController">
+        <!--<a class="nav-home"><img class="nav-logo" src="img/logo.png" width="30" height="30" data-pin-nopin="true"></a>-->
+        <a class="nav-home"><i class="id3-logo"></i></a>
+        <!--<a class="float-left mob-search mobView">
+            <input type="text" class="input-search-mob" placeholder="Search" ng-model="searchKeyword" ng-click="toggle()" />
+        </a>-->
+        <div class="container mobileFilterHideIcon"  ng-show="currentPath === '/problems'">
+            <form class="searchbox">
+                <input type="text" placeholder="Search..." ng-model="Keywordsearch" ng-change="mobilefilter(Keywordsearch)"  name="search" class="searchbox-input">                
+            </form>
+        </div>
+        <div class="container mobileFilterHideIcon"  ng-show="currentPath === '/users/manage'">
+            <form class="searchbox">
+                <input type="text" placeholder="Search..." ng-model="Keywordsearch" ng-change="mobilefilter(Keywordsearch)" name="search" class="searchbox-input">
+            </form>
+        </div>
+        <a class="nav-mob-res-logo search searchbox-icon nav-down" ng-show="currentPath === '/problems'|| currentPath === '/users/manage'"><i class="icon ion-android-search mobileFilterHideIcon" ng-click="clearSearch()"></i></a>
+        <a class="nav-mob-res-logo nav-down"><i class="icon ion-android-menu mobileFilterHideIcon" ng-click="hideNavoptions()"></i></a>
+        <nav class="float-right nav-main" ng-show="displayNavOption==1">
+            <a href="/#/home">HOME&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+            <a href="/#/problems" ng-class="{'active-tab': currentPath === '/problems'}">DISCOVERY HUB&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+            <!--<a href="">CHALLENGE&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>-->
+            <a href="https://ust.innovationhub.ust-global.com" target="_blank">INNOVATION HUB&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+            <div class="dropdown mob-drop">
+                <a href="">INNOVATION REPOSITORY&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+                <div class="dropdown-content nav-bar">
+                        <a class="a-nav-margin" target="_blank" href="../Repository/ID3 Dashboard- Q3-Q4 2016 v2.pdf">2016 Q3-Q4 Dashboard</a>
+                        <!--<a class="a-nav-margin" target="_blank" href="https://fab.ust-global.com">Fab Portal</a>-->
+                        <a class="a-nav-margin" ng-if="role=='Admin'" href="/#/repository/manage">Manage Repository</a>
+                </div>
+            </div>    
+            <div class="dropdown mob-drop" ng-if="role=='Admin'">
+                <a href="" ng-class="{'active-tab': currentPath === '/users/manage' || currentPath === '/modules'}">MANAGE&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>
+                <div class="dropdown-content nav-bar">
+                    <a class="a-nav-margin" href="/#/users/manage" ng-if="role=='Admin'">USER</a>
+                    <a class="a-nav-margin" href="/#/modules" ng-if="role=='Admin'">SETTINGS</a>
+                    <!--<a class="a-nav-margin" href="/#/repository/manage" ng-if="role=='Admin'">REPOSITORY</a>-->
+                </div>
+            </div>
+            <!--<a href="">DASHBOARD&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-dot ionicons ion-ios-circle-outline"></i></a>-->
+            <a href="" ng-click="logout()">LOGOUT</a>
+            <div style="cursor:pointer;" class="user-avatar float-right mobRes" ng-click="profileView()">
+                <img  src="/uploads/{{filename}}"  ng-if="filename!='undefined'"
+                         height="42" width="42" />
+            </div>
+        </nav>
+    </section>
+</header>
+
+<ng-include src="'app/partials/users/templates/create.html'"></ng-include>
+
+<script>
+    $(document).ready(function () {
+        responsiveSite();
+
+            var submitIcon = $('.searchbox-icon');
+            var inputBox = $('.searchbox-input');
+            var searchBox = $('.searchbox');
+            var isOpen = false;
+            submitIcon.click(function () {
+
+                    $('.menu-fixed').removeClass('nav-static').addClass('nav-relative');
+                    $('.searchbox-icon').removeClass('search').addClass('searched show-header');
+                    $('.searchbox-icon i').removeClass('ion-android-search').addClass('ion-ios-close-empty close-icon-size');
+                    $('.container-fixed').addClass('container-fixed-top');
+                    
+                if(isOpen == false){
+                    searchBox.addClass('searchbox-open');
+                    inputBox.focus();
+                    isOpen = true;
+                } else {
+                    searchBox.removeClass('searchbox-open');
+                    inputBox.focusout();
+                    isOpen = false;
+                    $('.menu-fixed').removeClass('nav-relative').addClass('nav-static');
+                    $('.searchbox-icon').removeClass('searched').addClass('search');
+                    $('.container-fixed').removeClass('container-fixed-top');
+                    $('.searchbox-icon i').removeClass('ion-ios-close-empty close-icon-size ').addClass('ion-android-search');
+                    $('.searchbox-input').val('');
+                }
+            });  
+             submitIcon.mouseup(function(){
+                    return false;
+                });
+            searchBox.mouseup(function(){
+                    return false;
+                });
+            $(document).mouseup(function(){
+                    if(isOpen == true){
+                        $('.searchbox-icon').css('display','block');
+                        submitIcon.click();
+                    }
+             });
+        
+    });
+
+
+</script>
+

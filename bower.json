@@ -1,0 +1,38 @@
+{
+  "name": "Soapbox",
+  "description": "Soapbox Web App",
+  "main": "server/app.js",
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "font-awesome": "4.5.0",
+    "angular": "1.5.0",
+    "angular-ui-router": "0.2.18",
+    "angular-bootstrap": "1.1.2",
+    "oclazyload": "1.0.9",
+    "angular-material": "master",
+    "angular-messages": "^1.5.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "css/font-awesome.min.css",
+        "scss/font-awesome.scss"
+      ]
+    }
+  },
+  "resolutions": {
+    "angular-material": "master"
+  }
+}

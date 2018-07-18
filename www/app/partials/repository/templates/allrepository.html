@@ -1,0 +1,463 @@
+﻿<ng-include src="'app/partials/main/templates/topmenu.html'"></ng-include>
+
+
+<div class="container-fluid container-content main">
+    <div class="row mobRes">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg">
+            <!--<span class="span-heading">Manage</span>-->
+            <ul class="business-sub-nav">
+                <!--<li class="active"> BUSINESS PROBLEMS </li>-->
+                <li class="active">MANAGE REPOSITORY </li>
+                <!--<li> SETTINGS </li>-->
+            </ul>
+        </div>
+        <div class="col-md-12 page-heading-bg-solid">
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-content container-fixed">
+    <div class="row white-bg list-menu menu-fixed mobView nav-static">
+        <div class="col-md-12 mobileFilterHideIcon">
+            <div class="float-left align-left fix-width-menu">
+                <i class="ion-ios-list-outline filter-menu-mob fixed-menu-left" ng-click="showhidefilteroptions()"></i>
+            </div>
+            <div class="float-left align-center fix-width-menu">
+                <i class="ion-earth filter-menu-mob active" ng-click="showTimeline();"></i>
+            </div>
+            <div class="float-left align-right fix-width-menu">
+                <i class="ion-ios-clock-outline filter-menu-mob fixed-menu-right" ng-click="showhiderecent();"></i> <!--ion-ios-bookmarks-outline-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mobRes">
+            <span class="span-text-repo mobRes">Innovation Repository</span>
+        </div>
+        <div class="col-md-6">
+            <div class="row txt-row-margin-create mobRes">
+                <div class="col-md-6">
+                    <!--<span class="span-create-head">Create Repository</span>-->
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-12">
+                    <!--<input type="text" class="input-create-prob" ng-model="repositoryName" placeholder="Enter the new Repository Name" />-->
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-1 mobRes"></div>
+                <div class="col-md-3 float-right"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-content container-border-left">
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="item in repository" ng-if="item.ismainFolder==true">
+            <a href="/#/allrepository/allRepoinnerFolder/{{item._id}}"><img src="../../../../assets/img/folder.png" /></a>
+            <label class="filename">{{item.folderName}}</label>
+        </div>
+        <div class="col-sm-2" ng-repeat="item in answerGroup" ng-if="item.ismainFolder==true">
+            <a href="/#/allrepository/allRepoinnerFolder/{{item._id}}"><img src="../../../../assets/img/folder.png" /></a>
+            <label class="filename">{{item.folderName}}</label>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('body').tooltip({
+            selector: '[rel="tooltip"]'
+        });
+
+        $(".filter-menu-mob").click(function () {
+
+            $(".filter-menu-mob.active").removeClass('active');
+
+            $(this).addClass('active');
+        });
+
+        responsiveSite();
+
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            if ($("#myNav").height() == 0 &&
+                $("#myUserNav").height() == 0 &&
+                $(".fixed-menu-left").hasClass("active") == false) {
+                didScroll = true;
+            }
+        });
+
+        setInterval(function () {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 1);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+                if ($(".searchbox-icon").hasClass("search") && $(".searchbox-icon").hasClass("show-header") == false) {
+                    $('header, .nav-mob-res-logo ').removeClass('nav-down').addClass('nav-up');
+
+                    $('.menu-fixed').removeClass('nav-static').addClass('nav-relative');
+                }
+
+                $('.searchbox-icon').removeClass('show-header');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    if ($(".searchbox-icon").hasClass("search")) {
+                        $('header, .nav-mob-res-logo ').removeClass('nav-up').addClass('nav-down');
+
+                        $('.menu-fixed').removeClass('nav-relative').addClass('nav-static');
+                    }
+                }
+            }
+
+            lastScrollTop = st;
+        }
+    });
+</script>
+
+
+<div class="modal fade" id="blockUserModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Deactivate</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate this user?</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#blockUserModal').modal('hide');" ng-click="blockUser(user._id)">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="unblockUserModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Activate</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to activate this user?</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#unblockUserModal').modal('hide');" ng-click="unblockUser(user._id)">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="blockUserSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Deactivated</h4>
+            </div>
+            <div class="modal-body">
+                <p>User deactivated successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#modalCreateSuccess').modal('hide'); $('#myNav').css('height', '0%');$('body').css('overflow-y', 'visible');$('.wizard .content').hide();$('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="roleChangeUserModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Member Role</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to change selected users Role?</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#roleChangeUserModal').modal('hide');" ng-click="assignUsersRole()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="roleChangeUserSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Member Role</h4>
+            </div>
+            <div class="modal-body">
+                <p>Member role assigned successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#roleChangeUserSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="groupAssignSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Group</h4>
+            </div>
+            <div class="modal-body">
+                <p>Group assigned successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#groupAssignSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deactivateUserModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Deactivate</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate selected users?</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#deactivateUserModal').modal('hide');" ng-click="deactivateUsers()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="activateUserModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Deactivate</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to Activate selected users?</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#activateUserModal').modal('hide');" ng-click="activateUsers()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addUsersInGroupModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Group</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to add selected users in Group<p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#addUsersInGroupModal').modal('hide');" ng-click="addUserInGroup()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="unblockUserSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Activated</h4>
+            </div>
+            <div class="modal-body">
+                <p>User activated successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#unblockUserSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deactivateUserSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Deactivated</h4>
+            </div>
+            <div class="modal-body">
+                <p>User deactivated successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#deactivateUserSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="activateUserSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Activated</h4>
+            </div>
+            <div class="modal-body">
+                <p>User activated successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#activateUserSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModule" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete selected {{actionName | lowercase}}?</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#deleteModule').modal('hide');" ng-click="deleteModule()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateModule" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to update selected {{actionName  | lowercase}}?</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change margin" data-dismiss="modal">No</button>
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#updateModule').modal('hide');" ng-click="updateModule()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Created</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{actioncreated}} created successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#createSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Deleted</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{actiondeleted}} deleted successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#deleteSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateSuccess" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header custom">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Updated</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{actionupdated}} updated successfully!</p>
+            </div>
+            <div class="modal-footer custom">
+                <button type="button" class="btn-edit-change update" data-dismiss="modal" onclick="$('#updateSuccess').modal('hide'); $('#myNav').css('height', '0%'); $('body').css('overflow-y', 'visible'); $('.wizard .content').hide(); $('.container-content.create').css({ 'z-index': '0', 'display': 'none' })">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'id3-domain';
+  src:  url('fonts/id3-domain.eot?bpmja1');
+  src:  url('fonts/id3-domain.eot?bpmja1#iefix') format('embedded-opentype'),
+    url('fonts/id3-domain.ttf?bpmja1') format('truetype'),
+    url('fonts/id3-domain.woff?bpmja1') format('woff'),
+    url('fonts/id3-domain.svg?bpmja1#id3-domain') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="id3-icon-"], [class*=" id3-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'id3-domain' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.id3-icon-banking:before {
+  content: "\e900";
+}
+.id3-icon-car:before {
+  content: "\e901";
+}
+.id3-icon-emerging:before {
+  content: "\e902";
+}
+.id3-icon-healthcare:before {
+  content: "\e903";
+}
+.id3-icon-mediaandentertainment:before {
+  content: "\e904";
+}
+.id3-icon-retail:before {
+  content: "\e905";
+}
+.id3-icon-telecom:before {
+  content: "\e906";
+}
+

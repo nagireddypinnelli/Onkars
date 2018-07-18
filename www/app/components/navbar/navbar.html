@@ -1,0 +1,47 @@
+<div class="overlay"></div>
+<md-sidenav class="xe-menu md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+    <div class="xe-menu-header" style="max-height: 60px;">
+        <span class="xe-text-gradient">ID3</span>
+    </div>
+    <md-content class="xe-transparent xe-overflow-hide " ng-controller="NavbarCtrl">
+        <ul class="xe-menu-list">
+            <!--<li class="xe-menu-list-heading margin-top-0">Dashboard</li>-->
+            <!--<li><i class="lnr lnr-earth "></i>Home</li>-->
+            <br />
+            <br />    
+           
+            <!--<li><i class="lnr lnr-tag"></i>Financials</li>-->
+            <a ui-sref="app.problems">
+                <li ng-class="{'active':active[1]}" ng-click="setActive(1)"><i class="icon ion-alert-circled"></i>Business Problems</li>
+            </a>
+			<a ui-sref="app.problems">
+                <li ng-class="{'active':active[2]}" ng-click="setActive(2)"><i class="icon ion-alert-circled"></i>Manage</li>
+            </a>
+			<a ui-sref="app.problems">
+                <li ng-class="{'active':active[3]}" ng-click="setActive(3)"><i class="icon ion-alert-circled"></i>Settings</li>
+            </a>
+			<a ui-sref="app.users">
+                <li ng-class="{'active':active[4]}" ng-click="setActive(4)"><i class="icon ion-alert-circled"></i>Users</li>
+            </a>
+			<a ui-sref="app.accounts">
+                <li ng-class="{'active':active[5]}" ng-click="setActive(5)"><i class="icon ion-alert-circled"></i>Accounts</li>
+            </a>
+            <a ui-sref="app.domain">
+                <li ng-class="{'active':active[6]}" ng-click="setActive(6)"><i class="icon ion-alert-circled"></i>Domain</li>
+            </a>
+            <a ui-sref="app.status">
+                <li ng-class="{'active':active[7]}" ng-click="setActive(7)"><i class="icon ion-alert-circled"></i>Status</li>
+            </a>
+            <a ui-sref="app.vertical">
+                <li ng-class="{'active':active[8]}" ng-click="setActive(8)"><i class="icon ion-alert-circled"></i>Vertical</li>
+            </a>
+            <a ui-sref="app.phases">
+                <li ng-class="{'active':active[9]}" ng-click="setActive(9)"><i class="icon ion-alert-circled"></i>Phase</li>
+            </a>
+
+            <a ui-sref="app.categories">
+                <li ng-class="{'active':active[10]}" ng-click="setActive(10)"><i class="icon ion-alert-circled"></i>Category</li>
+            </a>
+        </ul>
+    </md-content>
+</md-sidenav>

@@ -1,0 +1,26 @@
+<!--=---== Main.Navbar Partial ==---=-->
+<div flex layout="row" style="height:100%;">
+    <!--=---== Edge Navbar component ==---=-->
+    <edge-Navbar ng-show="(loginPage==0) ? true : false" ng-controller="LoginController"></edge-Navbar>
+    <!--=---== /. End ==---=-->
+    
+    <md-content flex id="content" layout="column" style="height: 96%;overflow:hidden;background-color:transparent;" >
+        <md-toolbar layout="row" class="md-toolbar-tools xe-bg-dark shadow" ng-controller="NavbarCtrl"  ng-hide="$state.includes('app.problemsignin') || $state.includes('app.login')"  style="min-height:36px;height:36px">
+            <md-button class="xe-menu-toggle" ng-click="toggleLeftMenu()" hide-gt-sm aria-label="FAB">
+                <i class="icon ion-android-menu icon-light size-24"></i>
+            </md-button>
+            <div layout="row" flex class="">
+                <span flex class="flex"></span>
+                <md-button class="md-icon-button" ng-click="" aria-label="FAB">
+                  <!--  <md-icon class="icon ion-android-settings icon-light size-24"></md-icon>-->
+                </md-button>
+            </div>
+        </md-toolbar>
+        
+        <!--=---== Content View ==---=-->
+        <div ui-view="content"></div>
+        <!--=---== /. End ==---=-->
+
+    </md-content>
+</div>
+<!--=---== /. End ==---=-->

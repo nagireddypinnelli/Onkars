@@ -1,0 +1,151 @@
+﻿<ng-include src="'app/partials/main/templates/topmenu.html'"></ng-include>
+
+
+<div class="container-fluid container-content main">
+    <div class="row mobRes">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg">
+            <!--<span class="span-heading">Manage</span>-->
+            <ul class="business-sub-nav">
+                <!--<li class="active"> BUSINESS PROBLEMS </li>-->
+                <li class="active">MANAGE REPOSITORY </li>
+                <!--<li> SETTINGS </li>-->
+            </ul> 
+        </div>
+        <div class="col-md-12 page-heading-bg-solid">
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+    </div>
+   
+</div>
+
+<div class="container-fluid container-content container-fixed">
+    <div class="row white-bg list-menu menu-fixed mobView nav-static">
+        <div class="col-md-12 mobileFilterHideIcon">
+            <div class="float-left align-left fix-width-menu">
+                <i class="ion-ios-list-outline filter-menu-mob fixed-menu-left" ng-click="showhidefilteroptions()"></i>
+            </div>
+            <div class="float-left align-center fix-width-menu">
+                <i class="ion-earth filter-menu-mob active" ng-click="showTimeline();"></i>
+            </div>
+            <div class="float-left align-right fix-width-menu">
+                <i class="ion-ios-clock-outline filter-menu-mob fixed-menu-right" ng-click="showhiderecent();"></i> <!--ion-ios-bookmarks-outline-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mobRes">
+            <!--<span class="span-text-wall">WALL</span><br />-->
+            <span class="span-text-intro mobRes">Innovation Repository</span>
+        </div>
+        <div class="col-md-6">
+            <div class="row txt-row-margin-create mobRes">
+                <div class="col-md-6">
+                    <span class="span-create-head">Create Repository</span>
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-12">
+                    <input type="text" class="input-create-prob" ng-model="repositoryName" placeholder="Enter the new repository name"/>
+                </div>
+            </div>
+            <div class="row input-row-margin-create">
+                <div class="col-md-3 float-right">
+                    <button class="btn-create-prob" ng-disabled="!repositoryName" ng-click="create()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-content container-border-left">
+    <div class="row">
+      <div class="col-sm-2" ng-repeat="item in repository" ng-if="item.ismainFolder==true">
+          <a href="/#/repository/innerFolder/{{item._id}}" ><img src="../../../../assets/img/folder.png"/></a>
+          <div class="col-md-8">
+              <label class="filename">{{item.folderName}}</label>
+          </div>
+      </div>
+        <div class="col-sm-2" ng-repeat="item in fodernames" ng-if="item.ismainFolder==true">
+            <a href="/#/repository/innerFolder/{{item._id}}"><img src="../../../../assets/img/folder.png" /></a>
+            <div class="col-md-8">
+                <label class="filename">{{item.folderName}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('body').tooltip({
+            selector: '[rel="tooltip"]'
+        });
+
+        $(".filter-menu-mob").click(function () {
+
+            $(".filter-menu-mob.active").removeClass('active');
+
+            $(this).addClass('active');
+        });
+
+        responsiveSite();
+
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            if ($("#myNav").height() == 0 &&
+                $("#myUserNav").height() == 0 &&
+                $(".fixed-menu-left").hasClass("active") == false) {
+                didScroll = true;
+            }
+        });
+
+        setInterval(function () {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 1);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+                if ($(".searchbox-icon").hasClass("search") && $(".searchbox-icon").hasClass("show-header") == false) {
+                    $('header, .nav-mob-res-logo ').removeClass('nav-down').addClass('nav-up');
+
+                    $('.menu-fixed').removeClass('nav-static').addClass('nav-relative');
+                }
+
+                $('.searchbox-icon').removeClass('show-header');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    if ($(".searchbox-icon").hasClass("search")) {
+                        $('header, .nav-mob-res-logo ').removeClass('nav-up').addClass('nav-down');
+
+                        $('.menu-fixed').removeClass('nav-relative').addClass('nav-static');
+                    }
+                }
+            }
+
+            lastScrollTop = st;
+        }
+    });
+</script>
+
+

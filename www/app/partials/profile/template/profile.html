@@ -1,0 +1,308 @@
+﻿
+
+<ng-include src="'app/partials/main/templates/topmenu.html'"></ng-include>
+
+
+<div class="container-fluid container-content main">
+    <div class="row mobRes">
+        <!--<div class="col-md-3 custom-width-left id3-heading-bg">
+            <span class="span-id3-heading">ID</span>
+            <span class="span-id3-sup">3</span>
+        </div>-->
+        <div class="col-md-12 page-heading-bg">
+            <!--<span class="span-heading">Manage</span>-->
+            <ul class="business-sub-nav">
+                <!--<li class="active"> BUSINESS PROBLEMS </li>-->
+                <li class="active"> USERS PROFILE</li>
+                <!--<li> SETTINGS </li>-->
+            </ul>
+        </div>
+        <div class="col-md-12 page-heading-bg-solid">
+
+        </div>
+        <div class="col-md-12 shadow-page-heading-bg">
+        </div>
+
+        <div class="container-fluid container-content container-fixed">
+            <div class="row white-bg list-menu menu-fixed mobView nav-static">
+                <div class="col-md-12 mobileFilterHideIcon">
+                    <div class="float-left align-left fix-width-menu">
+                        <i class="ion-ios-list-outline filter-menu-mob fixed-menu-left" ng-click="showhidefilteroptions()"></i>
+                    </div>
+                    <div class="float-left align-center fix-width-menu">
+                        <i class="ion-earth filter-menu-mob active" ng-click="showTimeline();"></i>
+                    </div>
+                    <div class="float-left align-right fix-width-menu">
+                        <i class="ion-ios-clock-outline filter-menu-mob fixed-menu-right" ng-click="showhiderecent();"></i> <!--ion-ios-bookmarks-outline-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mobRes">
+                    <!--<span class="span-text-wall">WALL</span><br />-->
+                     <!--<span class="span-text-intro mobRes">Create new user to share,</span><br />
+                    <span class="span-text-intro-part">collaborate and innovate together!</span>-->
+                  
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4"><span class="span-create-head">{{user.name}}</span></div>
+                    <div class="row txt-row-margin-create mobRes">
+                    </div>
+                    <div class="row col-md-4">
+                            <div class="div-disp-pic" >
+                                    <!--<input type="file" id="file-1"   ngf-select ng-model="file" name="file" ng-change="submitFile()" ngf-max-size="20MB" class="inputfile inputfile-1" required />-->
+                                    <img  src="/uploads/{{filename}}" height="42" width="42">
+                                    <input id="hiddenUpload" type="file" ngf-select ng-model="file" name="file" ng-change="submitFile()" ngf-max-size="20MB"  required/>
+                                    <label for="file-1"></label>
+                             </div> 
+                    </div>
+                    <div class="col-md-6" style="margin-left: -165px;">
+                        <div class="row row-create-right row-sol-date row-padding-middle js">
+                            <div class="col-md-10 right-side-cal">
+                                <p class="input-group input-group-width datefield upload">
+                                    <!--<input type="file" ngf-select ng-model="file" name="file" ngf-max-size="20MB" class="span-upload-label">-->
+                                    <!--<input type="file"  ngf-select ng-model="file" name="file" ngf-max-size="20MB" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />-->
+                                    <input type="file" ngf-select ng-model="file" name="file" ng-change="submitFile()" ngf-max-size="20MB" id="file-1" class="inputfile inputfile-1" required />
+                                    <label for="file-1"><span id="uploadText">Change Profile Picture</span></label>
+                                    <span class="input-group-btn span-temp-pos">
+                                        <button type="button" class="btn-upload btn-upload-icon"><i class="icon ion-ios-cloud-upload-outline"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <section>
+            <form class="form-inline" name="createUserForm" id="createUserForm">
+                <div class="container-fluid container-content create-user">
+                    <div class="row mobView">
+                        <div class="col-md-12 create-mob">
+                            <a href="javascript:void(0)" class="closebtn" ng-click="CloseNav()"><i class="icon ion-ios-close-empty hvr-icon-spin"></i></a>
+                            <span class="span-sub-text-create" ng-if="user._id ==''">Create User</span>
+                            <span class="span-sub-text-create" ng-if="user._id !=''">Edit User</span>
+                        </div>
+                    </div>
+                    <div class="row mobRes">
+                        <div class="col-md-12 page-heading-bg create-user">
+                            <a href="javascript:void(0)" class="closebtn" ng-click="CloseNav();"><i class="icon ion-ios-close-empty hvr-icon-spin"></i></a>
+                            <div class="create-dp-circle"></div>
+                            <span class="span-sub-text-create" ng-if="user._id ==''">Create User</span>
+                            <span class="span-sub-text-create" ng-if="user._id !=''">Edit User</span>
+
+                        </div>
+                        <div class="col-md-12 page-heading-bg-solid create-user">
+                        </div>
+                        <div class="col-md-12 shadow-page-heading-bg">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid overlay-container-bg div-main-container">
+                    <div class="row row-padding-top row-title-profile">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                                    <md-input-container class="md-block" flex-gt-sm="">
+                                        <label>Name</label>
+                                             <input ng-model="user.name" disabled="disabled" name="name" maxlength="200">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block" flex-gt-sm="">
+                                        <label>Username (UID)</label>
+                                            <input ng-model="user.username" disabled="disabled" name="username" maxlength="100">
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block user-email" flex-gt-sm="" >
+                                        <label>Email</label>
+                                      <input ng-model="user.email" name="email" disabled="disabled"   maxlength="100" ng-text-change="emailValidation">
+                                    </md-input-container>
+                                    <label class="error">{{emailValidationError}}</label>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block" flex-gt-sm="">
+                                        <label>Contact Number</label>
+                                      <input  ng-model="user.contactInfo"  name="contactInfo" ng-disabled="isDisabled" maxlength="10"  required>
+                                    </md-input-container>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block md-right" flex-gt-sm="" id="accountSelectBox">
+                                        <label class="col-lg-6">Account</label>
+                                        <md-select ng-model="user.account" name="account" ng-change="hideErrorMesssage('account')">
+                                            <md-option ng-repeat="account in accounts" ng-disabled="isDisabled"  value="{{account._id}}">
+                                                {{account.name}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block" flex-gt-sm="">
+                                        <label>Skills</label>
+                                        <input ng-model="user.skills" name="skills"  ng-disabled="isDisabled"  maxlength="200" required>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                             <div class="row">
+                                   <div class="col-md-6">
+                                        <md-input-container class="md-block" flex-gt-sm=""  ng-required="true">
+                                            <label>Designation</label>
+                                           <input ng-model="user.designations"  ng-disabled="isDisabled"  name="designations" maxlength="100" required>
+                                        </md-input-container>
+                                    </div>
+
+                                 <div class="col-md-6" style="display:inline-block;">
+                                     <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                                            <label>Gender</label><br>
+                                         <md-radio-group ng-model="user.gender">
+                                             <md-radio-button disabled="disabled" ng-disabled="isDisabled" class="radio-font-less inputDisabled" style="margin-top:15px;" value="Male" name="gender">Male</md-radio-button>
+                                             <md-radio-button disabled="disabled" ng-disabled="isDisabled" class="radio-font-less inputDisabled" value="Female" name="gender">Female</md-radio-button>
+                                         </md-radio-group>
+                                         </md-input-container>
+
+                                     </div>
+
+
+                                    <!--<div class="col-md-6" style="display:inline-block;">
+                                        <label>Gender</label>
+                                        <md-radio-group ng-model="user.gender">
+                                           
+                                            <md-radio-button value="Male" name="gender" class="md-primary">Male</md-radio-button>
+                                            <md-radio-button value="Female" name="gender">Female</md-radio-button>
+                                       </md-radio-group>
+                                     </div>-->
+                            </div>
+                          </div>
+                    </div>
+
+                    <!--<div class="col-sm-12">
+                        <label class="createUserError" ng-repeat="error in errorMessage">
+                            * {{error.msg}}
+                        </label>
+                    </div>-->
+
+                   </div>
+
+                <div class="container-fluid container-create-bottom newuser">
+                    <div class="row">
+                        <div class="col-md-12 div-btn-mob">
+                            <a class="btn-edit-change btn-sumbit-create col-sm-2 saveBtn btn-mob" ng-disabled="user.createUserForm.$invalid" id="createUser" ng-if="addbutton" ng-click="addUserProfile()">Save</a>
+                            <a class="btn-edit-change btn-sumbit-create col-sm-2 saveBtn btn-mob" ng-disabled="user.createUserForm.$invalid" id="createUser" ng-if="editbutton" ng-click="editProfile()">Edit</a>
+                            <a class="btn-edit-change btn-sumbit-create col-sm-2 saveBtn btn-mob" ng-disabled="user.createUserForm.$invalid" id="createUser" ng-if="cancelbutton" ng-click="cancelEdit()">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+    </div>
+</div>
+    <div class="modal fade" id="userProfileSave" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-header custom">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Profile</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Profile Successfully Updated</p>
+                </div>
+                <div class="modal-footer custom">
+                    <button type="button" class="btn-edit-change margin" data-dismiss="modal" onclick="$('#usercreateconfirm').modal('hide');" ng-click="redirectHomepage()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="requiredFields" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-header custom">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ERROR</h4>
+                </div>
+                <div class="modal-body">
+                    <p> All Fields are manditory </p>
+                </div>
+                <div class="modal-footer custom">
+                    <button type="button" class="btn-edit-change margin" data-dismiss="modal" onclick="$('#usercreateconfirm').modal('hide');" ng-click="redirectHomepage()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#wizard").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            onStepChanging: function (event, currentIndex, newIndex) {
+                //alert(1);
+                //alert(currentIndex);
+                //if(scope.showErrorAlert) return false;
+                // alert(currentIndex)
+
+                return false;
+            },
+        });
+
+    $("#createUserForm").validate({
+        rules: {
+            name: {
+                required: true
+            },
+            username: {
+                required: true
+            },
+            email: {
+                required: true,
+                email:true
+            },
+            Skills: {
+                required: true,
+                //email: true
+            },
+            Designations: {
+                required: true,
+                email: true
+            },
+            gender: {
+                required: true,
+                //email: true
+            },
+            ".role": {
+                required:true
+            },
+        }
+    });
+
+    $(document).ready(function () {
+
+        responsiveSite();
+
+        //$("#createUser").click(function () {
+        //    if ($("#createUserForm").valid()) {
+        //        var scope = angular.element('div[ng-controller="ManageController"]').scope();
+        //        scope.createUser();
+        //    }
+        //});
+
+        //$("#updateUser").click(function () {
+        //    if ($("#createUserForm").valid()) {
+        //        var scope = angular.element('div[ng-controller="ManageController"]').scope();
+        //        scope.updateUserDetails();
+        //    }
+        //});
+    });
+</script>
+

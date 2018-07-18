@@ -1,0 +1,25 @@
+﻿<md-dialog aria-label="Mango (Fruit)">
+    <form ng-cloak>
+       <md-dialog-content>
+            <div>
+                <div>
+                    <!-- Modal content-->
+                    <div>
+                        <div class="modal-header custom">
+                            <button type="button" class="close" ng-click="hide()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ERROR</h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <p> {{ error }}</p>
+                        </div>
+                        <div class="modal-footer custom">
+                            <button type="button" class="btn-edit-change update" ng-click="hide()" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
